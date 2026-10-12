@@ -40,19 +40,15 @@
     linear-gradient(90deg, rgba(10, 12, 11, 0) 50%, rgba(10, 12, 11, 0.45) 100%);
 }
 
-/* Персонаж — строго по центру сцены (владелец 23.09.2026). */
+/* Персонаж — сбоку слева (раскладка Мелонии): правую часть занимает
+   прямоугольник версий, центр остаётся сцене. */
 .lobby-char {
   position: absolute;
   z-index: 3;
-  /* Широкий холст: руки в эмоциях («6-7» и др.) не упираются в край
-     (правка владельца 23.09.2026). Фигура по центру — кадр считает сам. */
-  left: 20%;
-  /* Сверху место под ник над головой. */
-  top: 56px;
-  bottom: 100px;
-  width: 60%;
-  /* Вся сцена — перетаскивание (курсор задаёт JS: «указатель» только над
-     фигурой, иначе «grab»). */
+  left: 4%;
+  top: 48px;
+  bottom: 108px;
+  width: 34%;
   cursor: grab;
   opacity: 0;
   transition: opacity 240ms linear;
@@ -71,22 +67,260 @@
 .lobby-who {
   position: absolute;
   z-index: 4;
-  left: 30%;
-  width: 40%;
-  /* Строго над доком «Сегодня играем · Играть», между персонажем и выбором
-     сборок (владелец 25.09.2026): раньше строка налезала на док, потом ушла
-     слишком высоко к коленям. Держим прямо над доком снизу. */
-  top: auto;
-  bottom: 150px;
+  left: 4%;
+  width: 34%;
+  bottom: 96px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  pointer-events: none;
 }
 .lobby-who b {
   font: 700 16px/1 var(--m-font);
   color: #f2f4f3;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Правая колонка Мелонии: загрузки, прямоугольник версий, запуск. */
+.mln-right {
+  position: absolute;
+  z-index: 4;
+  right: 16px;
+  top: 74px;
+  bottom: 84px;
+  width: min(400px, 34%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* Ряд запуска внутри колонки — карточка режима над кнопкой, без пиксельной
+   подложки старого лобби. */
+.mln-right .lobby-row {
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  background: color-mix(in srgb, var(--m-bg) 78%, transparent);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-r-card);
+  box-shadow: var(--m-shadow-lg);
+  backdrop-filter: blur(16px);
+  clip-path: none;
+}
+.mln-right .lobby-row .lobby-mode {
+  flex: none;
+  width: 100%;
+}
+/* Карточка режима — в строгой рамке колонки, без пиксельной плиты. */
+.mln-right .lobby-mode-card {
+  clip-path: none;
+  border-radius: var(--m-r-mini);
+  box-shadow: none;
+}
+.mln-right .lobby-row .play-col {
+  width: 100%;
+}
+.mln-right .lobby-row #playBtn {
+  flex: none;
+  width: 100%;
+  min-width: 0;
+}
+
+.mln-rect {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: color-mix(in srgb, var(--m-bg) 78%, transparent);
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-r-card);
+  box-shadow: var(--m-shadow-lg);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+}
+.mln-rect-tabs {
+  display: flex;
+  width: 100%;
+  height: auto;
+  padding: 6px;
+  gap: 4px;
+  background: none;
+  border-bottom: 1px solid var(--m-border);
+  border-radius: 0;
+}
+.mln-rect-tabs [role='tab'] {
+  flex: 1;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: var(--m-r-mini);
+  font: 600 12.5px/1 var(--m-font);
+  color: var(--m-fg-subtle);
+  background: none;
+  transition: background-color var(--m-t-fast) var(--m-ease-smooth), color var(--m-t-fast) var(--m-ease-smooth);
+}
+.mln-rect-tabs [role='tab'][aria-selected='true'] {
+  color: var(--m-fg);
+  background: var(--m-surface-2);
+}
+.mln-rect-tabs [role='tab']:hover:not([aria-selected='true']) {
+  color: var(--m-fg);
+  background: var(--m-accent-soft);
+}
+.mln-rect-n {
+  min-width: 18px;
+  margin-left: 6px;
+  padding: 2px 5px;
+  border-radius: var(--m-r-pill);
+  font-size: 10.5px;
+  line-height: 1;
+  color: var(--m-accent-fg);
+  background: var(--m-accent);
+}
+.mln-rect-body {
+  flex: 1;
+  min-height: 0;
+  margin-top: 0;
+}
+.mln-rect-scroll {
+  height: 100%;
+}
+.mln-rect-list {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+}
+.mln-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 7px 8px;
+  border-radius: var(--m-r-mini);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--m-t-fast) var(--m-ease-smooth), border-color var(--m-t-fast) var(--m-ease-smooth);
+}
+.mln-row:hover {
+  background: var(--m-surface-2);
+}
+.mln-row.on {
+  background: var(--m-accent-soft);
+  border-color: var(--m-border-strong);
+}
+.mln-row-ico {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  color: var(--m-fg-subtle);
+}
+.mln-row-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+.mln-row-txt b {
+  font: 600 13px/1.2 var(--m-font);
+  color: var(--m-fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mln-row-txt i {
+  font: 400 11px/1.2 var(--m-font);
+  font-style: normal;
+  color: var(--m-fg-faint);
+}
+.mln-row-play {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: var(--m-r-mini);
+  color: var(--m-fg-subtle);
+  opacity: 0;
+  transition: opacity var(--m-t-fast) var(--m-ease-smooth), background-color var(--m-t-fast) var(--m-ease-smooth), color var(--m-t-fast) var(--m-ease-smooth);
+}
+.mln-row:hover .mln-row-play,
+.mln-row.on .mln-row-play {
+  opacity: 1;
+}
+.mln-row-play:hover {
+  color: var(--m-accent-fg);
+  background: var(--m-accent);
+}
+.mln-empty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 10px;
+  border-radius: var(--m-r-mini);
+  font: 400 12.5px/1.4 var(--m-font);
+  color: var(--m-fg-faint);
+  text-align: left;
+  transition: background-color var(--m-t-fast) var(--m-ease-smooth), color var(--m-t-fast) var(--m-ease-smooth);
+}
+.mln-empty:hover {
+  color: var(--m-fg);
+  background: var(--m-surface-2);
+}
+.mln-empty-static {
+  cursor: default;
+}
+
+/* Нижний док: разделы одной строгой полосой. */
+.mln-dock {
+  position: absolute;
+  z-index: 6;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 8px;
+  background: color-mix(in srgb, var(--m-bg) 78%, transparent);
+  border: 1px solid var(--m-border);
+  border-radius: 12px;
+  box-shadow: var(--m-shadow-lg);
+  backdrop-filter: blur(16px);
+}
+.mln-dock-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: var(--m-r-ctl);
+  font: 500 12.5px/1 var(--m-font);
+  color: var(--m-fg-subtle);
+  transition: background-color var(--m-t-fast) var(--m-ease-smooth), color var(--m-t-fast) var(--m-ease-smooth);
+}
+.mln-dock-item:hover {
+  color: var(--m-fg);
+  background: var(--m-surface-2);
+}
+.mln-dock-item.on {
+  color: var(--m-fg);
+  background: var(--m-surface-2);
+}
+.mln-dock-item.on::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -9px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--m-accent);
 }
 
 /* Правый низ: режим и запуск. */
@@ -243,7 +477,7 @@
 .mode-tile-tag svg { width: 12px; height: 12px; color: var(--m-accent); }
 
 @media (max-width: 1100px) {
-  .lobby-side { width: min(400px, 38%); }
+  .mln-right { width: min(380px, 40%); }
   .lobby-row #playBtn { flex-basis: 130px; font-size: 21px; }
 }
 
@@ -436,8 +670,8 @@
    размером под 1280 — мелкие островки по углам. Интерфейс лобби масштабируем
    ступенями вслед за шириной. */
 @media (min-width: 1800px) {
-  .lobby-left,
-  .lobby-side,
+  .mln-right,
+  .mln-dock,
   .lobby-party,
   .lobby-who,
   .lobby .hero-tools { zoom: 1.3; }
@@ -445,8 +679,8 @@
   .lobby .mc-nametag { font-size: 22px; }
 }
 @media (min-width: 2400px) {
-  .lobby-left,
-  .lobby-side,
+  .mln-right,
+  .mln-dock,
   .lobby-party,
   .lobby-who,
   .lobby .hero-tools { zoom: 1.6; }
@@ -686,20 +920,20 @@
   .lobby-rec, .lrec-scene img, .lobby-an .an-lava i { animation: none; }
 }
 
-/* «Сегодня играем» + «Играть» — по центру под персонажем и в 1,5 раза
-   крупнее (владелец 24.09.2026, 13:30). */
-:root .lobby-side { left: 50% !important; right: auto !important; transform: translateX(-50%); bottom: 18px; }
-:root .lobby-row .lobby-mode { flex: 0 0 500px; width: 500px; }
-:root .lobby-row #playBtn { flex: 0 0 290px; width: 290px; min-width: 290px; font-size: 34px; }
-:root .lobby-row #playBtn svg { width: 34px; height: 34px; }
+/* «Сегодня играем» + «Играть» — в правой колонке Мелонии, карточка над
+   кнопкой на всю ширину колонки. */
+:root .lobby-side { left: auto !important; right: 16px !important; transform: none; bottom: 96px; }
+:root .lobby-row .lobby-mode { flex: none; width: 100%; }
+:root .lobby-row #playBtn { flex: none; width: 100%; min-width: 0; min-height: 54px; font-size: 23px; }
+:root .lobby-row #playBtn svg { width: 22px; height: 22px; }
 /* «Остановить» длиннее «Играть» — тот же размер кнопки, шрифт мельче. */
 :root .lobby-row #playBtn.stop { font-size: 24px; padding: 0 14px 3px; }
 :root .lobby-row #playBtn.stop svg { width: 26px; height: 26px; }
-:root .lobby-row .lobby-mode-card { grid-template-columns: 138px minmax(0, 1fr); min-height: 120px; gap: 16px; }
-:root .lobby-row .lobby-mode-card .lobby-mode-art { width: 138px; height: 104px; }
-:root .lobby-row .lobby-mode-card .lobby-mode-body b { font-size: 30px; }
-:root .lobby-row .lobby-mode-card.empty .lobby-mode-body b { font-size: 31px; }
-:root .lobby-row .lobby-mode-card .lobby-mode-lab { font-size: 14px; }
+:root .lobby-row .lobby-mode-card { grid-template-columns: 84px minmax(0, 1fr); min-height: 78px; gap: 12px; }
+:root .lobby-row .lobby-mode-card .lobby-mode-art { width: 84px; height: 58px; }
+:root .lobby-row .lobby-mode-card .lobby-mode-body b { font-size: 17px; }
+:root .lobby-row .lobby-mode-card.empty .lobby-mode-body b { font-size: 17px; }
+:root .lobby-row .lobby-mode-card .lobby-mode-lab { font-size: 11px; }
 /* Строка «загрузчик · версия · наиграно» — мельче: под крупным названием она
    была почти с него ростом (владелец 25.09.2026: «слишком огромная»). */
 :root .lobby-row .lobby-mode-card .meta { font-size: 12px; gap: 8px; }
@@ -732,10 +966,10 @@
   clip-path: polygon(10px 0, calc(100% - 10px) 0, calc(100% - 10px) 10px, 100% 10px, 100% 100%, 0 100%, 0 10px, 10px 10px);
 }
 
-/* Холст персонажа на всю высоту и шире: крылья и руки в танце больше не
-   обрезаются краем (владелец 24.09.2026, 13:55). Сам персонаж того же
-   размера — место над головой считает lobbyFrame. */
-:root .lobby-char { top: 0; bottom: 0; left: 0; width: 100%; }
+/* Холст персонажа на всю высоту своей колонки слева: крылья и руки в танце
+   не обрезаются краем. Сам персонаж того же размера — место над головой
+   считает lobbyFrame. */
+:root .lobby-char { top: 48px; bottom: 0; left: 4%; width: 34%; }
 
 /* Звук и музыка в верхней полосе: выключено — значок приглушён. */
 .lb-btn.lb-toggle.off svg { opacity: 0.4; }

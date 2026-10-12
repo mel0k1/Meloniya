@@ -5,14 +5,14 @@ import { Installs } from '../components/Installs'
 import { LobbyCharacter } from '../components/lobby/LobbyCharacter'
 import { EmoteBubble } from '../components/lobby/EmoteBubble'
 import { PartyBar } from '../components/lobby/PartyBar'
+import { LobbyDock } from '../components/lobby/LobbyDock'
+import { VersionRect } from '../components/lobby/VersionRect'
 import { isLeader, leaveParty, loadParty, partyWithOthers, usePartyStore } from '../state/party'
 import { stopMateSearch, useMateSearch } from '../state/mateSearch'
 import { partyPlayPressed } from '../lib/partyPlay'
-import { Recommend } from '../components/lobby/Recommend'
 import { AnarchyArt } from '../components/playhub/AnarchyTile'
 import { targetsAnarchy } from '../lib/ownServer'
 import { PixelField } from '../components/lobby/PixelField'
-import { HubTile } from '../components/lobby/HubTile'
 import { useHeroWallpaper } from '../components/HeroWallpaper'
 import { LOADER_NAME, fmtN, fmtPlaytime } from '../lib/format'
 import { VIDEOS } from '../lib/wallpaper'
@@ -48,11 +48,9 @@ import '../styles/pixel/lobby.css'
 import '../styles/pixel/retention.css'
 import '../styles/pixel/party.css'
 
-/* Разделы на лобби, как в Brawl Stars: у каждого ровно один вход (владелец
-   23.09.2026: «всё дублируется»). Режимы и каталог открывает плашка «Что
-   играем сегодня», гардероб — кнопка под персонажем, друзей — список справа,
-   настройки — шестерёнка в углу. Слева под сундуком — плитки «Магазин» и
-   «Свой сервер» (HubTile). */
+/* Лобби Мелонии: персонаж стоит слева, справа — колонка с прямоугольником
+   версий (сборки и релизы) и запуском, разделы — в нижнем доке, аккаунт
+   и друзья — в верхней шапке. */
 
 /**
  * Пустая плашка режима: вместо значка-сетки по очереди сменяются обложки —
@@ -238,33 +236,12 @@ export function Play({ on }: { on: boolean }) {
       <LobbyCharacter on={on} />
       <PartyBar on={on} />
       <EmoteBubble />
-      {/* Баннер справа виден всем, и новичкам тоже: реклама на самом видном месте (владелец 11.10.2026). */}
-      <Recommend on={on} />
-      {/* Левый край — как в Brawl Stars: крупный сундук и под ним разделы.
-          Боковой полосы на главной нет (владелец 23.09.2026). */}
-      {/* Ежедневный бонус живёт в магазине (правка владельца 21:43): плитки
-          бонуса нет, у «Магазина» «!», пока бонус не забран. */}
-      <div className="lobby-left">
-        <nav className="lobby-nav" aria-label="Разделы">
-          <HubTile kind="shop" />
-          <HubTile kind="wardrobe" />
-          <HubTile kind="server" />
-        </nav>
-      </div>
-      <div className="lobby-who">
-        <LobbyChips on={on} />
-      </div>
-
-      <div className={'lobby-side' + (dayZero ? ' day0' : '')}>
-        {/* Downloads sit above the play card: in the window corner they covered
-            the card on narrow screens. */}
+      {/* Правая колонка Мелонии: загрузки, прямоугольник версий и запуск.
+          Промо-баннер и плитки-входы убраны — их место занял список версий,
+          разделы переехали в нижний док. */}
+      <div className="mln-right">
         <Installs inLobby />
-        {/* Над рядом — подпись и мелкие действия сборки; сам ряд — плашка
-            режима и «Играть» одной высоты, как в Brawl Stars. */}
-        <div className="lobby-side-top">
-          <span />
-          <span className="lobby-tools" />
-        </div>
+        <VersionRect on={on} />
         <div className="lobby-row">
           {/* OneBlock в лобби убран (владелец 24.09.2026, 07:26: «пока убираем»). */}
           {/* Плашка ведёт в каталог режимов, «Играть» — только запуск. */}
@@ -420,6 +397,10 @@ export function Play({ on }: { on: boolean }) {
           ) : null}
         </div>
       </div>
+      <div className="lobby-who">
+        <LobbyChips on={on} />
+      </div>
+      <LobbyDock />
         <div className={'wp-pop' + (wp.popOpen ? ' open' : '')} id="wpPop">
           <div className="cap">Живые обои</div>
           <div className="wp-grid" id="wpGrid">
