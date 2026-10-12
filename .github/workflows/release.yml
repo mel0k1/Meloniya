@@ -92,14 +92,17 @@ jobs:
           TARGET: ${{ matrix.target }}
         run: |
           set -eu
+          root="$PWD"
           mkdir -p "upload/${TARGET}"
           cd "src-tauri/target/${TARGET}/release/bundle"
-          if [ -d nsis ]; then cp nsis/*.exe "../../../upload/${TARGET}/"; fi
-          if [ -d msi ]; then cp msi/*.msi "../../../upload/${TARGET}/"; fi
-          if [ -d appimage ]; then cp appimage/*.AppImage "../../../upload/${TARGET}/"; fi
-          if [ -d deb ]; then cp deb/*.deb "../../../upload/${TARGET}/"; fi
-          if [ -d rpm ]; then cp rpm/*.rpm "../../../upload/${TARGET}/"; fi
-          cd ../../../upload/${TARGET}
+          shopt -s nullglob
+          for pair in nsis:exe msi:msi appimage:AppImage deb:deb rpm:rpm; do
+            d="${pair%%:*}"
+            ext="${pair##*:}"
+            [ -d "$d" ] || continue
+            cp "$d"/*."$ext" "$root/upload/${TARGET}/"
+          done
+          cd "$root/upload/${TARGET}"
           for f in *; do sha256sum "$f" > "$f.sha256"; done
           ls -la
 
