@@ -529,6 +529,11 @@ mod tests {
         "core:window:allow-destroy",
         "core:window:allow-start-dragging",
         "deep-link:allow-get-current",
+        // updater: проверка/установка релизов mel0k1/Meloniya; process: перезапуск
+        // после установки и выход при «обновить и закрыть».
+        "updater:default",
+        "process:allow-restart",
+        "process:allow-exit",
         "clipboard-manager:allow-write-text",
         // Все собственные команды ядра (build.rs, AppManifest): только главное окно.
         "main-commands",
