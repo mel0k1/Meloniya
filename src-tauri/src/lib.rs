@@ -169,8 +169,6 @@ pub fn run() {
         }))
         .plugin(navguard::init())
         .plugin(tauri_plugin_deep_link::init())
-        .plugin(tauri_plugin_updater::Builder::new().build())
-        .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         // Запуск вместе с системой (06.10.2026): лаунчер живёт в трее, и
@@ -446,10 +444,6 @@ pub fn run() {
             commands::system::cache_size,
             commands::system::clear_cache,
             commands::system::is_flatpak,
-            commands::system::update_fallback_check,
-            commands::system::update_notes,
-            commands::system::update_fallback_stage,
-            commands::system::update_fallback_run,
             commands::system::frontend_ready,
             commands::system::tray_available,
             commands::system::hide_to_tray,
@@ -532,13 +526,8 @@ mod tests {
         "core:window:allow-close",
         "core:window:allow-destroy",
         "core:window:allow-start-dragging",
-        "updater:allow-check",
-        "updater:allow-download",
-        "updater:allow-install",
         "deep-link:allow-get-current",
         "clipboard-manager:allow-write-text",
-        "process:allow-restart",
-        "process:allow-exit",
         // Все собственные команды ядра (build.rs, AppManifest): только главное окно.
         "main-commands",
     ];

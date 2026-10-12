@@ -43,7 +43,6 @@ import { BuyModal } from './components/catalog/PaidActs'
 import { ModpackVersionsOverlay, ScreenshotsOverlay } from './modals/Overlays'
 import { MigrateBuildModal } from './modals/MigrateBuild'
 import { ImageLightbox } from './components/ImageLightbox'
-import { UpdateBanner } from './components/UpdateBanner'
 import { ConfirmModal } from './components/ConfirmModal'
 import { BuildPicker } from './components/BuildPicker'
 import { PackKeyHost } from './components/PackKeyHost'
@@ -219,8 +218,6 @@ import { flushPrefs, hydratePrefs } from './lib/prefs'
 
 let gameStartedAt = 0
 import { flushNativeCrashes, installErrorHandlers, reportGameCrash } from './lib/crash'
-import { autoUpdate, bootUpdate, installUpdateOnExit, updateReady } from './lib/updater'
-import { BootUpdate } from './components/BootUpdate'
 import { Welcome } from './components/Welcome'
 import { useSlidingSegs } from './lib/slidingSegs'
 import { beatAfterReconnect, gameSession, heartbeat, ramMbFor, reconcileGameSession, setGameSession, updateSessionServer } from './lib/launch'
@@ -333,13 +330,7 @@ export function App() {
     const stopStreakReminder = initStreakReminder()
     const stopStreakActivity = initStreakActivity()
     const stopPromoServers = watchPromoServers()
-    void bootUpdate().then((leaving) => {
-      if (leaving) return
-      preloadScreens()
-    })
-    const updPoll = setInterval(() => {
-      if (!updateReady()) void autoUpdate()
-    }, 1_800_000)
+    preloadScreens()
     // The launcher can sit in the tray longer than an MC token lives, so refresh
     // near-expiry accounts periodically.
     const msPoll = setInterval(() => {
@@ -395,7 +386,6 @@ export function App() {
       stopStreakActivity()
       stopPromoServers()
       releaseRealtime()
-      clearInterval(updPoll)
       clearInterval(msPoll)
       document.removeEventListener('visibilitychange', onVisible)
       window.removeEventListener('pagehide', onLeave)
@@ -411,12 +401,6 @@ export function App() {
     void w
       .onCloseRequested(async (e) => {
         if (leaving) return
-        if (updateReady()) {
-          leaving = true
-          e.preventDefault()
-          await installUpdateOnExit()
-          return
-        }
         if (!trayCloseEnabled()) return
         e.preventDefault()
         hideLauncherToTray()
@@ -437,7 +421,6 @@ export function App() {
       trackAppExit()
       stopMusicNow()
       void flushPrefs()
-      if (updateReady()) void installUpdateOnExit()
     }).then((u) => {
       unlisten = u
     })
@@ -790,11 +773,9 @@ export function App() {
   return (
     <>
       <SvgSprite />
-      <BootUpdate />
       <Welcome />
       <div className="window" id="win">
         <Titlebar />
-        <UpdateBanner />
 
         <Login on={!logged} />
 

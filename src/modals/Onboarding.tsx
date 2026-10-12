@@ -25,7 +25,7 @@ function Welcome({ nick }: { nick: string }) {
   return (
     <>
       <div className="onb-hero">
-        <img src="/millida-logo.svg" alt="" />
+        <img src="/meloniya-logo.png" alt="" width={48} height={48} />
         <div>
           <h3>Привет{nick ? ', ' + nick : ''}!</h3>
         </div>

@@ -22,8 +22,6 @@ tauri-build = { version = "2", features = [] }
 # and the cross build calls cargo directly, so the CLI never derives it from
 # tauri.conf.json
 tauri = { version = "2", features = ["protocol-asset", "tray-icon", "macos-private-api"] }
-tauri-plugin-updater = "2"
-tauri-plugin-process = "2"
 tauri-plugin-autostart = "~2.5.1"
 tauri-plugin-single-instance = { version = "2", features = ["deep-link"] }
 tauri-plugin-deep-link = "2"
@@ -57,10 +55,9 @@ discord-rich-presence = "0.2"
 # secrets live in the local vault (secrets.rs): AES-256-GCM with an HKDF key
 aes-gcm = "0.10"
 hkdf = "0.12"
-# the fallback updater verifies artifacts with the same key and algorithm as the
-# updater plugin
+# catalog files (mods, packs) ship signed; verification uses the same algorithm
+# as the catalog publisher
 minisign-verify = "0.2"
-semver = "1"
 base64 = "0.22"
 url = "2"
 # game assets ship as ogg/vorbis, which WKWebView on macOS cannot play

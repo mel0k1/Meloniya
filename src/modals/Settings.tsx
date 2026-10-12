@@ -39,8 +39,7 @@ import { AppIconPicker } from '../components/AppIconPicker'
 import { AudioSettings } from '../components/AudioSettings'
 import { RewindClips } from '../components/RewindClips'
 import { RadioCredits, RadioVolume } from '../components/radio'
-import { betaChannel, checkForUpdate, pendingUpdate } from '../lib/updater'
-import { useUpdate } from '../state/update'
+import { checkForUpdate } from '../lib/updater'
 import { discordPresence } from '../lib/launch'
 import { radioOn, useMusic } from '../state/music'
 import { fetchSounds, playSound, setSoundMode, soundMode, soundVolume } from '../lib/sound'
@@ -252,10 +251,7 @@ export function Settings({ on }: { on: boolean }) {
   const [majors, setMajors] = useState<number[]>([8, 11, 17, 21])
   const [javaWant, setJavaWant] = useState(21)
   const [javaBusy, setJavaBusy] = useState(0)
-  const [upd, setUpd] = useState(pendingUpdate)
   const [updBusy, setUpdBusy] = useState(false)
-  const [beta, setBeta] = useState(betaChannel)
-  const updStaged = useUpdate((s) => s.staged)
   const [skins, setSkins] = useState<SkinSource>(skinSource)
   const charAnim = useViewPrefs((s) => s.charAnim)
   const bgAnim = useViewPrefs((s) => s.bgAnim)
@@ -993,51 +989,26 @@ export function Settings({ on }: { on: boolean }) {
     <>
       <Block keys="версия обновление обновить проверить">
         <div className="s2-hero">
-          <img src="/millida-logo.svg" alt="" width={48} height={48} />
+          <img src="/meloniya-logo.png" alt="" width={48} height={48} />
           <span className="s2-hero-txt">
-            <b>Millida Launcher</b>
-            <small>
-              {upd
-                ? updStaged
-                  ? 'Обновление ' + upd.version + ' встанет при выходе'
-                  : 'Доступна ' + upd.version
-                : ver
-                  ? 'Версия ' + ver
-                  : 'Версия приложения'}
-            </small>
+            <b>Мелония</b>
+            <small>{ver ? 'Версия ' + ver : 'Версия приложения'}</small>
           </span>
-          {upd ? (
-            <button
-              className="btn md primary"
-              disabled={updBusy}
-              onClick={() => {
-                setUpdBusy(true)
-                upd.install().catch((e) => {
-                  console.error('[settings] update', e)
-                  setUpdBusy(false)
-                  showToast('Не удалось обновиться', 'error')
+          <button
+            className="btn md secondary"
+            disabled={updBusy}
+            onClick={() => {
+              setUpdBusy(true)
+              void checkForUpdate(true)
+                .then((u) => {
+                  if (u) void u.install()
+                  else showToast('Стоит последняя версия')
                 })
-              }}
-            >
-              <Icon id="i-restart" /> {updBusy ? 'Обновляем…' : 'Обновить'}
-            </button>
-          ) : (
-            <button
-              className="btn md secondary"
-              disabled={updBusy}
-              onClick={() => {
-                setUpdBusy(true)
-                void checkForUpdate(true)
-                  .then((u) => {
-                    setUpd(u)
-                    if (!u) showToast('Стоит последняя версия')
-                  })
-                  .finally(() => setUpdBusy(false))
-              }}
-            >
-              {updBusy ? <span className="spin"></span> : <Icon id="i-restart" />} Проверить
-            </button>
-          )}
+                .finally(() => setUpdBusy(false))
+            }}
+          >
+            {updBusy ? <span className="spin"></span> : <Icon id="i-restart" />} Проверить
+          </button>
         </div>
       </Block>
 
@@ -1046,21 +1017,10 @@ export function Settings({ on }: { on: boolean }) {
         <Row title="Собран на GitHub" hint={ver ? 'v' + ver : undefined} keys="github исходный код открытый безопасность вирус проверить сборка">
           <button
             className="btn md secondary"
-            onClick={() => void openUrl('https://github.com/millida/launcher/releases' + (ver ? '/tag/v' + ver : '')).catch(() => {})}
+            onClick={() => void openUrl('https://github.com/mel0k1/Meloniya/releases' + (ver ? '/tag/v' + ver : '')).catch(() => {})}
           >
             Открыть
           </button>
-        </Row>
-        <Row title="Тестовые версии" hint={beta ? 'Раньше всех, бывают поломки' : undefined} keys="бета тестирование обновления раньше">
-          <Toggle
-            label="Тестовые версии"
-            on={beta}
-            onChange={() => {
-              const next = !beta
-              setBeta(next)
-              writePref('m-beta', next ? '1' : '0')
-            }}
-          />
         </Row>
         <Row title="Запускать вместе с системой" hint="Сразу в трей" keys="автозапуск автозагрузка система windows трей включение">
           <Toggle
