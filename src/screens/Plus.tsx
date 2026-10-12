@@ -255,9 +255,9 @@ export function Plus({ on }: { on: boolean }) {
       <div className="lp-hero">
         <span className="lp-hero-grid" aria-hidden="true" />
         <div className="lp-hero-head">
-          <span className="lp-eyebrow">Подписка Millida</span>
+          <span className="lp-eyebrow">Подписка Meloniya</span>
           <h1>
-            Millida <em>PLUS</em>
+            Meloniya <em>PLUS</em>
           </h1>
           {price ? <p>{rubles(price)} / 28 дней · отмена в любой день</p> : <span className="skel lp-price-skel" aria-hidden="true" />}
           <div className="lp-hero-cta">{cta}</div>
@@ -407,7 +407,7 @@ export function Plus({ on }: { on: boolean }) {
                 <div className="lp-aiex-card">
                   <b>Сборка на сервер</b>
                   <small>
-                    <strong>Одной кнопкой</strong> · на Millida Hosting
+                    <strong>Одной кнопкой</strong> · на Meloniya Hosting
                   </small>
                 </div>
               ) : null}

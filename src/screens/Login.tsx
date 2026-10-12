@@ -26,9 +26,9 @@ export function Login({ on }: { on: boolean }) {
       <div className="login-wrap lg2-wrap">
         <div className="login-form lg2-card">
           <div className="login-logo">
-            <img src="/millida-logo.svg" alt="" width={56} height={56} />
+            <img src="/meloniya-logo.png" alt="" width={56} height={56} />
           </div>
-          <h1>Вход в Millida</h1>
+          <h1>Вход в Мелонию</h1>
           {/* Одна строка вместо абзаца: остальное показывает сам поток входа —
               код, «Открыть страницу», «Копировать ссылку» (аудит 22.09.2026). */}
           <p className="sub">Нет аккаунта — создастся при входе</p>

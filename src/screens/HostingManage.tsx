@@ -418,7 +418,7 @@ export function HostingManage({
       return
     }
     if ((detail || server) && detail?.iconLocked) {
-      showToast('На бесплатном тарифе иконка наша — она же метка Millida', 'error')
+      showToast('На бесплатном тарифе иконка наша — она же метка Meloniya', 'error')
       return
     }
     setSaving('icon')
@@ -889,7 +889,7 @@ export function HostingManage({
                       src={cur.icon}
                       alt=""
                       onError={(e) => {
-                        e.currentTarget.src = '/millida-logo.svg'
+                        e.currentTarget.src = '/meloniya-logo.png'
                       }}
                       style={{ width: 28, height: 28, borderRadius: 6 }}
                     />

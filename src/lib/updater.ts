@@ -225,7 +225,7 @@ const TRANSLOCATED_RE = /запущен из образа/i
 
 function noticeIfTranslocated(e: unknown): boolean {
   if (!TRANSLOCATED_RE.test(String(e))) return false
-  showToast('Лаунчер запущен из образа. Перенеси Millida в «Программы» — иначе обновления не установятся', 'error')
+  showToast('Лаунчер запущен из образа. Перенеси Мелонию в «Программы» — иначе обновления не установятся', 'error')
   return true
 }
 

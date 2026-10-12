@@ -1,10 +1,4 @@
-# Как собрать Millida Launcher самому
-
-<p align="center">
-  <a href="https://github.com/millida/launcher/raw/main/.github/readme/build-guide.mp4"><img src=".github/readme/build-guide.gif" alt="Сборка лаунчера из исходников: клонирование, зависимости, сборка установщика" width="100%"></a>
-  <br>
-  <a href="https://github.com/millida/launcher/raw/main/.github/readme/build-guide.mp4"><b>Смотреть видео целиком (MP4, 75 с)</b></a>
-</p>
+# Как собрать Мелонию самому
 
 Три команды. Первая сборка — 10–20 минут, смотря какой компьютер. Дальше — быстрее: Rust пересобирает только изменённое.
 
@@ -52,8 +46,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ## 2. Собери
 
 ```bash
-git clone https://github.com/millida/launcher.git
-cd launcher
+git clone https://github.com/mel0k1/Meloniya.git
+cd Meloniya
 bun install
 bun run tauri build
 ```

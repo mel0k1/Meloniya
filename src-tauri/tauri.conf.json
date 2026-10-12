@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Millida Launcher",
+  "productName": "Meloniya",
   "version": "2.0.0",
-  "identifier": "net.millida.launcher",
+  "identifier": "net.meloniya.launcher",
   "build": {
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:5173",
@@ -14,7 +14,7 @@
     "withGlobalTauri": false,
     "windows": [
       {
-        "title": "Millida Launcher",
+        "title": "Мелония",
         "width": 1200,
         "height": 760,
         "minWidth": 980,
@@ -175,12 +175,12 @@
       "rpm",
       "appimage"
     ],
-    "publisher": "Millida",
+    "publisher": "Meloniya",
     "homepage": "https://millida.net/launcher",
-    "copyright": "© 2026 Millida (MARKET LINK LLC)",
+    "copyright": "© 2026 Meloniya. Форк Millida Launcher © MARKET LINK LLC",
     "category": "Game",
     "shortDescription": "Лаунчер Minecraft",
-    "longDescription": "Лаунчер Minecraft от Millida: версии от Mojang, загрузчики Fabric, Quilt, Forge и NeoForge, моды и модпаки с Modrinth и CurseForge.",
+    "longDescription": "Мелония — лаунчер Minecraft: версии от Mojang, загрузчики Fabric, Quilt, Forge и NeoForge, моды и модпаки с Modrinth и CurseForge.",
     "icon": [
       "icons/icon.icns",
       "icons/icon.ico",
@@ -215,7 +215,10 @@
         "installerIcon": "icons/icon.ico",
         "installMode": "currentUser",
         "installerHooks": "installer-hooks.nsh",
-        "languages": ["Russian", "English"]
+        "languages": [
+          "Russian",
+          "English"
+        ]
       }
     },
     "createUpdaterArtifacts": false

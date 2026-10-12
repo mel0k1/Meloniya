@@ -148,9 +148,9 @@ export function Welcome() {
       ) : null}
       <div className="welcome-body" aria-live="polite">
         {first && phase === 'in' ? <Burst n={30} spread={320} seed={9} /> : null}
-        <img className="welcome-logo" src="/millida-logo.svg" alt="" />
+        <img className="welcome-logo" src="/meloniya-logo.png" alt="" />
         <span className="welcome-hi">{first ? 'Добро пожаловать' : 'С возвращением,'}</span>
-        <b className="welcome-nick">{first ? 'в Millida' : nick || 'игрок'}</b>
+        <b className="welcome-nick">{first ? 'в Мелонии' : nick || 'игрок'}</b>
         {gift ? (
           <div className="welcome-gift sh-card is-show" {...rarityProps(gift.item.rarity)}>
             <RarityFx />

@@ -161,7 +161,7 @@ export async function startWebLogin(reopen = false) {
     try {
       init = await api<LauncherInit>('/auth/launcher/init', {
         method: 'POST',
-        body: JSON.stringify({ clientName: 'Millida Launcher' }),
+        body: JSON.stringify({ clientName: 'Meloniya' }),
       })
     } catch (e) {
       resetLogin()

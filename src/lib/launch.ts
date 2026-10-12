@@ -100,7 +100,7 @@ export function discordPresence(status?: string, server?: string | null): Promis
   const details = playing ? (build ? 'Играет · ' + build : 'В игре') : 'В лаунчере'
   const addr = (session && session.server) || ''
   const place = (session && (session.serverName || session.server)) || server || ''
-  const state = playing && place ? 'Сервер: ' + place : nick ? 'Ник: ' + nick : 'Millida Launcher'
+  const state = playing && place ? 'Сервер: ' + place : nick ? 'Ник: ' + nick : 'Мелония'
   // Версия сборки уезжает в ссылку: принимающий лаунчер иначе знает только
   // адрес и заходит тем, что у гостя выбрано сейчас.
   const joinUrl = playing && addr ? joinPageUrl(addr, (session && session.serverName) || null, pack && pack.version) : ''
@@ -207,8 +207,8 @@ async function resolveAuth(profile: string | null, server?: string | null): Prom
   if (millidaOnly) {
     const where = smp ? 'Millida SMP' : 'OneBlock'
     if (kind !== 'millida')
-      throw new Error(native ? NATIVE_NEEDS_MILLIDA : where + ' пускает только с аккаунтом Millida: войди в Millida и нажми «Играть» ещё раз')
-    if (!native && acc && !isMillidaKind(acc.kind)) showToast(where + ': заходим с аккаунтом Millida')
+      throw new Error(native ? NATIVE_NEEDS_MILLIDA : where + ' пускает только с аккаунтом Мелонии: войди в неё и нажми «Играть» ещё раз')
+    if (!native && acc && !isMillidaKind(acc.kind)) showToast(where + ': заходим с аккаунтом Мелонии')
     return { nick: offline.nick, auth: { kind: 'millida' } }
   }
   // A live token is required, not just a stored one: Minecraft session tokens expire after a day.

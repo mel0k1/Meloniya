@@ -49,7 +49,7 @@ function handle(raw: string) {
     // поэтому рядом всегда настоящий адрес, а запоминаем имя только после «да».
     const label = name === addr ? `«${addr}»` : `«${name}» (${addr})`
     void uiConfirm(`Запустить игру и зайти на сервер ${label}?`, {
-      title: 'Millida',
+      title: 'Мелония',
       confirmLabel: 'Запустить',
       danger: false,
     }).then((ok) => {
@@ -79,7 +79,7 @@ function handle(raw: string) {
       return
     }
     void uiConfirm(`Запустить сборку «${profile}»?`, {
-      title: 'Millida',
+      title: 'Мелония',
       confirmLabel: 'Запустить',
       danger: false,
     }).then((ok) => {
@@ -140,7 +140,7 @@ function handle(raw: string) {
     setScreen('builds')
     const title = q.get('name') || slug
     void uiConfirm(title === slug ? `Установить сборку «${slug}»?` : `Установить сборку «${title}» (${slug})?`, {
-      title: 'Millida',
+      title: 'Мелония',
       confirmLabel: 'Установить',
       danger: false,
     }).then((ok) => {
@@ -195,7 +195,7 @@ function handle(raw: string) {
       const nick = friend.nickname || ''
       // Any web page can fire a millida:// link, so calling someone asks first.
       void uiConfirm(`Позвонить ${nick || 'этому игроку'}?`, {
-        title: 'Millida',
+        title: 'Мелония',
         confirmLabel: 'Позвонить',
         danger: false,
       }).then((ok) => {
