@@ -803,13 +803,6 @@ pub(crate) async fn download_new(
     fetch(url, dest, sum, size).await
 }
 
-/// For sources without a reference hash whose content changes between versions
-/// (installers, modpack archives).
-#[cfg_attr(not(test), allow(dead_code))]
-pub(crate) async fn download_fresh(url: &str, dest: &Path) -> Result<(), String> {
-    fetch(url, dest, None, None).await
-}
-
 /// Same, for archives an install job downloads: the job's cancel flag stops the
 /// transfer mid-body instead of after the last byte.
 /// Сейчас вызывается только тестом отмены: установка каталожных сборок ушла на
