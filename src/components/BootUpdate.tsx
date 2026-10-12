@@ -17,7 +17,7 @@ export function BootUpdate() {
       <div className="boot-upd-card">
         <img src="/meloniya-logo.png" alt="" width={44} height={44} />
         <div className="boot-upd-title">{TITLES[phase]}</div>
-        <div className="boot-upd-sub">{version ? 'Версия ' + version : 'Millida Launcher'}</div>
+        <div className="boot-upd-sub">{version ? 'Версия ' + version : 'Мелония'}</div>
         <div className="boot-upd-bar">
           <span
             className={'boot-upd-fill' + (phase === 'installing' || !pct ? ' pulse' : '')}

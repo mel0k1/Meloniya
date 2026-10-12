@@ -437,7 +437,7 @@ export interface MilliError {
 }
 
 const ERROR_TEXT: Record<MilliErrorKind, string> = {
-  auth: 'Войди в аккаунт Millida',
+  auth: 'Войди в аккаунт Мелонии',
   limit: 'Лимит на сегодня',
   busy: 'Милли ещё думает над прошлым',
   blocked: 'Милли тебе недоступна',

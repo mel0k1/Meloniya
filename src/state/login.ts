@@ -37,7 +37,7 @@ interface LoginState {
   set: (patch: Partial<LoginState>) => void
 }
 
-const IDLE_LABEL = 'Войти через аккаунт Millida'
+const IDLE_LABEL = 'Войти через аккаунт Мелонии'
 
 // The browser does not always come up (no default browser, a portable build, a
 // second machine). Saying where the code goes turns a dead end into a two-step
@@ -99,10 +99,10 @@ function resetLogin(hint?: string, dropCode = false) {
 }
 
 function nickFromUser(user: LauncherUser): string {
-  if (!user) return 'Millida'
+  if (!user) return 'Мелония'
   if (user.nickname) return user.nickname
   const local = (user.email || '').split('@')[0]
-  return local || 'Millida'
+  return local || 'Мелония'
 }
 
 /// The launcher holds one Millida session, so a second sign-in takes the place of the
@@ -149,7 +149,7 @@ export async function startWebLogin(reopen = false) {
     return
   }
   if (!hasTauri()) {
-    showToast('Вход через аккаунт Millida доступен только в приложении лаунчера', 'error')
+    showToast('Вход через аккаунт Мелонии доступен только в приложении лаунчера', 'error')
     return
   }
   s.set({ webBusy: true, webLabel: 'Ждём подтверждения…' })
@@ -268,7 +268,7 @@ export function quickStart() {
   // Guest mode is a shortcut for a returning user, not a way around the account:
   // friends, skins, hosting and the game profile all need a Millida login.
   if (!millidaEver()) {
-    showToast('Сначала войди в аккаунт Millida — это нужно один раз', 'error')
+    showToast('Сначала войди в аккаунт Мелонии — это нужно один раз', 'error')
     return
   }
   const nick = 'Player' + Math.floor(1000 + Math.random() * 8999)

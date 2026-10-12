@@ -286,7 +286,7 @@ export const useDaily = create<DailyState>((set, get) => ({
   openOne: async (id) => {
     if (!hasMillidaAccount()) {
       logoutToLogin()
-      return { error: 'Войди в аккаунт Millida' }
+      return { error: 'Войди в аккаунт Мелонии' }
     }
     const drop = () => {
       const cur = get().status

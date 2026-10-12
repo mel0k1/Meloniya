@@ -73,8 +73,14 @@ function rgb(hex: string) {
   return (n >> 16 & 255) + ',' + (n >> 8 & 255) + ',' + (n & 255)
 }
 
+function luma(hex: string) {
+  const n = parseInt(hex.slice(1), 16)
+  return (0.2126 * (n >> 16 & 255) + 0.7152 * (n >> 8 & 255) + 0.0722 * (n & 255)) / 255
+}
+
 /** Палитра от цвета кнопок. */
 export function makePal(c: string, shade: (hex: string, amt: number) => string): Pal {
+  const pale = luma(c) > 0.62
   return {
     accent: rgb(c),
     tint: rgb(shade(c, 0.3)),
@@ -89,12 +95,12 @@ export function makePal(c: string, shade: (hex: string, amt: number) => string):
     // Brawl Ball: центр #cff989, края #26b447 — светлый оттенок и сам цвет.
     // Приглушённее и темнее, как старый фон лобби со скрина владельца
     // (24.09.2026, 11:28); свет из центра остаётся.
-    glowCore: shade(c, 0.32),
-    glowMid: mix(c, '#000000', 0.18),
-    glowEdge: mix(c, '#000000', 0.34),
+    glowCore: pale ? mix(c, '#000000', 0.12) : shade(c, 0.32),
+    glowMid: mix(c, '#000000', pale ? 0.5 : 0.18),
+    glowEdge: mix(c, '#000000', pale ? 0.6 : 0.34),
     // Воронка к краям (владелец 24.09.2026, 07:44: «с краёв слишком зелёный»).
-    glowDeep: mix(c, '#000000', 0.5),
-    glowVoid: mix(c, '#000000', 0.66),
+    glowDeep: mix(c, '#000000', pale ? 0.68 : 0.5),
+    glowVoid: mix(c, '#000000', pale ? 0.78 : 0.66),
   }
 }
 

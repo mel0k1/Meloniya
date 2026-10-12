@@ -195,7 +195,7 @@ export const accKindLabel = (k?: string): string =>
     : k === 'elyby'
       ? 'Аккаунт Ely.by'
       : k === 'tg' || k === 'millida'
-      ? 'Аккаунт Millida'
+      ? 'Аккаунт Мелонии'
       : k === 'offline'
         ? 'Офлайн-ник'
         : 'Гость'

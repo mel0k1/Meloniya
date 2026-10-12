@@ -29,7 +29,7 @@ export function Titlebar() {
       <div className="tb-drag" data-tauri-drag-region="" style={{ flex: 1 }}></div>
       <div className="tb-center">
         <img src="/meloniya-logo.png" alt="" style={{ width: '22px', height: '22px', borderRadius: '6px' }} />
-        <span className="tb-name">MILLIDA LAUNCHER</span>
+        <span className="tb-name">МЕЛОНИЯ</span>
       </div>
       {IS_MAC ? null : (
         <div className="tb-btns">
