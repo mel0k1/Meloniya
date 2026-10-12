@@ -169,6 +169,8 @@ pub fn run() {
         }))
         .plugin(navguard::init())
         .plugin(tauri_plugin_deep_link::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         // Запуск вместе с системой (06.10.2026): лаунчер живёт в трее, и

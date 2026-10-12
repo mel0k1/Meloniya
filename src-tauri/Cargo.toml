@@ -22,6 +22,8 @@ tauri-build = { version = "2", features = [] }
 # and the cross build calls cargo directly, so the CLI never derives it from
 # tauri.conf.json
 tauri = { version = "2", features = ["protocol-asset", "tray-icon", "macos-private-api"] }
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
 tauri-plugin-autostart = "~2.5.1"
 tauri-plugin-single-instance = { version = "2", features = ["deep-link"] }
 tauri-plugin-deep-link = "2"

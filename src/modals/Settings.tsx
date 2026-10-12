@@ -1004,6 +1004,7 @@ export function Settings({ on }: { on: boolean }) {
                   if (u) void u.install()
                   else showToast('Стоит последняя версия')
                 })
+                .catch(() => showToast('Обновления недоступны — скачай с GitHub', 'error'))
                 .finally(() => setUpdBusy(false))
             }}
           >

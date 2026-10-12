@@ -236,6 +236,8 @@ import {
 import { initRealtimeRelay } from './lib/realtimeRelay'
 import { readPresencePush, readTypingPush, withPresence } from './lib/friendsPush'
 import { hideLauncherToTray, initTray, restoreLauncher, restoreOnGameExit, trayCloseEnabled } from './lib/window'
+import { bootUpdate, installUpdateOnExit, updateReady } from './lib/updater'
+import { UpdateBanner } from './components/UpdateBanner'
 import { SESSION_EXPIRED_EVENT, api, hasMillidaAccount } from './lib/api'
 import { hasTauri, tauri } from './ipc/tauri'
 import type { UnlistenFn } from './ipc/tauri'
@@ -375,6 +377,7 @@ export function App() {
       void refreshGameNick()
       void refreshMsAccounts()
       void flushNativeCrashes()
+      void bootUpdate()
       hideBoot()
       void initTelemetry(performance.now()).then(reportWebviewFailure)
       watchHeap()
@@ -401,6 +404,12 @@ export function App() {
     void w
       .onCloseRequested(async (e) => {
         if (leaving) return
+        if (updateReady()) {
+          leaving = true
+          e.preventDefault()
+          await installUpdateOnExit()
+          return
+        }
         if (!trayCloseEnabled()) return
         e.preventDefault()
         hideLauncherToTray()
@@ -421,6 +430,7 @@ export function App() {
       trackAppExit()
       stopMusicNow()
       void flushPrefs()
+      if (updateReady()) void installUpdateOnExit()
     }).then((u) => {
       unlisten = u
     })
@@ -776,6 +786,7 @@ export function App() {
       <Welcome />
       <div className="window" id="win">
         <Titlebar />
+        <UpdateBanner />
 
         <Login on={!logged} />
 
