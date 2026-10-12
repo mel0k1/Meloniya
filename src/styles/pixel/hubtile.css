@@ -57,10 +57,7 @@
    по плите, поэтому арт можно брать шире плитки. */
 .ht-artbox {
   position: absolute; z-index: 2; inset: 3px; pointer-events: none;
-  clip-path: polygon(
-    0 -40px, 100% -40px, 100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px),
-    calc(100% - 10px) 100%, 10px 100%, 10px calc(100% - 10px), 0 calc(100% - 10px)
-  );
+  clip-path: inset(-40px 0 0 0 round 0 0 10px 10px);
 }
 .ht-art {
   position: absolute; bottom: 0; left: 50%; display: block; max-width: none;
@@ -79,10 +76,7 @@
   background: var(--ht-band);
   /* Сверху клип открыт на 20px: лента «Бесплатно» сидит на шве. Фон
      плашки дальше своего бокса не рисуется, так что открыть клип безопасно. */
-  clip-path: polygon(
-    0 -20px, 100% -20px, 100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px),
-    calc(100% - 10px) 100%, 10px 100%, 10px calc(100% - 10px), 0 calc(100% - 10px)
-  );
+  clip-path: inset(-20px 0 0 0 round 0 0 10px 10px);
 }
 .ht-band::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--ht-ol); }
 .ht-band::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: rgba(0, 0, 0, 0.3); }

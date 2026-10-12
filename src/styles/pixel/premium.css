@@ -13,7 +13,7 @@
   margin-bottom: 14px;
 }
 :root:root .pm-hero {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
 }
 .pm-hero-art {
@@ -95,7 +95,7 @@
 .pm-badge svg { width: 13px; height: 13px; }
 .pm-badge.sm { position: absolute; top: 8px; right: 8px; }
 :root:root .pm-badge {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 4px; clip-path: var(--px-4);
   /* Плотный акцент с тёмным текстом — как у primary-кнопки. */
   color: var(--px-on-accent);
@@ -109,7 +109,7 @@
   background: rgba(255, 255, 255, 0.14);
   border-radius: var(--m-r-mini);
 }
-:root:root .pm-age { border-radius: 0; --px-n: 4px; clip-path: var(--px-4); }
+:root:root .pm-age { border-radius: var(--m-r-pill); --px-n: 4px; clip-path: var(--px-4); }
 
 /* ---------- Цена ---------- */
 .pm-price {
@@ -154,7 +154,7 @@
   transition: transform var(--m-t-fast) var(--m-ease-out);
 }
 :root:root .pm-card {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
   box-shadow: var(--px-plate); --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
 }
@@ -232,7 +232,7 @@
   border-radius: var(--m-r-md);
   cursor: pointer;
 }
-:root:root .pm-shot { border-radius: 0; --px-n: 5px; clip-path: var(--px-5); }
+:root:root .pm-shot { border-radius: var(--m-r-card); --px-n: 5px; clip-path: var(--px-5); }
 .pm-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pm-video { display: grid; place-items: center; color: var(--m-fg-muted); }
 .pm-video svg { width: 30px; height: 30px; }
@@ -252,7 +252,7 @@
   border-radius: var(--m-r-md);
 }
 :root:root .pm-tile {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
   box-shadow: var(--px-plate); --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
 }
@@ -280,7 +280,7 @@
   border-radius: var(--m-r-card);
 }
 :root:root .pm-plan-card {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
   box-shadow: var(--px-plate); --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
 }
@@ -303,7 +303,7 @@
   margin-top: 4px;
 }
 :root:root .pm-buy {
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   --px-n: 10px; clip-path: var(--px-10);
   box-shadow: var(--px-plate); --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
 }
@@ -342,6 +342,6 @@
 .pm-skel-hero { display: block; height: 320px; border-radius: var(--m-r-card); }
 .pm-skel-card { display: block; height: 176px; border-radius: var(--m-r-card); }
 :root:root :is(.pm-skel-hero, .pm-skel-card) {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
 }

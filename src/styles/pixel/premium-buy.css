@@ -39,7 +39,7 @@
   height: 12px;
   flex: none;
   background: currentColor;
-  clip-path: polygon(0 0, 50% 0, 50% 50%, 100% 50%, 100% 100%, 0 100%);
+  border-radius: 50%;
   animation: pab-spin 800ms var(--m-ease-smooth) infinite;
 }
 @keyframes pab-spin { to { transform: rotate(360deg); } }
@@ -181,7 +181,7 @@
   color: var(--pab-gold);
   background-color: var(--m-inset);
   --px-n: 5px; clip-path: var(--px-5);
-  --px-img: radial-gradient(circle at 50% 35%, rgba(245, 196, 81, 0.18), transparent 70%);
+  background-image: radial-gradient(circle at 50% 35%, rgba(245, 196, 81, 0.18), transparent 70%);
   --px-img-repeat: no-repeat;
   --px-ol: var(--pab-gold); --px-ol-w: 2px;
   --px-ft: rgba(0, 0, 0, 0.3); --px-ft-w: 3px;
@@ -245,7 +245,7 @@
   background-color: #2c2719;
   --px-ol: var(--pab-gold); --px-ol-w: 2px;
   --px-ft: rgba(255, 224, 138, 0.12);
-  --px-img: radial-gradient(140% 100% at 0% 0%, rgba(245, 196, 81, 0.16), transparent 70%);
+  background-image: radial-gradient(140% 100% at 0% 0%, rgba(245, 196, 81, 0.16), transparent 70%);
   --px-img-repeat: no-repeat;
 }
 .pab-plan-radio {
@@ -291,7 +291,7 @@
   text-transform: uppercase;
   color: var(--pab-ink);
   background-color: var(--pab-gold);
-  --px-n: 3px; clip-path: polygon(3px 0, calc(100% - 3px) 0, calc(100% - 3px) 3px, 100% 3px, 100% calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%, 3px 100%, 3px calc(100% - 3px), 0 calc(100% - 3px), 0 3px, 3px 3px);
+  --px-n: 3px; border-radius: var(--m-r-pill);
   --px-fb: rgba(120, 70, 0, 0.45); --px-fb-w: 2px;
 }
 .pab-plan:not(.on) .pab-plan-badge { background-color: rgba(245, 196, 81, 0.85); }
@@ -324,7 +324,7 @@
   display: block;
   height: 10px;
   background-color: var(--m-inset);
-  --px-n: 2px; clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+  --px-n: 2px; border-radius: var(--m-r-pill);
   --px-ft: rgba(0, 0, 0, 0.35); --px-ft-w: 2px;
 }
 .pab-prog-fill {
@@ -458,7 +458,7 @@
   padding: 18px 20px;
   background-color: #23211c;
   --px-ol: rgba(245, 196, 81, 0.4); --px-ol-w: 1px;
-  --px-img: radial-gradient(80% 120% at 0% 0%, rgba(245, 196, 81, 0.12), transparent 70%);
+  background-image: radial-gradient(80% 120% at 0% 0%, rgba(245, 196, 81, 0.12), transparent 70%);
   --px-img-repeat: no-repeat;
 }
 .pm-buy.pab-wide.is-open { --px-ol: rgba(245, 196, 81, 0.22); }

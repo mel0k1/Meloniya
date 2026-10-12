@@ -252,7 +252,7 @@
 .sh-row { display: flex; align-items: center; gap: 10px; }
 .sh-promo { margin-top: 14px; max-width: 420px; }
 .sh-skel { display: block; height: 92px; }
-:root:root .sh-skel { border-radius: 0; --px-n: 10px; clip-path: var(--px-10); }
+:root:root .sh-skel { border-radius: var(--m-r-card); --px-n: 10px; clip-path: var(--px-10); }
 
 @media (prefers-reduced-motion: reduce) {
   .sh-nc-in { transition: none; }

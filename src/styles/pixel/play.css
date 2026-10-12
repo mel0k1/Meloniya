@@ -23,7 +23,7 @@
 .pl-hero-cover .cover-img.block { image-rendering: pixelated; padding: 8px; }
 .pl-hero-cta { flex-direction: row; align-items: center; gap: 10px; }
 
-:root:root .pl-hero-cover { --px-n: 10px; clip-path: var(--px-10); border-radius: 0; }
+:root:root .pl-hero-cover { --px-n: 10px; clip-path: var(--px-10); border-radius: var(--m-r-card); }
 
 /* ---------- Полка «Премиум» ---------- */
 .pl-prem-row {
@@ -55,8 +55,8 @@
 }
 .pl-prem-body .meta { display: block; margin-top: 3px; font-size: 11.5px; color: var(--m-fg-faint); }
 
-:root:root .pl-prem { --px-n: 10px; clip-path: var(--px-10); border-radius: 0; }
-:root:root .pl-prem-badge { --px-n: 4px; clip-path: var(--px-4); border-radius: 0; }
+:root:root .pl-prem { --px-n: 10px; clip-path: var(--px-10); border-radius: var(--m-r-card); }
+:root:root .pl-prem-badge { --px-n: 4px; clip-path: var(--px-4); border-radius: var(--m-r-pill); }
 
 @container (max-width: 860px) { .pl-prem:nth-child(n + 4) { display: none; } }
 @container (max-width: 600px) { .pl-prem:nth-child(n + 3) { display: none; } }
@@ -72,7 +72,7 @@
 .pl-srv-tag.own { background: var(--m-accent); color: var(--px-on-accent, #06200e); }
 .pl-srv-tag.ad { background: var(--m-surface-3, var(--m-inset)); color: var(--m-fg-faint); }
 
-:root:root .pl-srv-tag { --px-n: 4px; clip-path: var(--px-4); border-radius: 0; }
+:root:root .pl-srv-tag { --px-n: 4px; clip-path: var(--px-4); border-radius: var(--m-r-mini); }
 
 /* ---------- Карточка сборки: значок запуска виден сразу ----------
    Клик по обложке запускает игру, клик по остальной карточке открывает

@@ -45,7 +45,7 @@
 .bx-skel-list { display: flex; flex-direction: column; gap: 8px; padding: 4px 0; }
 .bx-skel-list .skel { display: block; height: 44px; }
 .bx-skel-shot { display: block; aspect-ratio: 16 / 9; }
-:root:root :is(.bx-skel-list .skel, .bx-skel-shot) { border-radius: 0; --px-n: 10px; clip-path: var(--px-10); }
+:root:root :is(.bx-skel-list .skel, .bx-skel-shot) { border-radius: var(--m-r-card); --px-n: 10px; clip-path: var(--px-10); }
 
 /* ---------- Ошибка строкой: значок, фраза, «Повторить» ---------- */
 .nb-err {
@@ -161,12 +161,12 @@
 .nb-create.busy .nb-create-lab { visibility: hidden; }
 .nb-create-spin { position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-color: currentColor; border-top-color: transparent; }
 
-:root:root :is(.nb-loader, .nb-tile, .nb-retry, .nb-skel, .nb-act) { border-radius: 0; --px-n: 5px; clip-path: var(--px-5); }
-:root:root .nb-preview { border-radius: 0; --px-n: 10px; clip-path: var(--px-10); }
+:root:root :is(.nb-loader, .nb-tile, .nb-retry, .nb-skel, .nb-act) { border-radius: var(--m-r-ctl); --px-n: 5px; clip-path: var(--px-5); }
+:root:root .nb-preview { border-radius: var(--m-r-card); --px-n: 10px; clip-path: var(--px-10); }
 :root:root .nb-tile.on::after { --px-n: 5px; clip-path: var(--px-5); }
-:root:root :is(.nb-icon, .inst-icon) { border-radius: 0; --px-n: 10px; clip-path: var(--px-10); border-color: transparent; }
-:root:root .icon-grid { border-radius: 0; --px-n: 10px; clip-path: var(--px-10); }
-:root:root .icon-cell { border-radius: 0; --px-n: 4px; clip-path: var(--px-4); }
+:root:root :is(.nb-icon, .inst-icon) { border-radius: var(--m-r-card); --px-n: 10px; clip-path: var(--px-10); border-color: transparent; }
+:root:root .icon-grid { border-radius: var(--m-r-card); --px-n: 10px; clip-path: var(--px-10); }
+:root:root .icon-cell { border-radius: var(--m-r-mini); --px-n: 4px; clip-path: var(--px-4); }
 
 /* ---------- Импорт ---------- */
 .imp-list { max-height: 300px; overflow-y: auto; margin-top: 4px; }
@@ -183,10 +183,10 @@
 .imp-way:disabled { opacity: 0.6; }
 @media (hover: hover) and (pointer: fine) { .imp-way:hover:not(:disabled) { background: var(--m-raised); transform: translateY(-1px); } }
 .imp-way:active:not(:disabled) { transform: translateY(2px); box-shadow: var(--px-btn-press, none); --px-ol: rgba(0, 0, 0, 0.2); --px-ol-w: 2px; --px-ft: rgba(0, 0, 0, 0.22); --px-ft-w: 3px; --px-fb: rgba(0, 0, 0, 0.22); --px-fb-w: 2px; --px-fl: transparent; --px-fr: transparent; }
-:root:root .imp-way { border-radius: 0; --px-n: 5px; clip-path: var(--px-5); }
+:root:root .imp-way { border-radius: var(--m-r-ctl); --px-n: 5px; clip-path: var(--px-5); }
 
 /* ---------- Страница сборки ---------- */
-:root:root :is(.inst-back, .inst-tab, .log-file-chip) { border-radius: 0; --px-n: 5px; clip-path: var(--px-5); }
+:root:root :is(.inst-back, .inst-tab, .log-file-chip) { border-radius: var(--m-r-ctl); --px-n: 5px; clip-path: var(--px-5); }
 /* Выбранная вкладка — как пункт сайдбара: мягкая подсветка + грань слева.
    Сплошной акцент оставлен только главной кнопке («Играть»): три зелёные
    плашки на экране спорили друг с другом (сведение 22.09.2026). */
@@ -195,7 +195,7 @@
   box-shadow: inset 3px 0 0 var(--m-accent), inset 0 -3px 0 rgba(0, 0, 0, 0.2); --px-ol: transparent; --px-ft: transparent; --px-fb: rgba(0, 0, 0, 0.2); --px-fb-w: 3px; --px-fl: var(--m-accent); --px-fl-w: 3px; --px-fr: transparent;
 }
 :root:root #bsLogBody,
-:root:root .instance-page .host-console { border-radius: 0 !important; --px-n: 10px; clip-path: var(--px-10); }
+:root:root .instance-page .host-console { border-radius: var(--m-r-card) !important; --px-n: 10px; clip-path: var(--px-10); }
 
 /* Совместимость — одна строка со статусом вместо заголовка и абзаца. */
 .bx-audit { margin: 0 0 14px; padding: 10px 10px 10px 14px; background: var(--m-surface); }
@@ -223,7 +223,7 @@
 
 /* ---------- Окно краша: точная починка — во всю ширину ---------- */
 .crash-fixes.has-main .crash-main-fix { flex: 1 0 100%; }
-:root:root :is(.crash-reason, .crash-ic, .share-code) { border-radius: 0; --px-n: 10px; clip-path: var(--px-10); }
+:root:root :is(.crash-reason, .crash-ic, .share-code) { border-radius: var(--m-r-card); --px-n: 10px; clip-path: var(--px-10); }
 :root:root .crash-ic { --px-n: 5px; clip-path: var(--px-5); }
 /* У «Поделиться», «По коду» и «Проверки модов» значок был красным, как у
    краша: модификатора .ok в стилях не было. Красный — только для беды. */

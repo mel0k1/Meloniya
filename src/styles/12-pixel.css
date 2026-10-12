@@ -1,126 +1,34 @@
-/* ============================================================
-   ПИКСЕЛЬНЫЙ ЯЗЫК ЛАУНЧЕРА (22.09.2026)
-   ------------------------------------------------------------
-   Перенос языка millida.net (docs/PIXEL-LANGUAGE.md, оригинал —
-   ~/Documents/Claude/Работа/Дизайн-Millida/ПИКСЕЛЬНЫЙ-ЯЗЫК.md) в лаунчер.
-   Приказ владельца 22.09.2026: «полный редизайн всего лаунчера в новом
-   стиле за один подход».
-
-   Коротко:
-   - кнопки и переключатели — срез угла 5px, ОДИН уступ (clip-path, не radius);
-   - подложки (карточки, строки, модалки, сайдбар) — срез 10px;
-   - главная кнопка — плотный акцент с тёмным текстом, грани и подошва;
-   - рамка и грани — СПЛОШНАЯ ступенчатая линия по всему силуэту (приказ
-     23.09.2026): рисует их «ступенчатая рамка» ниже, фоновыми слоями.
-     inset-тень и border идут по прямоугольнику, clip-path вырезает угол
-     вместе с куском линии — на ступеньке остаётся разрыв. Их не использовать.
-
-   Правила пишутся под `:root:root` — так они весят ровно столько, сколько
-   весили под прежним `:root:not([…])`, и спор с базовым китом решается как раньше.
-   ============================================================ */
+/* Токены бывшего «пиксельного языка» Millida: срезы, ступенчатые рамки
+   и фактуры отключены. Геометрия интерфейса — кит (--m-r-*). */
 
 :root {
-  --px-5: polygon(
-    5px 0, calc(100% - 5px) 0, calc(100% - 5px) 5px, 100% 5px,
-    100% calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%,
-    5px calc(100% - 5px), 0 calc(100% - 5px), 0 5px, 5px 5px
-  );
-  --px-4: polygon(
-    4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
-    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%,
-    4px calc(100% - 4px), 0 calc(100% - 4px), 0 4px, 4px 4px
-  );
-  --px-10: polygon(
-    10px 0, calc(100% - 10px) 0, calc(100% - 10px) 10px, 100% 10px,
-    100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%,
-    10px calc(100% - 10px), 0 calc(100% - 10px), 0 10px, 10px 10px
-  );
-  /* Кольцо 3px по силуэту среза 10px (evenodd: внешний контур, затем внутренний) —
-     рамка поверх картинки со ступенчатыми углами. */
-  --px-ring-10: polygon(evenodd,
-    10px 0, calc(100% - 10px) 0, calc(100% - 10px) 10px, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 10px calc(100% - 10px), 0 calc(100% - 10px), 0 10px, 10px 10px, 10px 0,
-    13px 3px, 13px 13px, 3px 13px, 3px calc(100% - 13px), 13px calc(100% - 13px), 13px calc(100% - 3px), calc(100% - 13px) calc(100% - 3px), calc(100% - 13px) calc(100% - 13px), calc(100% - 3px) calc(100% - 13px), calc(100% - 3px) 13px, calc(100% - 13px) 13px, calc(100% - 13px) 3px, 13px 3px
-  );
-  /* Тёмный текст на акценте: белый на этом зелёном даёт 2,6:1. */
-  --px-on-accent: #06200e;
-  /* Цвета граней для ступенчатой рамки (см. «Ступенчатая рамка»). */
-  --px-plate-t: rgba(255, 255, 255, 0.04);
-  --px-plate-b: rgba(0, 0, 0, 0.26);
-  --px-btn-ol: rgba(0, 0, 0, 0.16);
-  --px-btn-t: rgba(255, 255, 255, 0.3);
-  --px-btn-b: rgba(0, 0, 0, 0.32);
-  --px-btn-l: rgba(255, 255, 255, 0.1);
-  --px-btn-r: rgba(0, 0, 0, 0.14);
+  --px-5: none;
+  --px-4: none;
+  --px-10: none;
+  --px-ring-10: none;
+  --px-on-accent: var(--m-accent-fg);
+  --px-plate-t: transparent;
+  --px-plate-b: transparent;
+  --px-btn-ol: transparent;
+  --px-btn-t: transparent;
+  --px-btn-b: transparent;
+  --px-btn-l: transparent;
+  --px-btn-r: transparent;
   --px-well-ol: color-mix(in srgb, var(--m-fg) 9%, transparent);
-  --px-well-t: rgba(0, 0, 0, 0.26);
-  /* Подложка: тонкая кайма, светлая грань сверху, тёмная снизу. */
-  /* Кайма 1px здесь не ставится: срез обрывает её на углах, и подложка
-     выглядит надорванной (замер скриншотом 22.09.2026). Форму держит заливка. */
-  --px-plate:
-    inset 0 2px 0 rgba(255, 255, 255, 0.04),
-    inset 0 -3px 0 rgba(0, 0, 0, 0.26);
-  /* Объём кнопки. Подошва — последняя, плотная полоса ВНУТРИ силуэта:
-     drop-shadow на элементе с clip-path обрезается самим clip-path
-     (порядок filter → clip в спецификации), а WebKit на macOS это
-     соблюдает строже Chromium. */
-  --px-btn:
-    inset 0 3px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -5px 0 rgba(0, 0, 0, 0.32),
-    inset 3px 0 0 rgba(255, 255, 255, 0.1),
-    inset -3px 0 0 rgba(0, 0, 0, 0.14),
-    inset 0 0 0 2px rgba(0, 0, 0, 0.16);
-  --px-btn-press:
-    inset 0 3px 0 rgba(0, 0, 0, 0.22),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.22),
-    inset 0 0 0 2px rgba(0, 0, 0, 0.2);
-  /* Вдавленное поле: поиск, ввод, дорожка переключателя. */
-  --px-well:
-    inset 0 0 0 1px color-mix(in srgb, var(--m-fg) 9%, transparent),
-    inset 0 3px 0 rgba(0, 0, 0, 0.26);
-  /* Списки под 8 слоёв точек — для --px-img-* у элементов со ступенчатой рамкой. */
-  --px-dots-size: auto, auto, auto, auto, auto, auto, auto, auto;
-  --px-dots-pos: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
-  --px-dots-repeat: repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat;
-  --px-dots-origin: padding-box, padding-box, padding-box, padding-box, padding-box, padding-box, padding-box, padding-box;
-  /* Фактура блока: редкие точки 2px с жёсткими стопами. */
-  --px-dots:
-    radial-gradient(circle at 11% 26%, rgba(255, 255, 255, 0.2) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 31% 68%, rgba(255, 255, 255, 0.14) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 57% 22%, rgba(255, 255, 255, 0.18) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 76% 66%, rgba(255, 255, 255, 0.12) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 90% 34%, rgba(255, 255, 255, 0.18) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 21% 80%, rgba(0, 0, 0, 0.14) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 66% 12%, rgba(0, 0, 0, 0.12) 0 1.5px, transparent 2px),
-    radial-gradient(circle at 44% 46%, rgba(0, 0, 0, 0.1) 0 1.5px, transparent 2px);
+  --px-well-t: transparent;
+  --px-plate: none;
+  --px-btn: none;
+  --px-btn-press: none;
+  --px-well: none;
+  --px-dots-size: auto;
+  --px-dots-pos: 0 0;
+  --px-dots-repeat: repeat;
+  --px-dots-origin: padding-box;
+  --px-dots: none;
 }
 
-/* ============ Ступенчатая рамка (приказ 23.09.2026) ============
-   Рамка, кайма и грани у элемента со срезанным углом — СПЛОШНАЯ ступенчатая
-   линия одинаковой толщины по всему силуэту, как рамка в Minecraft.
-
-   inset-тень и border рисуются по прямоугольнику: clip-path вырезает угол
-   вместе с куском линии, и на ступеньке остаётся разрыв. Поэтому рамку
-   рисуют фоновые слои (они лежат там же, где inset-тень: над заливкой,
-   под содержимым). Каждая сторона — полосы, которые не перекрываются,
-   так что полупрозрачные цвета не темнеют в стыках:
-     полоса у края → ряд ступеньки (угол n + толщина) → боковины → низ.
-
-   Как пользоваться:
-   1. Селектор элемента — в список :is(...) правила «Слои рамки» ниже.
-   2. На элементе задать переменные (не наследуются — у вложенных своё):
-        --px-n            ступенька среза: 5px (по умолчанию) / 10px / 4px —
-                          ставится рядом с clip-path: var(--px-10) и т.п.;
-        --px-ol / -ol-w   обводка по всему силуэту (цвет / толщина, 2px);
-        --px-ft / -ft-w   верхняя грань (2px), --px-fb / -fb-w нижняя (3px),
-        --px-fl / -fl-w   левая (3px),        --px-fr / -fr-w правая (3px).
-      Готовые наборы: подложка (--px-plate-t / -b), кнопка (--px-btn-*),
-      поле (--px-well-*) — токены в :root.
-   3. Своя картинка фона у такого элемента — через --px-img (+ -img-size,
-      -img-pos, -img-repeat, -img-origin): фон рамки стоит с !important, иначе
-      любое `background:` на экране сотрёт рамку. У картинки из нескольких
-      слоёв списки размеров/позиций — той же длины (иначе браузер повторит
-      значения рамки по кругу); фактура точек — готовым набором --px-dots-*.
-   box-shadow: inset … у элементов со срезом больше не пишется. */
+/* Зарегистрированные ниже --px-* больше нигде не рисуются: поля оставлены,
+   чтобы сотни объявлений в экранных css оставались валидным CSS. */
 @property --px-n { syntax: '<length>'; inherits: false; initial-value: 5px; }
 @property --px-ol { syntax: '<color>'; inherits: false; initial-value: transparent; }
 @property --px-ol-w { syntax: '<length>'; inherits: false; initial-value: 2px; }
@@ -138,119 +46,6 @@
 @property --px-img-repeat { syntax: '*'; inherits: false; }
 @property --px-img-origin { syntax: '*'; inherits: false; }
 
-/* Слои рамки. Первые пять — обводка, следующие пять — грани, последний —
-   своя картинка элемента. */
-:root:root :is(
-  /* кит */
-  .btn, .wp-btn, .hero-gear, .seg, .mk-pill, .set-tab, .tgl, .nav-item, .build-new,
-  .input, .m-select-btn, .login-code, .ovc-search, .px-tip,
-  .card, .sidebar, .modal, .srv-row, .mod-row, .plan-card, .kpi, .fr-row,
-  .host-cat-card, .srv-feature, .shot-card, .wm-card, .toast, .mk-menu, .tour-card, .wp-pop,
-  .chat-emoji-btn, .wp-item.wp-item-add, .m-slider-thumb,
-  .gf,
-  /* builds.css */
-  .bx-kbd, .nb-loader, .nb-loader.on, .imp-way, .inst-tab.on, .bx-audit,
-  /* catalog.css */
-  .cat-empty-ic, .mods-filters .mk-pill.is-active,
-  /* character.css */
-  .ch-look-input, .ch-tile.on, .ch-tile.trying, .ch-looks, .ch-stage, .ch-fit, .ch-tile, .ch-slot.on,
-  /* pass.css */
-  .bp-card, .bp-day, .bp-arrow,
-  /* daily.css */
-  .dc, .dp-cell, .dp-cell.now, .ra-frame, .wi, .wi-art, .dp2-hero, .dp2-arrow, .dp2-cell, .rv-card-in, .rv-missed, .rv-week, .rv-unlock-art, .dc.hero, .mc-cell,
-  /* friends.css */
-  .fr-list .fr-row[role='button'],
-  /* hosting-panel.css, hosting-scene.css */
-  .hp-balance, .hp-balance-add, .hp-panel, .hp-danger, .hsx-stat, .hsx-graph, .hsx-off, .hsx-danger, .hsx-adv, .hsx-more-pop, .hsx-tab, .hsx-addr, .hsx-settings .hsx-plate, .hsx-main-set .set-row, #s-hosting .host-manage-body .host-set-grid .set-row,
-  /* hosting-settings.css */
-  :is(.hs-pitch, .hs-state), .hs-fact, .hs-banner,
-  /* lobby.css */
-  .lobby-mode-card, .lobby-who .btn.lobby-wardrobe, .lobby-mate, .lobby-mate-act, .lobby-invite, .ht-gift, .lg2-card, .lb-btn, .lobby-row, .lb-me, .lobby-promo, .lobby-rec,
-  /* party.css */
-  .party-slot-empty, .party-plate, .party-invite, .party-card, .party-menu,
-  /* retention.css */
-  .lchip, .play-chest.go, .tb-block, .tb-none, .tb-row, .tr-mine, .tr-banner, .tl-kit-art, .tl-card, .tl-pod-plate, .tl-rc, .tl-search, .ar-card, .ar-panel, .ar-status,
-  /* lobby-bubble.css */
-  .eb-body,
-  /* milli.css */
-  .mlf, .msf, .ml-panel, .ml-menu, .ml-limit, .ml-hist-row, .mpk, .mpk-up, .mpk-srv,
-  /* play.css */
-  .pl-prem,
-  /* playhub.css */
-  .ph-card, .pp-play, .pp-fact, .pp-buy, .pp-buy.gold, .hi-srv.on, .ph-mine-menu,
-  .ph-chip, .ip, .ip-color, .ip-color.on, .ip-block, .ip-block.on, .nb2-lt, .nb2-lt.on, .nb2-ver, .nb2-ver.on,
-  /* premium.css */
-  .pm-card, .pm-card.is-active, .pm-tile, .pm-plan-card, .pm-buy,
-  /* rail.css */
-  .rail-inner, .sidebar.rail .rail-inner, .tb-back, .tb-icon, .tb-rubies, .topbar .account,
-  /* settings.css */
-  .s2-plate, .s2-hero, .s2-sw, .s2-sw.on, .s2-sw.custom, .s2-wp-tile.add, .s2-dot, .s2-dot.on, .s2-kbd,
-  /* shell.css */
-  .acc-menu, .ava.is-plus, .acc-item.on, .acc-add-btn, .acc-opt, .acc-buy, .acc-code, .upd-banner, :is(.hero-cta .btn.glass, .hero-cta .btn.running, .hero-cta .btn.danger), .hero-cta .btn.glass.on, .hero-cta .btn.running, .hero-cta .btn.danger,
-  /* shop.css */
-  .sh-bal, .sh-tag, .sh-art, .sh-work-how, .sh-src, .sh-wp-hero, .sh-owned, .sh-card, .sh-feat, .sh-deal, .sh-bundle-item, .sh-nc-back, .sh-nc-face, .sh-xray-stage, .sh-wish-item, .sh-meter-bar, .card.sh-weekly.is-ready, .sh-pick, .sh-pick.on, .sh-ach-row, .sh-prize, .card.sh-plus2, .sh-plus2-item, .sh-mig, .sh-pack, .sh-bar, .sh-chest,
-  /* sets.css */
-  .st-dot, .cs-cover, .cs-res,
-  /* social.css */
-  .skin-card.on, .skin-card.skin-add, .cape-card.on, .cape-card.trying, .cape-card, :is(.skin-order-banner, .plus-offer, .pack-card, .load-again, .sk-login-row), :is(.skin-order-banner, .plus-offer), :is( .fr-menu, .fr-add-pop, .msg-menu, .chat-emoji-pop, .chat-srv-pop, .chat-sticker-pop, .chat-notify, .chest-reveal-box )
-),
-/* псевдоэлементы в :is() не пишутся — отдельными селекторами */
-:root:root .nb-tile.on::after,
-:root:root .ph-card.prem::after,
-:root:root .sh-meter-bar::after,
-:root:root .sh-bar::after,
-:root:root .sidebar.collapsed [data-tip]::after,
-:root:root .s2-wp-tile.on::before,
-:root:root .px-excl::after,
-:root:root .ph-mt.ph-mt-own::before,
-:root:root .hs-host2::before {
-  box-shadow: none !important;
-  background-image:
-    linear-gradient(var(--px-ol) 0 0),
-    linear-gradient(90deg, var(--px-ol) 0 calc(var(--px-n) + var(--px-ol-w)), #0000 0 calc(100% - var(--px-n) - var(--px-ol-w)), var(--px-ol) 0),
-    linear-gradient(90deg, var(--px-ol) 0 var(--px-ol-w), #0000 0 calc(100% - var(--px-ol-w)), var(--px-ol) 0),
-    linear-gradient(90deg, var(--px-ol) 0 calc(var(--px-n) + var(--px-ol-w)), #0000 0 calc(100% - var(--px-n) - var(--px-ol-w)), var(--px-ol) 0),
-    linear-gradient(var(--px-ol) 0 0),
-    linear-gradient(var(--px-ft) 0 0),
-    linear-gradient(90deg, var(--px-ft) 0 calc(var(--px-n) + var(--px-ft-w)), #0000 0 calc(100% - var(--px-n) - var(--px-ft-w)), var(--px-ft) 0),
-    linear-gradient(90deg, var(--px-fl) 0 var(--px-fl-w), #0000 0 calc(100% - var(--px-fr-w)), var(--px-fr) 0),
-    linear-gradient(90deg, var(--px-fb) 0 calc(var(--px-n) + var(--px-fb-w)), #0000 0 calc(100% - var(--px-n) - var(--px-fb-w)), var(--px-fb) 0),
-    linear-gradient(var(--px-fb) 0 0),
-    var(--px-img, none) !important;
-  background-size:
-    100% var(--px-ol-w),
-    100% var(--px-n),
-    100% calc(100% - 2 * var(--px-n) - 2 * var(--px-ol-w)),
-    100% var(--px-n),
-    100% var(--px-ol-w),
-    100% var(--px-ft-w),
-    100% var(--px-n),
-    100% calc(100% - 2 * var(--px-n) - var(--px-ft-w) - var(--px-fb-w)),
-    100% var(--px-n),
-    100% var(--px-fb-w),
-    var(--px-img-size, auto) !important;
-  background-position:
-    0 0,
-    0 var(--px-ol-w),
-    0 calc(var(--px-n) + var(--px-ol-w)),
-    left 0 bottom var(--px-ol-w),
-    0 100%,
-    0 0,
-    0 var(--px-ft-w),
-    0 calc(var(--px-n) + var(--px-ft-w)),
-    left 0 bottom var(--px-fb-w),
-    0 100%,
-    var(--px-img-pos, 0 0) !important;
-  background-repeat:
-    no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
-    no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
-    var(--px-img-repeat, repeat) !important;
-  background-origin:
-    border-box, border-box, border-box, border-box, border-box,
-    border-box, border-box, border-box, border-box, border-box,
-    var(--px-img-origin, padding-box) !important;
-  background-clip: border-box !important;
-}
 
 /* Плавность — только у цвета заливки. Переход по `background`/`all` плавно
    смешивал слои рамки при смене состояния (нажатие, выбор) — на кадре это
@@ -263,7 +58,7 @@
 /* ============ Кнопки ============ */
 
 :root:root .btn {
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   --px-n: 5px; clip-path: var(--px-5);
   font-weight: 750;
   letter-spacing: -0.005em;
@@ -298,16 +93,11 @@
   box-shadow: none;
   --px-ol: var(--px-btn-ol); --px-ft: var(--px-btn-t); --px-ft-w: 3px; --px-fb: var(--px-btn-b); --px-fb-w: 5px; --px-fl: var(--px-btn-l); --px-fr: var(--px-btn-r);
   font-weight: 800;
-  padding-bottom: 3px;
 }
 :root:root .btn.stop svg { color: var(--m-accent-fg); }
 :root:root .btn.running {
   box-shadow: none;
   --px-ol: var(--m-accent); --px-fb: rgba(0, 0, 0, 0.22); --px-fb-w: 5px;
-}
-:root:root .btn.primary,
-:root:root .btn.secondary {
-  padding-bottom: 3px; /* текст по центру видимой грани, над подошвой */
 }
 @media (hover: hover) and (pointer: fine) {
   :root:root .btn.primary:hover:not(:disabled),
@@ -330,7 +120,7 @@
 
 /* Круглые служебные кнопки первого экрана и оверлеев — в тот же срез. */
 :root:root :is(.wp-btn, .hero-gear, .tb-btn, .toast-act, .side-collapse-ic, .mini-play, .proto-btn) {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 5px; clip-path: var(--px-5);
 }
 :root:root :is(.wp-btn, .hero-gear) {
@@ -341,7 +131,7 @@
 /* ============ Переключатели, чипы, фильтры ============ */
 
 :root:root :is(.seg, .set-tab, .mk-pill, .mk-chip, .filter-chip) {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 5px; clip-path: var(--px-5);
 }
 :root:root :is(.seg.on, .mk-pill.is-active) {
@@ -363,7 +153,7 @@
 
 /* Тумблер — квадратный, как рычаг в игре. */
 :root:root .tgl {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 4px;
   clip-path: var(--px-4);
   box-shadow: none;
@@ -371,20 +161,20 @@
 }
 :root:root .tgl::after,
 :root:root .tgl::before {
-  border-radius: 0 !important;
+  border-radius: 50% !important;
 }
 :root:root .tgl.on { --px-ol: transparent; --px-ft: rgba(255, 255, 255, 0.24); --px-ft-w: 2px; --px-fb: rgba(0, 0, 0, 0.26); }
 
 /* Мелкие плашки: срез 4px. Цветные бейджи категорий остаются круглыми. */
 :root:root :is(.nav-pill, .nav-badge, .nav-count, .pill, .mod-tag, .mod-ver, .mod-upd, .srv-rank, .srv-feature-badge, .host-perm) {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 4px; clip-path: var(--px-4);
 }
 
 /* ============ Поля ввода и выпадашки ============ */
 
 :root:root :is(.input, .m-select-btn, .login-code, .ovc-search) {
-  border-radius: 0;
+  border-radius: var(--m-r-md);
   --px-n: 5px; clip-path: var(--px-5);
   border-color: transparent;
   box-shadow: none;
@@ -394,11 +184,11 @@
 
 /* Ползунок: квадратная дорожка и квадратная ручка. */
 :root:root :is(.m-slider-track, .m-slider-fill, .slider, .bar, .dl-track, .dl-fill, .pl-bar, .boot-upd-bar, .boot-upd-fill, .onb-bar-seg) {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
 }
 /* Заливка — плотный акцент, без градиента. */
 :root:root .m-slider-fill { background: var(--m-accent); }
-:root:root .m-slider-thumb { border-radius: 0; --px-n: 4px; clip-path: var(--px-4); border: 0; --px-ol: var(--m-accent); --px-ol-w: 2px; }
+:root:root .m-slider-thumb { border-radius: var(--m-r-pill); --px-n: 4px; clip-path: var(--px-4); border: 0; --px-ol: var(--m-accent); --px-ol-w: 2px; }
 
 /* ============ Подложки ============ */
 
@@ -410,7 +200,7 @@
   .skin-stage, .skin-drop, .srv-banner, .bp-item, .ovc-row, .room-member, .room-pick-row,
   .ic-ed-big, .ic-ed-stage
 ) {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px;
   clip-path: var(--px-10);
   border-color: transparent;
@@ -429,12 +219,13 @@
 /* Выбранная карточка темы — кайма акцентом через inset (border срезался бы). */
 /* Меньшие подложки — меньший уступ, иначе срез съедает контент. */
 :root:root :is(.dl-card, .account, .kpi, .bp-item, .ovc-row, .room-member, .room-pick-row, .mod-card) {
+  border-radius: var(--m-r-card);
   --px-n: 5px;
   clip-path: var(--px-5);
 }
 /* Пунктирная «Новая сборка»: пунктир border по срезу рвётся — рисуем фоном. */
 :root:root .build-new {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   border: 0;
   --px-n: 10px;
   clip-path: var(--px-10);
@@ -460,7 +251,7 @@
 /* ============ Навигация ============ */
 
 :root:root .nav-item {
-  border-radius: 0;
+  border-radius: 10px;
   --px-n: 5px; clip-path: var(--px-5);
 }
 /* Активный раздел — плотная плашка с гранью, как выбранный таб в шапке сайта. */
@@ -473,7 +264,7 @@
 /* ============ Картинки и обложки ============ */
 
 :root:root :is(.cover, .cover-ph, .mod-icon, .srv-icon, .build-cover, .wp-item, .shot-img) {
-  border-radius: 0;
+  border-radius: var(--m-r-mini);
   --px-n: 5px; clip-path: var(--px-5);
 }
 
@@ -486,8 +277,6 @@
 :root:root .sec-title { font-weight: 800; }
 
 /* ============ Полоса прокрутки ============ */
-
-:root:root ::-webkit-scrollbar-thumb { border-radius: 0; }
 
 /* ============ Своя подсказка (components/PixelTip.tsx) ============
    Вместо системной подсказки ОС. Живёт в body, поэтому срез карточек её не режет.
@@ -507,6 +296,7 @@
   pointer-events: none;
   --px-n: 4px;
   clip-path: var(--px-4);
+  border-radius: var(--m-r-mini);
   --px-ol: var(--m-border-strong); --px-ol-w: 1px; --px-fb: rgba(0, 0, 0, 0.25);
   animation: pxTipIn 120ms ease-out;
 }
@@ -522,13 +312,10 @@ img[src*='/block-icons/'] {
   object-fit: contain;
 }
 
-/* Знак Millida — пиксельный квадрат со срезанными углами и объёмом кнопки
-   (23.09.2026): скругление, где оно задано инлайном, его бы съело. */
-img[src$='/meloniya-logo.png'] { border-radius: 0 !important; }
-
 .px-excl { position: relative; }
-/* Рамка партнёра — «Бегущий свет» (владелец 06.10.2026 выбрал П2 из вариантов):
-   тусклое кольцо, по нему ступенями бежит светлый отрезок. */
+/* Рамка партнёра — «Бегущий свет»: тусклое кольцо, по нему ступенями бежит
+   светлый отрезок. Кольцо собрано маской (внешний бокс минус внутренний),
+   поэтому углы идут по радиусу карточки. */
 @property --px-run { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 .px-excl::after {
   content: '';
@@ -537,7 +324,13 @@ img[src$='/meloniya-logo.png'] { border-radius: 0 !important; }
   z-index: 3;
   pointer-events: none;
   --px-c: var(--m-warning);
-  clip-path: var(--px-ring-10);
+  border-radius: var(--m-r-card);
+  padding: 3px;
+  background-origin: border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
   animation: px-excl-run 3.6s steps(48, end) infinite;
 }
 :root:root:root .px-excl::after {
@@ -589,7 +382,7 @@ img[src$='/meloniya-logo.png'] { border-radius: 0 !important; }
 .ms-box { position: relative; isolation: isolate; }
 .ms-box > .ms-ind {
   position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none;
-  background: var(--m-surface-2); --px-n: 5px; clip-path: var(--px-5);
+  background: var(--m-surface-2); border-radius: var(--m-r-pill); --px-n: 5px; clip-path: var(--px-5);
   box-shadow: inset 0 -3px 0 var(--m-accent);
   transition: transform 240ms var(--m-ease-move), width 240ms var(--m-ease-move), height 240ms var(--m-ease-move), opacity 120ms linear;
 }
@@ -610,14 +403,12 @@ img[src$='/meloniya-logo.png'] { border-radius: 0 !important; }
 
 /* Загрузка в лобби (08.10.2026: «как кнопка Играть»): пиксельная плашка с полосой-заливкой, без скруглений. */
 :root:root .inst-dock.in-lobby .inst-card {
-  border: 0; border-radius: 0; box-shadow: none; padding: 8px 12px; gap: 12px;
+  border: 1px solid var(--m-border); border-radius: var(--m-r-ctl); box-shadow: none; padding: 8px 12px; gap: 12px;
   background-color: var(--m-surface); --px-n: 5px; clip-path: var(--px-5);
 }
 :root:root .inst-dock.in-lobby .inst-name { font: 800 14px/1.1 var(--m-font); }
 :root:root .inst-dock.in-lobby .inst-msg { font: 700 12px/1.2 var(--m-font); color: var(--m-fg-subtle); }
-:root:root .inst-dock.in-lobby .inst-bar { height: 10px; border-radius: 0; margin-top: 6px; background: var(--m-inset); --px-n: 3px; clip-path: var(--px-4); }
+:root:root .inst-dock.in-lobby .inst-bar { height: 10px; border-radius: var(--m-r-pill); margin-top: 6px; background: var(--m-inset); --px-n: 3px; clip-path: var(--px-4); }
 :root:root .inst-dock.in-lobby .inst-bar > i {
-  border-radius: 0; background-color: var(--m-accent);
-  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, .18) 0 6px, transparent 6px 12px);
-  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .22), inset 0 2px 0 rgba(255, 255, 255, .25);
+  border-radius: var(--m-r-pill); background-color: var(--m-accent);
 }

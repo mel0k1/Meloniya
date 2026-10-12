@@ -38,7 +38,7 @@
   --px-n: 3px; clip-path: var(--px-4);
 }
 :root:root .mbl-filters .seg.on { color: var(--m-fg); background: var(--m-accent-soft); box-shadow: inset 0 -2px 0 var(--m-accent); }
-.mbl-chip i { font: 700 10.5px/1 'Monocraft', var(--m-mono); font-style: normal; color: var(--m-fg-faint); font-variant-numeric: tabular-nums; }
+.mbl-chip i { font: 700 10.5px/1 var(--m-mono); font-style: normal; color: var(--m-fg-faint); font-variant-numeric: tabular-nums; }
 .mbl-chip.on i { color: var(--m-accent); }
 .mbl-chip.warn { color: var(--m-warning); }
 .mbl-chip.warn i { color: var(--m-warning); }
@@ -63,7 +63,7 @@
 .mbl-gbtn:hover { color: var(--m-fg); }
 .mbl-gbtn .px-icon { width: 8px; height: 8px; flex: none; color: var(--m-fg-faint); }
 .mbl-gbtn b { min-width: 0; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.mbl-gbtn i { flex: none; font: 700 10.5px/1 'Monocraft', var(--m-mono); font-style: normal; letter-spacing: 0; color: var(--m-fg-faint); font-variant-numeric: tabular-nums; }
+.mbl-gbtn i { flex: none; font: 700 10.5px/1 var(--m-mono); font-style: normal; letter-spacing: 0; color: var(--m-fg-faint); font-variant-numeric: tabular-nums; }
 .mbl-group.shut .mbl-gbtn { color: var(--m-fg-faint); }
 :root:root .mbl-gsel { width: 14px; height: 14px; }
 

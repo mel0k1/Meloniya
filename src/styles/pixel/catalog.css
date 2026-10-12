@@ -29,7 +29,7 @@
 }
 .cat-empty-ic svg { width: 28px; height: 28px; }
 :root:root .cat-empty-ic {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
   box-shadow: var(--px-plate); --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
 }
@@ -40,7 +40,7 @@
 .cat-skel-icon { width: 52px; height: 52px; flex: none; }
 .cat-skel-btn { width: 104px; height: 32px; flex: none; }
 :root:root :is(.cat-skel-icon, .cat-skel-btn) {
-  border-radius: 0;
+  border-radius: var(--m-r-mini);
   --px-n: 5px; clip-path: var(--px-5);
 }
 .cat-pj-skel .skel { display: block; }
@@ -94,7 +94,7 @@
   border-radius: 9px;
   font-variant-numeric: tabular-nums;
 }
-:root:root .cat-pill-n { border-radius: 0; --px-n: 4px; clip-path: var(--px-4); }
+:root:root .cat-pill-n { border-radius: var(--m-r-pill); --px-n: 4px; clip-path: var(--px-4); }
 .mk-pill.cat-reset { color: var(--m-fg-subtle); }
 
 /* Сборка, под которую открыт каталог. */
@@ -134,6 +134,6 @@
   color: var(--m-warning, #f5923b);
 }
 .cat-warn svg { width: 15px; height: 15px; flex: none; }
-:root:root .srv-detail-fact { border-radius: 0; --px-n: 5px; clip-path: var(--px-5); }
+:root:root .srv-detail-fact { border-radius: var(--m-r-card); --px-n: 5px; clip-path: var(--px-5); }
 .srv-detail-fact.as-btn { cursor: pointer; }
 .srv-detail-fact.as-btn:hover b { color: var(--m-accent); }

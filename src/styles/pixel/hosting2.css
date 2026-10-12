@@ -25,6 +25,6 @@
   font-weight: 700;
 }
 :root:root .plan-pick {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 4px; clip-path: var(--px-4);
 }

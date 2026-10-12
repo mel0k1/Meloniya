@@ -130,27 +130,27 @@
 /* ============ Пиксельная форма ============ */
 
 :root:root :is(.hs-pitch, .hs-state, .hs-banner) {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
 }
 :root:root :is(.hs-pitch, .hs-state) { box-shadow: var(--px-plate); --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent; }
 :root:root .hs-fact {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 5px; clip-path: var(--px-5);
   box-shadow: var(--px-well); --px-ol: var(--px-well-ol); --px-ol-w: 1px; --px-ft: var(--px-well-t); --px-ft-w: 3px; --px-fb: transparent; --px-fl: transparent; --px-fr: transparent;
 }
 :root:root :is(.hs-chip, .hs-tip) {
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   --px-n: 4px; clip-path: var(--px-4);
 }
 :root:root .hs-tip { box-shadow: none; outline: 0; }
 :root:root .hs-banner { box-shadow: inset 4px 0 0 var(--m-warning, #f5c93b), inset 0 -3px 0 rgba(0, 0, 0, 0.2); --px-ol: transparent; --px-ft: transparent; --px-fb: rgba(0, 0, 0, 0.2); --px-fb-w: 3px; --px-fl: var(--m-warning, #f5c93b); --px-fl-w: 4px; --px-fr: transparent; }
 :root:root .host-graph {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 5px; clip-path: var(--px-5);
 }
 :root:root :is(.host-day, .host-crumb, .ip-pill) {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 4px; clip-path: var(--px-4);
 }
 

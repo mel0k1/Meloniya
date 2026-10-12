@@ -258,7 +258,7 @@
 /* Плитки вещей, плащей и сундуков. */
 :root:root .cape-card {
   border: 0;
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 5px; clip-path: var(--px-5);
 }
 :root:root .cape-card.on {
@@ -273,14 +273,14 @@
   }
 }
 :root:root :is(.cape-lock, .cape-star, .cape-price, .sk-del, .sk-active-mark, .fitting-off) {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 4px; clip-path: var(--px-4);
 }
 
 /* Подложки зоны: строки, предложения, пакеты, клетки ленты наград. */
 :root:root :is(.skin-order-banner, .plus-offer, .pack-card, .load-again, .sk-login-row) {
   border: 0;
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
   box-shadow: var(--px-plate); --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
 }
@@ -288,14 +288,14 @@
   box-shadow: var(--px-plate), inset 3px 0 0 var(--m-accent); --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: var(--m-accent); --px-fl-w: 3px; --px-fr: transparent;
 }
 :root:root :is(.pass-cell, .wallet-cell, .pack-art, .rb-stat, .fr-gate-feats > span) {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 5px; clip-path: var(--px-5);
 }
 :root:root .wallet-cell.as-link {
   border: 0;
 }
 :root:root :is(.skin-order-mark, .plus-offer-mark, .wallet-mark, .gate-ic) {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 5px; clip-path: var(--px-5);
 }
 
@@ -306,12 +306,12 @@
   .chat-notify, .chest-reveal-box
 ) {
   border-color: transparent;
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
   box-shadow: var(--px-plate), inset 0 0 0 1px color-mix(in srgb, var(--m-fg) 8%, transparent); --px-ol: color-mix(in srgb, var(--m-fg) 8%, transparent); --px-ol-w: 1px; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
 }
 :root:root :is(.fr-menu button, .msg-menu-item, .msg-menu-emoji, .chat-srv-row, .chat-sticker-tab, .chat-notify-x) {
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   --px-n: 4px; clip-path: var(--px-4);
 }
 /* Меню друга висит в корне документа (FriendRow, портал): строке больше не
@@ -323,7 +323,7 @@
 
 /* Круглые служебные кнопки чата и звонка — в тот же срез, что и кнопки. */
 :root:root :is(.chat-emoji-btn, .chat-send, .chat-rec-x, .chat-quote-x, .chat-down, .msg-act, .call-screen-x, .call-screen-max, .ovc-act) {
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   --px-n: 5px; clip-path: var(--px-5);
 }
 

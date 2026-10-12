@@ -145,7 +145,7 @@
   object-fit: cover;
   background: var(--m-inset);
 }
-#pjModal .pjx-icon-skel { width: 68px; height: 68px; border-radius: 0; }
+#pjModal .pjx-icon-skel { width: 68px; height: 68px; border-radius: var(--m-r-mini); }
 
 #pjModal .pjx-titles {
   flex: 1 1 auto;
@@ -200,7 +200,7 @@
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
   overflow-wrap: anywhere;
 }
-#pjModal .pjx-title-skel { display: block; width: 46%; height: 22px; border-radius: 0; }
+#pjModal .pjx-title-skel { display: block; width: 46%; height: 22px; border-radius: var(--m-r-mini); }
 
 #pjModal .pjx-meta {
   display: flex;
@@ -437,7 +437,7 @@
   height: auto;
   object-fit: contain;
   vertical-align: middle;
-  border-radius: 0 !important;
+  border-radius: var(--m-r-mini) !important;
   margin: 6px 0 !important;
   cursor: zoom-in;
 }
@@ -451,7 +451,7 @@
   background: rgba(0, 0, 0, 0.3);
 }
 #pjModal .pjx-md details {
-  border-radius: 0 !important;
+  border-radius: var(--m-r-mini) !important;
   clip-path: var(--px-5);
   background: rgba(0, 0, 0, 0.22) !important;
 }

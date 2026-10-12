@@ -139,7 +139,7 @@
   color: var(--m-fg);
   background: var(--m-bg);
   border: 2px solid color-mix(in srgb, var(--m-fg) 14%, transparent);
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   outline: none;
 }
 #pjModal .pjt-ta:focus { border-color: rgba(150, 100, 255, 0.7); }

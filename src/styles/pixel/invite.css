@@ -144,7 +144,7 @@
 }
 
 :root:root :is(.inv-code, .inv-step, .inv-earned) {
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   --px-n: 5px;
   clip-path: var(--px-5);
 }
@@ -335,13 +335,13 @@
   .ico-pic[data-id='legend']::after { animation: none; display: none; }
 }
 :root:root :is(.inv-gift, .onb-ref-gift, .ico-tile, .onb-ref-found, .onb-ref-miss) {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 5px;
   clip-path: var(--px-5);
 }
 
 /* Полоса «Засчитано»: плотный акцент без градиента старого кита (QA 06.10.2026). */
 .inv-bar > i {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   background: var(--m-accent);
 }

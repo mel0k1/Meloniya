@@ -158,7 +158,7 @@
 }
 /* Процент — как уровень опыта в игре: лаймовый с тёмной обводкой. */
 .mwl-pct {
-  flex: none; font: 700 16px/1 'Monocraft', var(--m-mono); font-variant-numeric: tabular-nums; color: #80ff20;
+  flex: none; font: 700 16px/1 var(--m-mono); font-variant-numeric: tabular-nums; color: #80ff20;
   text-shadow: 1px 0 0 #0b1a03, -1px 0 0 #0b1a03, 0 1px 0 #0b1a03, 0 -1px 0 #0b1a03, 2px 2px 0 #0b1a03;
 }
 .mwl-live { display: block; min-height: 36px; margin: 7px 0 8px; font: 700 13.5px/18px var(--m-font); color: var(--m-fg); }

@@ -66,22 +66,22 @@
 
 /* ---------- Пиксельная форма ---------- */
 :root:root .hp-balance {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 5px; clip-path: var(--px-5);
   --px-ol: color-mix(in srgb, var(--m-accent) 32%, transparent); --px-ol-w: 2px;
   --px-ft: transparent; --px-fb: transparent; --px-fl: transparent; --px-fr: transparent;
 }
 :root:root .hp-balance-add {
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   /* Тот же срез, что у плашки баланса: зазор до каймы одной ширины и на ступеньке. */
   --px-n: 5px; clip-path: var(--px-5);
   --px-ol: transparent; --px-ft: rgba(255, 255, 255, 0.3); --px-ft-w: 2px; --px-fb: rgba(0, 0, 0, 0.3); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
 }
 :root:root .hp-panel {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
   --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
 }
-:root:root :is(.hp-ico, .hp-badge) { border-radius: 0; clip-path: var(--px-4); }
+:root:root :is(.hp-ico, .hp-badge) { border-radius: var(--m-r-pill); clip-path: var(--px-4); }
 :root:root .hp-ico { clip-path: var(--px-5); }
 :root:root .hp-danger { --px-ft: transparent; --px-fb: rgba(0, 0, 0, 0.26); }

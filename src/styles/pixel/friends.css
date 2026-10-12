@@ -278,14 +278,14 @@
 }
 
 :root:root :is(.fr-hours, .fr-tab-n, .fr-ava-n) {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 4px; clip-path: var(--px-4);
 }
 :root:root .fr-ava-n {
   box-shadow: none;
 }
 :root:root :is(.fr-chat .room-ava, .fr-add-ic, .fr-skel-ava, .fr-q-x) {
-  border-radius: 0;
+  border-radius: var(--m-r-pill);
   --px-n: 5px; clip-path: var(--px-5);
 }
 :root:root .fr-list .fr-row[role='button']:focus-visible {

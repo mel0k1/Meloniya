@@ -180,7 +180,7 @@
 .ip-colors { grid-template-columns: repeat(11, minmax(0, 1fr)); }
 .ip-head .ip-roll { flex: none; gap: 6px; }
 /* Цвет и градиент — слоем --px-img (фон пиксельных плиток задаёт рамка, background-color не виден). */
-.ip-color, .ip-block { --px-img: var(--c); --px-img-size: 100% 100%; --px-img-repeat: no-repeat; --px-img-origin: border-box; }
+.ip-color, .ip-block { background-image: var(--c); background-size: 100% 100%; background-repeat: no-repeat; background-origin: border-box; }
 .ip-block:not(.on) img { opacity: 0.92; }
 /* Значки Modrinth в карточках библиотеки — крупнее блоков Millida: детальный рендер на градиенте. */
 :root .hub-pane .ph-mine .ph-card-art .bi.mr img { max-height: 86px; width: 86px; height: 86px; transform: translateY(-14px); }

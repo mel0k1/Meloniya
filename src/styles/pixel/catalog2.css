@@ -44,7 +44,7 @@
   border-radius: 13px;
 }
 .cat2-now svg { width: 13px; height: 13px; }
-:root:root .cat2-now { border-radius: 0; --px-n: 4px; clip-path: var(--px-4); }
+:root:root .cat2-now { border-radius: var(--m-r-mini); --px-n: 4px; clip-path: var(--px-4); }
 
 @media (max-width: 900px) {
   .cat2-bar .cat2-search { flex: 1 1 100%; }

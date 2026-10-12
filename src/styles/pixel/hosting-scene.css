@@ -28,8 +28,8 @@
   --hs-on: var(--m-fg);
   --hs-on-2: var(--m-fg-subtle);
   --hs-shade: color-mix(in srgb, var(--m-fg) 8%, transparent);
-  --hs-cut-l: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 10px calc(100% - 10px), 0 calc(100% - 10px), 0 10px, 10px 10px);
-  --hs-cut-r: polygon(0 0, calc(100% - 10px) 0, calc(100% - 10px) 10px, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  --hs-cut-l: none;
+  --hs-cut-r: none;
 }
 :root:root #s-hosting {
   --hs-green: #1d7a36;
@@ -70,7 +70,7 @@
 }
 .hsx-navy::before,
 .hsx-road.is-navy::before { background: var(--hs-navy); }
-:root:root :is(.hsx-green, .hsx-navy, .hsx-road)::before { border-radius: 0; }
+:root:root :is(.hsx-green, .hsx-navy, .hsx-road)::before { border-radius: var(--m-r-card); }
 :root:root :is(.hsx-green, .hsx-road.is-green)::before { clip-path: var(--hs-cut-l); }
 :root:root :is(.hsx-navy, .hsx-road.is-navy)::before { clip-path: var(--hs-cut-r); }
 .hsx-green::before { border-top-right-radius: 0; border-bottom-right-radius: 0; }
@@ -445,7 +445,7 @@
    Рамки и грани — общим слоем «Ступенчатая рамка» (12-pixel.css):
    переменные --px-*, никаких inset-теней и border на срезанных элементах. */
 :root:root :is(.hsx-stat, .hsx-graph, .hsx-off, .hsx-danger, .hsx-adv, .hsx-more-pop) {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
   box-shadow: none;
   --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;
@@ -453,23 +453,23 @@
 /* Белая плашка: тёмная подошва снизу, как у чипов сайта. */
 :root:root .hsx-stat { --px-n: 5px; clip-path: var(--px-5); --px-ft: transparent; --px-fb: rgba(0, 0, 0, 0.14); --px-fb-w: 4px; }
 :root:root :is(.hsx-status, .hsx-addr, .hsx-tab, .hsx-more-item, .hsx-bars-tip) {
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   --px-n: 4px; clip-path: var(--px-4);
 }
 :root:root :is(.hsx-addr, .hsx-tab) { --px-n: 5px; clip-path: var(--px-5); }
 :root:root .hsx-tab { box-shadow: none; --px-ol: transparent; --px-ft: transparent; --px-fl: transparent; --px-fr: transparent; --px-fb: rgba(0, 0, 0, 0.26); --px-fb-w: 3px; }
 :root:root .hsx-tab.on { --px-fb: var(--m-accent); --px-fb-w: 3px; }
-:root:root .hsx-status .dot { border-radius: 0; }
-:root:root .hsx-green .host-invite-pop { border-radius: 0; clip-path: var(--px-10); border: 0; }
+:root:root .hsx-status .dot { border-radius: var(--m-r-pill); }
+:root:root .hsx-green .host-invite-pop { border-radius: var(--m-r-card); clip-path: var(--px-10); border: 0; }
 :root:root :is(.hsx-main-set .set-row, #s-hosting .host-manage-body .host-set-grid .set-row) {
-  border-radius: 0;
+  border-radius: var(--m-r-ctl);
   --px-n: 5px; clip-path: var(--px-5);
   box-shadow: none;
   --px-ol: var(--px-well-ol); --px-ol-w: 1px; --px-ft: var(--px-well-t); --px-ft-w: 3px; --px-fb: transparent; --px-fl: transparent; --px-fr: transparent;
 }
-:root:root #s-hosting .host-console { border-radius: 0; clip-path: var(--px-10); }
+:root:root #s-hosting .host-console { border-radius: var(--m-r-card); clip-path: var(--px-10); }
 :root:root .hsx-settings .hsx-plate {
-  border-radius: 0;
+  border-radius: var(--m-r-card);
   --px-n: 10px; clip-path: var(--px-10);
   box-shadow: none;
   --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent;

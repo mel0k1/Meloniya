@@ -73,7 +73,7 @@
   border-radius: var(--m-r-card); font: inherit; text-align: left;
 }
 .dc.compact { width: 260px; height: 72px; min-height: 0; padding: 8px 8px 8px 8px; gap: 7px; }
-:root:root .dc { border-radius: 0; --px-n: 10px; clip-path: var(--px-10); }
+:root:root .dc { border-radius: var(--m-r-card); --px-n: 10px; clip-path: var(--px-10); }
 .dc.clickable { cursor: pointer; transition: background-color var(--m-t-fast); }
 .dc.clickable:hover { background: var(--m-surface-2); }
 .dc.clickable:focus-visible { outline: none; background: var(--m-surface-2); }
@@ -134,7 +134,7 @@
   box-shadow: var(--px-plate); --px-ol: transparent; --px-ft: var(--px-plate-t); --px-ft-w: 2px; --px-fb: var(--px-plate-b); --px-fb-w: 3px; --px-fl: transparent; --px-fr: transparent; border-radius: var(--m-r-md);
 }
 .dp-cell.plus { min-height: 72px; background: color-mix(in srgb, var(--m-rarity-legendary) 12%, var(--m-surface-2)); }
-:root:root .dp-cell { border-radius: 0; --px-n: 10px; clip-path: var(--px-10); }
+:root:root .dp-cell { border-radius: var(--m-r-card); --px-n: 10px; clip-path: var(--px-10); }
 .dp-cell b { font-size: 12px; font-weight: 800; line-height: 1.15; white-space: nowrap; }
 .dp-cell img { flex: none; }
 .dp-day > svg.icon { width: 13px; height: 13px; display: block; }
@@ -395,7 +395,7 @@
   background: #ffc933; color: #3a2400;
   font-size: 14px; font-weight: 900; letter-spacing: 0.06em; line-height: 1;
   box-shadow: inset 0 -3px 0 #c98a00, inset 0 2px 0 #ffe79a;
-  clip-path: polygon(0 4px, 4px 4px, 4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px));
+  border-radius: var(--m-r-pill);
 }
 .plus-badge > svg.icon { width: 16px; height: 16px; color: #3a2400; }
 
