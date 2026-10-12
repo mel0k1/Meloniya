@@ -1,6 +1,7 @@
 // Первым: до модулей, которые читают адрес API при импорте.
 import './preview'
 import { createRoot } from 'react-dom/client'
+import './styles/00-tailwind.css'
 import './styles/01-base.css'
 import './styles/02-kit.css'
 import './styles/03-mods.css'

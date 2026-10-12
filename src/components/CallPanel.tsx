@@ -102,7 +102,7 @@ function VoiceGraph() {
     let mine: number[] = []
     let theirs: number[] = []
     let width = 0
-    let colorMe = '#5EC64D'
+    let colorMe = '#EDEFEE'
     let colorPeer = '#6AA9E9'
     let colorGrid = 'rgba(255,255,255,.14)'
 

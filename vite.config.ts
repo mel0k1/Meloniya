@@ -2,6 +2,8 @@ import { existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import { resolve } from 'node:path'
 import { oldWebKitCss } from './scripts/old-webkit-css.mjs'
 import { devCosmeticModels } from './scripts/dev-cosmetic-models.mjs'
 
@@ -15,8 +17,9 @@ export default defineConfig(({ mode }) => {
   // Тестовая Милли (milli-server): адрес и токен только из .env.local, в сборку не попадают.
   const env = loadEnv(mode, process.cwd(), 'MILLI_TEST_')
   return {
-  plugins: [react(), oldWebKitCss(), devCosmeticModels()],
+  plugins: [react(), tailwindcss(), oldWebKitCss(), devCosmeticModels()],
   clearScreen: false,
+  resolve: { alias: { '@': resolve(__dirname, 'src') } },
   define: {
     __BUNDLED_VIDEOS__: JSON.stringify(bundledVideos),
     __HAS_BUNDLED_MUSIC__: JSON.stringify(hasBundledMusic),
