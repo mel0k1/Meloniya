@@ -23,7 +23,7 @@ fn frontend_ready() -> bool {
     FRONTEND_UP.load(Ordering::SeqCst)
 }
 
-pub fn arm_selfheal(app: &AppHandle) {
+pub fn arm_selfheal(_app: &AppHandle) {
     // Flatpak updates itself; in dev the frontend is served by Vite; autotests
     // never open the frontend at all.
     if is_flatpak() || cfg!(debug_assertions) || std::env::var_os("MILLIDA_AUTOTEST").is_some() {
@@ -32,7 +32,6 @@ pub fn arm_selfheal(app: &AppHandle) {
     if std::env::var_os("MILLIDA_NO_SELFHEAL").is_some() {
         return;
     }
-    let app = app.clone();
     tauri::async_runtime::spawn(async move {
         tokio::time::sleep(BOOT_GRACE).await;
         if frontend_ready() {

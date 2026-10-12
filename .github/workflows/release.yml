@@ -141,7 +141,9 @@ jobs:
             echo
             echo 'Первая версия форка: интерфейс Мелонии, обновления идут релизами этого репозитория.'
           } > "$notes"
-          gh release create "$TAG" --verify-tag --latest --title "Мелония ${TAG#v}" --notes-file "$notes"
+          gh release view "$TAG" >/dev/null 2>&1 && \
+            gh release edit "$TAG" --latest --title "Мелония ${TAG#v}" --notes-file "$notes" || \
+            gh release create "$TAG" --verify-tag --latest --title "Мелония ${TAG#v}" --notes-file "$notes"
           shopt -s nullglob
           files=(artifacts/*)
           gh release upload "$TAG" "${files[@]}" --clobber

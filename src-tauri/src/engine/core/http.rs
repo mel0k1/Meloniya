@@ -805,6 +805,7 @@ pub(crate) async fn download_new(
 
 /// For sources without a reference hash whose content changes between versions
 /// (installers, modpack archives).
+#[cfg_attr(not(test), allow(dead_code))]
 pub(crate) async fn download_fresh(url: &str, dest: &Path) -> Result<(), String> {
     fetch(url, dest, None, None).await
 }
