@@ -5,13 +5,13 @@ use std::process::{Command, Stdio};
 use crate::install::home_dir;
 
 #[cfg(target_os = "linux")]
-const DESKTOP_FILE: &str = "millida-launcher.desktop";
+const DESKTOP_FILE: &str = "meloniya-launcher.desktop";
 
-/// The launcher registers millida:// links, and on Linux nothing but the desktop
+/// The launcher registers meloniya:// links, and on Linux nothing but the desktop
 /// entry tells the system that. Without it a login link from the site opens
 /// nowhere, which the deb package does not suffer from.
 #[cfg(target_os = "linux")]
-const SCHEME: &str = "x-scheme-handler/millida";
+const SCHEME: &str = "x-scheme-handler/meloniya";
 
 /// An AppImage mounts itself through libfuse 2. Arch, Ubuntu 22.04+ and Fedora
 /// ship only fuse3, and there the launcher died a second after start while the
@@ -49,7 +49,7 @@ pub fn place(payload: &Path, workspace: &Path) -> Result<PathBuf, String> {
     use std::os::unix::fs::PermissionsExt;
 
     let home = home_dir()?;
-    let dir = home.join(".local").join("share").join("millida-launcher");
+    let dir = home.join(".local").join("share").join("meloniya-launcher");
     std::fs::create_dir_all(&dir).map_err(|e| format!("не создать папку {}: {}", dir.display(), e))?;
 
     let target = dir.join("MillidaLauncher.AppImage");
@@ -129,7 +129,7 @@ fn write_desktop_entry(home: &Path, target: &Path, icon: Option<&Path>, extract:
 pub fn desktop_entry(target: &Path, icon: Option<&Path>, extract: bool) -> String {
     let icon = icon
         .map(|path| path.to_string_lossy().to_string())
-        .unwrap_or_else(|| "millida-launcher".to_string());
+        .unwrap_or_else(|| "meloniya-launcher".to_string());
     let mut entry = String::from("[Desktop Entry]\n");
     entry.push_str("Type=Application\n");
     entry.push_str("Version=1.0\n");
@@ -274,7 +274,7 @@ fn applications_dir() -> Result<PathBuf, String> {
 
 #[cfg(target_os = "macos")]
 fn writable(dir: &Path) -> bool {
-    let probe = dir.join(format!(".millida-setup-{}", std::process::id()));
+    let probe = dir.join(format!(".meloniya-setup-{}", std::process::id()));
     match std::fs::File::create(&probe) {
         Ok(_) => {
             let _ = std::fs::remove_file(&probe);
@@ -357,10 +357,10 @@ mod tests {
                 "путь с пробелом обязан быть в кавычках, иначе ярлык не запускается",
             ),
             (
-                "MimeType=x-scheme-handler/millida;",
+                "MimeType=x-scheme-handler/meloniya;x-scheme-handler/millida;",
                 "без схемы ссылки входа с сайта открывать нечем",
             ),
-            ("Icon=millida-launcher", "без иконки берётся имя из темы, а не пустая строка"),
+            ("Icon=meloniya-launcher", "без иконки берётся имя из темы, а не пустая строка"),
             ("Terminal=false", "лаунчер не консольный: с Terminal=true открывается лишнее окно"),
         ];
         for (needle, why) in cases {
@@ -391,7 +391,7 @@ mod tests {
 
     #[test]
     fn fuse2_needs_library_and_device() {
-        let dir = std::env::temp_dir().join(format!("millida-fuse-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("meloniya-fuse-{}", std::process::id()));
         std::fs::create_dir_all(&dir).unwrap();
         let lib = dir.join("libfuse.so.2");
         let dev = dir.join("fuse");

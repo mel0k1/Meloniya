@@ -227,6 +227,7 @@
     "deep-link": {
       "desktop": {
         "schemes": [
+          "meloniya",
           "millida"
         ]
       }

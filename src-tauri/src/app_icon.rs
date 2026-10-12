@@ -10,7 +10,7 @@
 //! - Windows: иконка окна и панели задач + ярлыки «Рабочий стол» и «Пуск»,
 //!   которые ведут на наш .exe (`IShellLinkW::SetIconLocation` на копию .ico
 //!   в данных приложения). Сам .exe не трогаем — подпись цела.
-//! - Linux: окно + `Icon=` в `~/.local/share/applications/millida-launcher.desktop`.
+//! - Linux: окно + `Icon=` в `~/.local/share/applications/meloniya-launcher.desktop`.
 //!
 //! Выбор хранит интерфейс и присылает его при каждом запуске.
 use tauri::image::Image;
@@ -204,7 +204,7 @@ mod shortcuts {
 mod shortcuts {
     use std::path::{Path, PathBuf};
 
-    const DESKTOP: &str = "millida-launcher.desktop";
+    const DESKTOP: &str = "meloniya-launcher.desktop";
 
     fn entry() -> Option<PathBuf> {
         let base = std::env::var_os("XDG_DATA_HOME")

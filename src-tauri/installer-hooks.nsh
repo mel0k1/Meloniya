@@ -1,17 +1,17 @@
 !include LogicLib.nsh
 
 !ifdef MAINBINARYNAME
-  !define MILLIDA_MAIN_EXE "${MAINBINARYNAME}.exe"
+  !define MELONIYA_MAIN_EXE "${MAINBINARYNAME}.exe"
 !else
-  !define MILLIDA_MAIN_EXE "millida-launcher.exe"
+  !define MELONIYA_MAIN_EXE "meloniya-launcher.exe"
 !endif
 
-!define MILLIDA_ASIDE ".millida-old"
+!define MELONIYA_ASIDE ".meloniya-old"
 
-Var MillidaAttempt
-Var MillidaProbe
-Var MillidaAside
-Var MillidaExitCode
+Var MeloniyaAttempt
+Var MeloniyaProbe
+Var MeloniyaAside
+Var MeloniyaExitCode
 
 ; NSIS aborts the install with "Error opening file for writing" whenever the
 ; target is still held: the app running from the tray, an elevated instance the
@@ -21,66 +21,66 @@ Var MillidaExitCode
 ; the app asked to quit, then forced, and as a last resort the locked file is
 ; renamed aside — Windows allows renaming a running image — and removed on the
 ; next reboot. The installer writes a fresh binary either way.
-!macro MillidaFreeFile _file
+!macro MeloniyaFreeFile _file
   ${If} ${FileExists} "${_file}"
     SetFileAttributes "${_file}" NORMAL
-    StrCpy $MillidaAttempt 0
+    StrCpy $MeloniyaAttempt 0
     ${Do}
       ClearErrors
-      FileOpen $MillidaProbe "${_file}" a
+      FileOpen $MeloniyaProbe "${_file}" a
       ${IfNot} ${Errors}
-        FileClose $MillidaProbe
+        FileClose $MeloniyaProbe
         ${Break}
       ${EndIf}
-      ${If} $MillidaAttempt == 0
-        nsExec::Exec 'taskkill /IM "${MILLIDA_MAIN_EXE}"'
-        Pop $MillidaExitCode
-      ${ElseIf} $MillidaAttempt == 2
-        nsExec::Exec 'taskkill /F /IM "${MILLIDA_MAIN_EXE}"'
-        Pop $MillidaExitCode
-      ${ElseIf} $MillidaAttempt == 4
-        StrCpy $MillidaAside "${_file}${MILLIDA_ASIDE}"
-        Delete "$MillidaAside"
+      ${If} $MeloniyaAttempt == 0
+        nsExec::Exec 'taskkill /IM "${MELONIYA_MAIN_EXE}"'
+        Pop $MeloniyaExitCode
+      ${ElseIf} $MeloniyaAttempt == 2
+        nsExec::Exec 'taskkill /F /IM "${MELONIYA_MAIN_EXE}"'
+        Pop $MeloniyaExitCode
+      ${ElseIf} $MeloniyaAttempt == 4
+        StrCpy $MeloniyaAside "${_file}${MELONIYA_ASIDE}"
+        Delete "$MeloniyaAside"
         ClearErrors
-        Rename "${_file}" "$MillidaAside"
+        Rename "${_file}" "$MeloniyaAside"
         ${IfNot} ${Errors}
-          Delete /REBOOTOK "$MillidaAside"
+          Delete /REBOOTOK "$MeloniyaAside"
           ${Break}
         ${EndIf}
-      ${ElseIf} $MillidaAttempt == 5
-        StrCpy $MillidaAside "${_file}${MILLIDA_ASIDE}2"
-        Delete "$MillidaAside"
+      ${ElseIf} $MeloniyaAttempt == 5
+        StrCpy $MeloniyaAside "${_file}${MELONIYA_ASIDE}2"
+        Delete "$MeloniyaAside"
         ClearErrors
-        Rename "${_file}" "$MillidaAside"
+        Rename "${_file}" "$MeloniyaAside"
         ${IfNot} ${Errors}
-          Delete /REBOOTOK "$MillidaAside"
+          Delete /REBOOTOK "$MeloniyaAside"
         ${EndIf}
         ${Break}
       ${EndIf}
       Sleep 600
-      IntOp $MillidaAttempt $MillidaAttempt + 1
+      IntOp $MeloniyaAttempt $MeloniyaAttempt + 1
     ${Loop}
   ${EndIf}
 !macroend
 
-!macro MillidaFreeInstallDir
-  !insertmacro MillidaFreeFile "$INSTDIR\${MILLIDA_MAIN_EXE}"
-  !insertmacro MillidaFreeFile "$INSTDIR\WebView2Loader.dll"
-  !insertmacro MillidaFreeFile "$INSTDIR\uninstall.exe"
+!macro MeloniyaFreeInstallDir
+  !insertmacro MeloniyaFreeFile "$INSTDIR\${MELONIYA_MAIN_EXE}"
+  !insertmacro MeloniyaFreeFile "$INSTDIR\WebView2Loader.dll"
+  !insertmacro MeloniyaFreeFile "$INSTDIR\uninstall.exe"
 !macroend
 
 !macro NSIS_HOOK_PREINSTALL
-  !insertmacro MillidaFreeInstallDir
+  !insertmacro MeloniyaFreeInstallDir
 !macroend
 
 !macro NSIS_HOOK_POSTINSTALL
-  Delete /REBOOTOK "$INSTDIR\*${MILLIDA_ASIDE}*"
+  Delete /REBOOTOK "$INSTDIR\*${MELONIYA_ASIDE}*"
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  !insertmacro MillidaFreeInstallDir
+  !insertmacro MeloniyaFreeInstallDir
 !macroend
 
 !macro NSIS_HOOK_POSTUNINSTALL
-  Delete /REBOOTOK "$INSTDIR\*${MILLIDA_ASIDE}*"
+  Delete /REBOOTOK "$INSTDIR\*${MELONIYA_ASIDE}*"
 !macroend

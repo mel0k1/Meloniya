@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 // Вход → вердикт. Закреплено обращением 24.08.2026: установщик падал с «Error
-// opening file for writing … millida-launcher.exe», а «Повтор» открывал тот же
+// opening file for writing … meloniya-launcher.exe», а «Повтор» открывал тот же
 // занятый файл и падал снова. Хук обязан отдать файл установщику сам — и в
 // случае запущенного лаунчера, и в случае снятого атрибута «только чтение».
 const NSIS_DIR = join(process.env.LOCALAPPDATA ?? '', 'tauri', 'NSIS')
@@ -13,7 +13,7 @@ const MAKENSIS = join(NSIS_DIR, 'Bin', 'makensis.exe')
 const HOOKS = join(import.meta.dir, '..', 'src-tauri', 'installer-hooks.nsh')
 const READY = process.platform === 'win32' && existsSync(MAKENSIS)
 
-const EXE = 'millida-hooktest.exe'
+const EXE = 'meloniya-hooktest.exe'
 
 const HARNESS = `Unicode true
 OutFile "\${OUT}"
@@ -24,7 +24,7 @@ Section
   StrCpy $INSTDIR "\${TESTDIR}"
   !insertmacro NSIS_HOOK_PREINSTALL
   ClearErrors
-  FileOpen $0 "$INSTDIR\\\${MILLIDA_MAIN_EXE}" w
+  FileOpen $0 "$INSTDIR\\\${MELONIYA_MAIN_EXE}" w
   \${IfNot} \${Errors}
     FileWrite $0 "NEW-PAYLOAD"
     FileClose $0
@@ -32,7 +32,7 @@ Section
 SectionEnd
 `
 
-const root = READY ? mkdtempSync(join(tmpdir(), 'millida-hooks-')) : ''
+const root = READY ? mkdtempSync(join(tmpdir(), 'meloniya-hooks-')) : ''
 
 afterAll(() => {
   if (root) rmSync(root, { recursive: true, force: true })
@@ -52,7 +52,7 @@ const buildInstaller = (name) => {
       `/DOUT=${out}`,
       `/DHOOKS=${HOOKS}`,
       `/DTESTDIR=${dir}`,
-      '/DMAINBINARYNAME=millida-hooktest',
+      '/DMAINBINARYNAME=meloniya-hooktest',
       script,
     ],
     { encoding: 'utf8', env: { ...process.env, NSISDIR: NSIS_DIR } },

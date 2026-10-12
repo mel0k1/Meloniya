@@ -49,7 +49,7 @@ fn base_dir() -> PathBuf {
         .filter(|value| !value.is_empty())
         .map(PathBuf::from)
         .or_else(|| home.map(|h| h.join(".cache")))
-        .map(|cache| cache.join("millida").join("setup"));
+        .map(|cache| cache.join("meloniya").join("setup"));
     dir.unwrap_or_else(std::env::temp_dir)
 }
 
@@ -64,11 +64,11 @@ pub fn home_dir() -> Result<PathBuf, String> {
 /// The file the manifest points at for this platform: an NSIS installer, an
 /// AppImage or a packed .app.
 #[cfg(windows)]
-pub const PAYLOAD_NAME: &str = "millida-launcher-setup.exe";
+pub const PAYLOAD_NAME: &str = "meloniya-launcher-setup.exe";
 #[cfg(target_os = "linux")]
-pub const PAYLOAD_NAME: &str = "millida-launcher.AppImage";
+pub const PAYLOAD_NAME: &str = "meloniya-launcher.AppImage";
 #[cfg(target_os = "macos")]
-pub const PAYLOAD_NAME: &str = "millida-launcher.app.tar.gz";
+pub const PAYLOAD_NAME: &str = "meloniya-launcher.app.tar.gz";
 
 /// Removes the working directory on every path out, including the error ones:
 /// a half-downloaded installer left behind is what an antivirus reports.
@@ -100,7 +100,7 @@ impl Drop for Workspace {
 }
 
 fn own_prefix() -> String {
-    format!("millida-setup-{}-", std::process::id())
+    format!("meloniya-setup-{}-", std::process::id())
 }
 
 /// Closing the window kills the process before Drop runs, so leftovers from an
@@ -112,7 +112,7 @@ pub fn sweep_stale() {
     let mine = own_prefix();
     for entry in entries.flatten() {
         let name = entry.file_name().to_string_lossy().to_string();
-        if !name.starts_with("millida-setup-") || name.starts_with(&mine) {
+        if !name.starts_with("meloniya-setup-") || name.starts_with(&mine) {
             continue;
         }
         // The folder is shared by every session of one user, the mutex is not:

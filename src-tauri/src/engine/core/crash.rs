@@ -34,7 +34,7 @@ pub fn install_panic_hook(version: String) {
             .unwrap_or_else(|| "паника без сообщения".to_string());
         let place = info.location().map(|l| format!("{}:{}", l.file(), l.line())).unwrap_or_default();
         let body = format!(
-            "millida-launcher {}\nos: {} {}\nместо: {}\nсообщение: {}\n\n{}",
+            "meloniya-launcher {}\nos: {} {}\nместо: {}\nсообщение: {}\n\n{}",
             version,
             std::env::consts::OS,
             std::env::consts::ARCH,
@@ -66,7 +66,7 @@ pub fn record_freeze(stamp: u64, stalled: std::time::Duration, recovered: bool) 
         return stamp;
     }
     let body = format!(
-        "millida-launcher {}\nos: {} {}\nместо: главный поток\nсообщение: интерфейс не отвечал {} с\nитог: {}\n",
+        "meloniya-launcher {}\nos: {} {}\nместо: главный поток\nсообщение: интерфейс не отвечал {} с\nитог: {}\n",
         env!("CARGO_PKG_VERSION"),
         std::env::consts::OS,
         std::env::consts::ARCH,

@@ -33,7 +33,7 @@ function handle(raw: string) {
   } catch {
     return
   }
-  if (url.protocol !== 'millida:') return
+  if (url.protocol !== 'meloniya:' && url.protocol !== 'millida:') return
   restoreLauncher()
   // For millida://join/<host> the host lands in `hostname`, the rest in `pathname`.
   const action = url.hostname || url.pathname.replace(/^\/+/, '').split('/')[0] || ''

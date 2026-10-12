@@ -1,4 +1,4 @@
-use millida_launcher_lib::engine;
+use meloniya_launcher_lib::engine;
 use std::io::Read;
 
 #[test]

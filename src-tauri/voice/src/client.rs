@@ -109,7 +109,7 @@ impl VoiceClient {
             let cmds = cmds.clone();
             let devices = Devices { mtu: config.mtu, input: config.input.clone(), output: config.output.clone() };
             std::thread::Builder::new()
-                .name("millida-voice-audio".into())
+                .name("meloniya-voice-audio".into())
                 .spawn(move || audio_thread(control, speakers, events, cmds, devices, ready_tx))
                 .map_err(|e| format!("поток звука: {e}"))?
         };
@@ -129,7 +129,7 @@ impl VoiceClient {
         let net = {
             let control = control.clone();
             std::thread::Builder::new()
-                .name("millida-voice-udp".into())
+                .name("meloniya-voice-udp".into())
                 .spawn(move || net_thread(socket, config.session, control, speakers, events, cmd_rx))
                 .map_err(|e| format!("поток сети голоса: {e}"))?
         };

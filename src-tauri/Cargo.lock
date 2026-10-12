@@ -2849,22 +2849,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "memchr"
-version = "2.8.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
-
-[[package]]
-name = "memoffset"
-version = "0.9.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "488016bfae457b036d996092f6cb448677611ce4449e970ceaf42695203f218a"
-dependencies = [
- "autocfg",
-]
-
-[[package]]
-name = "millida-launcher"
+name = "meloniya-launcher"
 version = "2.0.0"
 dependencies = [
  "aes-gcm",
@@ -2881,7 +2866,7 @@ dependencies = [
  "lewton",
  "libc",
  "md-5",
- "millida-voice",
+ "meloniya-voice",
  "minisign-verify 0.2.5",
  "objc2",
  "objc2-app-kit",
@@ -2915,7 +2900,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "millida-voice"
+name = "meloniya-voice"
 version = "0.1.0"
 dependencies = [
  "aes-gcm",
@@ -2923,6 +2908,21 @@ dependencies = [
  "nnnoiseless",
  "opus-rs",
  "sha2",
+]
+
+[[package]]
+name = "memchr"
+version = "2.8.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
+
+[[package]]
+name = "memoffset"
+version = "0.9.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "488016bfae457b036d996092f6cb448677611ce4449e970ceaf42695203f218a"
+dependencies = [
+ "autocfg",
 ]
 
 [[package]]

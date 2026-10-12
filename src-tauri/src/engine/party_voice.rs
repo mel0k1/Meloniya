@@ -9,11 +9,11 @@ use std::sync::{mpsc, Arc, Mutex};
 use std::time::Duration;
 
 use base64::Engine as _;
-use millida_voice::client::{Config, Events, VoiceClient};
-use millida_voice::dsp::{Noise, Processing};
-use millida_voice::link::Session;
-use millida_voice::party::{party_voice_player, valid_party_id};
-use millida_voice::wire::{parse_uuid, Uuid};
+use meloniya_voice::client::{Config, Events, VoiceClient};
+use meloniya_voice::dsp::{Noise, Processing};
+use meloniya_voice::link::Session;
+use meloniya_voice::party::{party_voice_player, valid_party_id};
+use meloniya_voice::wire::{parse_uuid, Uuid};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use tauri::{AppHandle, Emitter};
