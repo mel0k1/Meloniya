@@ -666,6 +666,23 @@
   height: 100%;
 }
 
+/* Перелив фона: светлое пятно медленно дрейфует, слой двигает GPU. */
+.pixel-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(46% 42% at 50% 46%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0) 72%);
+  animation: px-glow-drift 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.pixel-glow.off { animation: none; }
+@keyframes px-glow-drift {
+  from { transform: translate3d(-2%, -1.5%, 0) scale(1.06); }
+  to { transform: translate3d(2%, 1.5%, 0) scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) { .pixel-glow { animation: none; } }
+
 /* На большом окне фон и персонаж растут вместе с окном, а панели оставались
    размером под 1280 — мелкие островки по углам. Интерфейс лобби масштабируем
    ступенями вслед за шириной. */
