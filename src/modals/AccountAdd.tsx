@@ -3,6 +3,7 @@ import { Icon } from '../components/Icon'
 import { closeModal, showToast, useUi } from '../state/ui'
 import { openExt } from '../lib/api'
 import { useAccounts } from '../state/accounts'
+import { enterApp } from '../lib/session'
 import { cancelWebLogin, copyUserCode, copyVerifyLink, startWebLogin, useLogin } from '../state/login'
 import { cancelMsLogin, copyMsCode, copyMsVerifyLink, openMsVerifyPage, startMsLogin, useMsLogin } from '../state/msLogin'
 import { cancelElyLogin, copyElyCode, copyElyVerifyLink, openElyVerifyPage, startElyLogin, useElyLogin } from '../state/elyLogin'
@@ -62,6 +63,9 @@ function KindPanel({ kind, onBack, onDone, onSafety }: { kind: Kind; onBack: () 
       return
     }
     useAccounts.getState().add({ nick: v, kind: 'offline' })
+    // С экрана входа создание аккаунта и есть вход: Microsoft/Ely.by потоки
+    // поднимают оболочку сами (enterApp в своих стейтах), офлайн — здесь.
+    if (!useUi.getState().logged) enterApp()
     onDone()
     showToast('Аккаунт создан: ' + v)
   }

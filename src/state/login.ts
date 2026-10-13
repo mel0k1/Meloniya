@@ -11,7 +11,7 @@ import { copyLink } from '../lib/links'
 import { api } from '../lib/api'
 import { claimWelcome } from '../lib/rubies'
 import { flushTelemetry, track, trackFailure } from '../lib/telemetry'
-import { markMillidaEver, millidaEver } from './onboarding'
+import { markMillidaEver } from './onboarding'
 import { apiErrorText, isTransientApiError } from '../lib/apiError'
 import { loginPollDelayMs, pokeGate, readLoginChannel } from '../lib/realtimePace'
 import { watchLoginChannel, type LoginWatch } from '../lib/loginRealtime'
@@ -265,12 +265,9 @@ export async function startWebLogin(reopen = false) {
 }
 
 export function quickStart() {
-  // Guest mode is a shortcut for a returning user, not a way around the account:
-  // friends, skins, hosting and the game profile all need a Millida login.
-  if (!millidaEver()) {
-    showToast('Сначала войди в аккаунт Мелонии — это нужно один раз', 'error')
-    return
-  }
+  // Guest mode: play right away, no account needed. Friends, skins, hosting and
+  // the game profile stay behind the Millida login, the game itself runs on the
+  // guest nick; a proper account can be added later in the account menu.
   const nick = 'Player' + Math.floor(1000 + Math.random() * 8999)
   useAccounts.getState().add({ nick, kind: 'guest' })
   enterApp()

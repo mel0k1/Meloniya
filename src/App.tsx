@@ -65,7 +65,7 @@ import { initDesktopToasts, showDesktopToast } from './lib/desktopToast'
 import { parseInvite } from './lib/invite'
 import { parseCallLog } from './lib/call/callLog'
 import { effectiveNick, getAccount, getMillidaAccount, isMillidaKind, useAccounts } from './state/accounts'
-import { markMillidaEver, millidaEver } from './state/onboarding'
+import { markMillidaEver } from './state/onboarding'
 import { OnboardingModal } from './modals/Onboarding'
 import { Tour } from './components/Tour'
 import { initAccent } from './lib/accent'
@@ -360,12 +360,11 @@ export function App() {
       if (getMillidaAccount()) markMillidaEver()
       // Account present but its token did not survive a secret-storage migration:
       // clear the session once instead of showing a half-logged-in state everywhere.
+      // Любой другой аккаунт (гость, офлайн, Microsoft, Ely.by) поднимает оболочку
+      // сам: регистрация у Миллиды не обязательна.
       if (acc && isMillidaKind(acc.kind) && !hasMillidaAccount()) {
         logoutToLogin()
-        showToast('После обновления войдите в Millida заново — один раз', 'error')
-      } else if (acc && !millidaEver()) {
-        logoutToLogin()
-        showToast('Войди в аккаунт Millida — это нужно один раз', 'error')
+        showToast('После обновления войдите в аккаунт заново — один раз', 'error')
       } else if (acc) enterApp()
       else logoutToLogin()
       void refreshProfiles()
@@ -790,6 +789,11 @@ export function App() {
 
         <Login on={!logged} />
 
+        {/* Модалка аккаунтов и тосты живут над экраном входа: офлайн-аккаунт
+            создаётся до входа в оболочку. */}
+        <AccountAddModal />
+        <Toast />
+
         <div className="app" id="scr-app" style={{ display: logged ? 'flex' : 'none' }}>
           {(() => {
             const onNav = (s: ScreenId) => {
@@ -904,7 +908,6 @@ export function App() {
         <MoveBuildsModal />
         <ProjectModal />
         <NewBuildModal />
-        <AccountAddModal />
         <BuyModal />
         <ScreenshotsOverlay />
         <ModpackVersionsOverlay />
@@ -928,7 +931,6 @@ export function App() {
         <Installs />
         <PackDrop />
         <LaunchToast />
-        <Toast />
         <RewardHost />
         <PixelTip />
       </div>

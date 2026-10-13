@@ -1,14 +1,13 @@
 import { useRef } from 'react'
 import { Icon } from '../components/Icon'
 import { cancelWebLogin, copyUserCode, copyVerifyLink, quickStart, startWebLogin, useLogin } from '../state/login'
-import { millidaEver } from '../state/onboarding'
+import { openModal } from '../state/ui'
 import { PixelField } from '../components/lobby/PixelField'
 import '../styles/pixel/login.css'
 
 export function Login({ on }: { on: boolean }) {
   const login = useLogin()
   const artRef = useRef<HTMLImageElement>(null)
-  const guestAllowed = millidaEver()
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -28,19 +27,26 @@ export function Login({ on }: { on: boolean }) {
           <div className="login-logo">
             <img src="/meloniya-logo.png" alt="" width={56} height={56} />
           </div>
-          <h1>Вход в Мелонию</h1>
-          {/* Одна строка вместо абзаца: остальное показывает сам поток входа —
-              код, «Открыть страницу», «Копировать ссылку» (аудит 22.09.2026). */}
-          <p className="sub">Нет аккаунта — создастся при входе</p>
+          <h1>Мелония</h1>
+          {/* Играется сразу: аккаунт — по желанию, остальное расскажет сам поток входа. */}
+          <p className="sub">Играй сразу — аккаунт не обязателен</p>
 
+          <button className="btn lg primary lg2-main" id="quickStart" onClick={quickStart}>
+            <Icon id="i-play" />
+            Играть гостем
+          </button>
           <button
-            className="btn lg primary lg2-main"
+            className="btn md secondary lg2-guest"
             id="webLogin"
             disabled={login.webBusy}
             onClick={() => void startWebLogin()}
           >
             <Icon id="i-shield" />
             {login.webLabel}
+          </button>
+          <button className="btn md ghost lg2-offline" id="offlineAcc" onClick={() => openModal('accModal')}>
+            <Icon id="i-mo-user" />
+            Офлайн-аккаунт — свой ник
           </button>
           {login.webBusy ? (
             <div className="login-code-box">
@@ -67,12 +73,6 @@ export function Login({ on }: { on: boolean }) {
               {login.hintText}
             </div>
           )}
-
-          {guestAllowed ? (
-            <button className="btn md secondary login-guest lg2-guest" id="quickStart" onClick={quickStart}>
-              Играть гостем
-            </button>
-          ) : null}
           <div className="trust">
             <Icon id="i-shield" />
             <span>Пароль — только на сайте Millida</span>
