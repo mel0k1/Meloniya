@@ -3,12 +3,12 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
-const [version, tag, dir] = process.argv.slice(2)
+const [version, tag, dir, outArg] = process.argv.slice(2)
 if (!version || !tag || !dir) {
   console.error('usage: make-latest.mjs <version> <tag> <artifacts-dir> [out]')
   process.exit(1)
 }
-const out = process.argv[4] || 'latest.json'
+const out = outArg || 'latest.json'
 
 const REPO = 'mel0k1/Meloniya'
 const files = readdirSync(dir)
