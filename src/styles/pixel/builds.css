@@ -94,7 +94,7 @@
 }
 .nb-act svg.icon { width: 17px; height: 17px; }
 @media (hover: hover) and (pointer: fine) { .nb-act:hover { background: var(--m-surface-2); } }
-.nb-act.on { background: var(--m-accent); color: #06200e; }
+.nb-act.on { background: var(--m-accent); color: var(--m-accent-fg); }
 .nb-head-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 
 /* Лента обложек: одна строка плиток 64px, листается вбок (и колесом). */

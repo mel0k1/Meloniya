@@ -889,38 +889,36 @@ html.overlay-root,html.overlay-root body,html.overlay-root #root{background:tran
 /* Cards are the only clickable spot of a click-through window: the core lifts
    the flag over them, so they take the pointer while the stack does not. */
 .ov-cards{position:absolute;bottom:22px;right:22px;display:flex;flex-direction:column;gap:10px;width:420px}
-/* The card is the mod menu's window in small: a black stepped edge around a
-   solid plate, so it reads the same over any game frame. */
-.ov-card{position:relative;isolation:isolate;display:flex;align-items:center;gap:14px;min-height:76px;padding:14px 16px 17px 14px;background:#000;clip-path:var(--px-5);color:#edefee;animation:ovIn 220ms steps(4,jump-start)}
-.ov-card::before{content:'';position:absolute;inset:3px;z-index:-1;clip-path:var(--px-4);background:#1b1c1f;box-shadow:inset 0 3px 0 rgba(255,255,255,.05),inset 0 -5px 0 rgba(0,0,0,.45)}
+/* The card is the mod menu's window in small: a readable plate over any game
+   frame, in the launcher's own kit — same recipe as .ov-panel below. */
+.ov-card{position:relative;isolation:isolate;display:flex;align-items:center;gap:14px;min-height:76px;padding:14px 16px;background:color-mix(in srgb,var(--m-surface) 90%,transparent);backdrop-filter:blur(20px) saturate(1.25);border:1px solid var(--m-border-strong);border-radius:var(--m-r-md);box-shadow:var(--m-shadow-lg);color:var(--m-fg);animation:ovIn 180ms var(--m-ease-out)}
 .ov-card.ov-kind-msg{--ov-accent:var(--m-info)}
 .ov-card.ov-kind-online{--ov-accent:var(--m-success)}
 .ov-card.ov-kind-play{--ov-accent:var(--m-warning)}
 .ov-card.ov-kind-streak{--ov-accent:var(--m-warning)}
-.ov-cards .ov-card{pointer-events:auto;cursor:pointer;transition:transform 120ms steps(2,jump-start)}
-@media (hover:hover) and (pointer:fine){.ov-cards.held .ov-card:hover{transform:translateX(-3px)}.ov-cards.held .ov-card:hover::before{background:#212226}}
-.ov-card:active::before{box-shadow:inset 0 3px 0 rgba(0,0,0,.3),inset 0 -2px 0 rgba(0,0,0,.45)}
+.ov-cards .ov-card{pointer-events:auto;cursor:pointer;transition:transform 120ms var(--m-ease-smooth),background-color 120ms}
+@media (hover:hover) and (pointer:fine){.ov-cards.held .ov-card:hover{transform:translateX(-3px);background:color-mix(in srgb,var(--m-raised) 92%,transparent)}}
+.ov-card:active{transform:scale(.99)}
 .ov-card-heads{position:relative;display:flex;flex:none}
-.ov-card-hd{display:block;padding:3px;background:#000;clip-path:var(--px-4)}
+.ov-card-hd{display:block;border-radius:var(--m-r-ctl);overflow:hidden;background:var(--m-inset)}
 .ov-card-hd img{display:block;width:40px;height:40px;image-rendering:pixelated}
 .ov-card-hd+.ov-card-hd{margin-left:-14px}
-.ov-card-dot{position:absolute;right:-4px;bottom:-4px;z-index:1;width:16px;height:16px;padding:3px;background:#000;clip-path:var(--px-4)}
-.ov-card-dot::after{content:'';display:block;width:100%;height:100%;background:var(--ov-accent,var(--m-info))}
-.ov-card-ic{display:grid;place-items:center;width:46px;height:46px;color:rgba(0,0,0,.72);background:var(--ov-accent);clip-path:var(--px-4);box-shadow:inset 0 3px 0 rgba(255,255,255,.3),inset 0 -4px 0 rgba(0,0,0,.3)}
+.ov-card-dot{position:absolute;right:-4px;bottom:-4px;z-index:1;width:16px;height:16px;border-radius:50%;border:3px solid var(--m-surface);background:var(--ov-accent,var(--m-info))}
+.ov-card-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:var(--m-r-ctl);color:var(--m-accent-fg);background:var(--ov-accent)}
 .ov-card-ic svg{width:28px;height:28px}
 .ov-card-body{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}
 .ov-card-body b{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ov-card-body span{font-size:13px;line-height:1.35;color:rgba(237,239,238,.66);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.ov-card-body span{font-size:13px;line-height:1.35;color:var(--m-fg-subtle);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 .ov-card-body em{font-style:normal;color:var(--ov-accent)}
-.ov-card-tag{flex:none;align-self:flex-start;margin-top:2px;padding:3px 7px 4px;font-size:10px;font-weight:700;line-height:1;letter-spacing:.06em;text-transform:uppercase;color:rgba(0,0,0,.78);background:var(--ov-accent,var(--m-info));clip-path:var(--px-4)}
+.ov-card-tag{flex:none;align-self:flex-start;margin-top:2px;padding:4px 8px;font-size:10px;font-weight:700;line-height:1;letter-spacing:.06em;text-transform:uppercase;color:var(--m-accent-fg);background:var(--ov-accent,var(--m-info));border-radius:var(--m-r-pill)}
 .ov-cards.held .ov-card-tag{visibility:hidden}
-.ov-card-x{position:absolute;top:10px;right:10px;width:26px;height:26px;display:grid;place-items:center;border:0;background:rgba(255,255,255,.06);clip-path:var(--px-4);color:rgba(237,239,238,.66);opacity:0;transition:opacity 120ms steps(2,jump-start);cursor:pointer}
+.ov-card-x{position:absolute;top:10px;right:10px;width:26px;height:26px;display:grid;place-items:center;border:0;background:rgba(255,255,255,.06);border-radius:50%;color:var(--m-fg-subtle);opacity:0;transition:opacity 120ms,background-color 120ms,color 120ms;cursor:pointer}
 .ov-card-x svg{width:12px;height:12px}
 .ov-cards.held .ov-card-x{opacity:1}
 .ov-card-x:hover{background:rgba(255,255,255,.14);color:#fff}
 /* Time left as segments that go out one by one from the right: each waits its
    share of the card's life, so pausing the stack pauses all of them. */
-.ov-card-ttl{position:absolute;left:3px;right:3px;bottom:3px;height:5px;display:flex;gap:2px}
+.ov-card-ttl{position:absolute;left:1px;right:1px;bottom:1px;height:4px;display:flex;gap:2px;border-radius:0 0 calc(var(--m-r-md) - 1px) calc(var(--m-r-md) - 1px);overflow:hidden}
 .ov-card-ttl i{flex:1;background:var(--ov-accent,var(--m-info));animation:ovSeg 1ms linear forwards}
 .ov-cards.held .ov-card-ttl i{animation-play-state:paused}
 @keyframes ovSeg{to{background:rgba(0,0,0,.35)}}

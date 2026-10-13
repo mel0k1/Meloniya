@@ -46,7 +46,7 @@
   font-weight: 800;
   letter-spacing: .02em;
   text-transform: uppercase;
-  color: var(--m-accent-fg, #06200e);
+  color: var(--m-accent-fg);
   background: var(--m-accent);
   clip-path: var(--px-4);
 }
@@ -63,7 +63,7 @@
   clip-path: var(--px-4);
   font-variant-numeric: tabular-nums;
 }
-.gm-owned { color: var(--m-accent-fg, #06200e); background: var(--m-accent); }
+.gm-owned { color: var(--m-accent-fg); background: var(--m-accent); }
 .gm-lic {
   flex-basis: 100%;
   padding: 0;
@@ -97,7 +97,7 @@
 .gm-bd-play {
   position: absolute; right: 10px; bottom: 10px;
   display: grid; place-items: center; width: 34px; height: 34px;
-  color: var(--m-accent-fg, #06200e); background: var(--m-accent);
+  color: var(--m-accent-fg); background: var(--m-accent);
   clip-path: var(--px-5);
   opacity: 0; transition: opacity 120ms var(--m-ease-smooth);
 }

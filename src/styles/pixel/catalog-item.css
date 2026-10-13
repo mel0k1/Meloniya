@@ -220,7 +220,7 @@
 .sk-chips { display: flex; gap: 6px; margin: 0 0 14px; padding: 0 0 6px; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--m-surface-2) transparent; }
 .sk-chip { flex: none; height: 32px; padding: 0 12px; border: 0; cursor: pointer; font: 700 13px/1 var(--m-font); color: var(--m-fg-muted); background: var(--m-surface); --px-n: 4px; clip-path: var(--px-4); transition: background-color var(--m-t-fast), color var(--m-t-fast); }
 .sk-chip:hover { color: var(--m-fg); background: var(--m-surface-2); }
-:root .sk-chip.on { color: var(--px-on-accent, #06200e); background: var(--m-accent); }
+:root .sk-chip.on { color: var(--px-on-accent); background: var(--m-accent); }
 /* Кнопка карточки — тихая, пока курсор не на карточке: без стены зелёных кнопок */
 :root .card.mr-skin:not(:hover) .btn.primary { color: var(--m-accent); background: var(--m-surface-2); --px-img: none; --px-ft: transparent; --px-fb: transparent; }
 .card.mr-skin .mr-skin-art > img { transition: transform 260ms var(--m-ease-out, ease); }
@@ -247,7 +247,7 @@
 .sk-fact b { color: var(--m-fg); font-variant-numeric: tabular-nums; }
 .sk-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .sk-tag { height: 30px; padding: 0 11px; border: 0; cursor: pointer; font: 700 13px/1 var(--m-font); color: var(--m-fg); background: var(--m-surface-2); --px-n: 4px; clip-path: var(--px-4); }
-.sk-tag:hover { color: var(--px-on-accent, #06200e); background: var(--m-accent); }
+.sk-tag:hover { color: var(--px-on-accent); background: var(--m-accent); }
 .sk-tag.skel-text { display: inline-block; height: 30px; cursor: default; }
 .sk-acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2px; }
 .sk-note { margin: 0; font-size: 13px; line-height: 18px; color: var(--m-fg-subtle); max-width: 520px; }

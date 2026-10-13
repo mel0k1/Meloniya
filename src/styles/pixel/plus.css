@@ -75,7 +75,7 @@
 .lp-aib-head i { display: block; font-style: normal; font-size: 14px; font-weight: 600; color: rgba(255, 255, 255, 0.78); }
 .lp-aib-field { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 6px 6px 16px; background: hsl(30 60% 8%); font-size: 17px; font-weight: 700; clip-path: var(--px-5); }
 .lp-aib-field > span:first-child { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.lp-aib-go { padding: 9px 14px 11px; font-size: 14px; font-weight: 800; color: #06200e; background: var(--m-accent); clip-path: var(--px-5); }
+.lp-aib-go { padding: 9px 14px 11px; font-size: 14px; font-weight: 800; color: var(--m-accent-fg); background: var(--m-accent); clip-path: var(--px-5); }
 .lp-aib-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .lp-aib-chip { padding: 7px 12px 9px; border: 0; font: 700 13px/1.1 inherit; color: #fff; background: hsl(38 60% 38%); clip-path: var(--px-5); cursor: pointer; }
 .lp-aib-chip.on { background: #fff; color: hsl(30 60% 8%); }

@@ -45,7 +45,7 @@
   height: 40px;
   padding: 0 16px 0 10px;
   font: 800 15px/1 var(--m-font);
-  color: #06200e;
+  color: var(--m-accent-fg);
   background: var(--m-accent);
   clip-path: var(--px-5);
 }
@@ -81,7 +81,7 @@
   clip-path: var(--px-5);
 }
 .tb-icon:hover { color: var(--m-fg); }
-.tb-icon.active { color: #06200e; background: var(--m-accent); }
+.tb-icon.active { color: var(--m-accent-fg); background: var(--m-accent); }
 .tb-icon svg { width: 18px; height: 18px; }
 
 .tb-rubies {

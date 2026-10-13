@@ -83,7 +83,7 @@
   width: 20px;
   height: 20px;
   background: var(--m-accent);
-  color: var(--px-on-accent, #06200e);
+  color: var(--px-on-accent);
   border-radius: var(--m-r-mini);
 }
 .sk-active-mark svg {
@@ -428,5 +428,5 @@
 /* Отправка — плотный акцент с тёмным значком, как главная кнопка, без градиента. */
 :root:root .chat-send {
   background: var(--m-accent);
-  color: var(--px-on-accent, #06200e);
+  color: var(--px-on-accent);
 }

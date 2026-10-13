@@ -153,7 +153,7 @@
 
 /* галочка — тихая: тёмный квадрат, отмечено — зелёный */
 .mpc-box {
-  flex: none; width: 18px; height: 18px; display: grid; place-items: center; color: var(--px-on-accent, #06200e);
+  flex: none; width: 18px; height: 18px; display: grid; place-items: center; color: var(--px-on-accent);
   background: var(--m-inset); outline: 2px solid var(--m-border-strong); outline-offset: -2px;
   transition: background-color var(--m-t-fast), outline-color var(--m-t-fast);
 }
@@ -445,7 +445,7 @@
 .mpc-tab.on .mci { display: block; }
 .mpc-tab-t { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .mpc-tab-n {
-  flex: none; font: 700 11px/1 'Monocraft', var(--m-mono); font-variant-numeric: tabular-nums; color: var(--m-fg-faint);
+  flex: none; font: 700 11px/1 var(--m-mono); font-variant-numeric: tabular-nums; color: var(--m-fg-faint);
 }
 .mpc-tab.on .mpc-tab-n { color: var(--m-accent); }
 .mpc-tab-dot {
@@ -561,7 +561,7 @@ details.mpc-excl[open] > summary::before { content: '▾'; }
 details.mpc-excl { --px-fl: color-mix(in srgb, var(--m-danger) 70%, transparent); --px-fl-w: 2px; }
 details.mpc-excl > summary { color: var(--m-fg-subtle); font-size: 10.5px; }
 details.mpc-excl > summary:hover, details.mpc-excl[open] > summary { color: var(--m-fg); }
-details.mpc-excl > summary > i { color: var(--m-danger); font: 700 10.5px/1 'Monocraft', var(--m-mono); }
+details.mpc-excl > summary > i { color: var(--m-danger); font: 700 10.5px/1 var(--m-mono); }
 details.mpc-excl > ul { padding: 0 10px 10px; max-height: 220px; overflow-y: auto; scrollbar-width: thin; }
 
 /* ── футер: итог + «Установить ▾» ─────────────────────────────── */

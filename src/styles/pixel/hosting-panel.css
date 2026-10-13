@@ -33,7 +33,7 @@
   height: 28px;
   margin-left: 2px;
   background: var(--m-accent);
-  color: var(--px-on-accent, #06200e);
+  color: var(--px-on-accent);
   border-radius: var(--m-r-mini);
 }
 .hp-balance-add svg { width: 15px; height: 15px; }

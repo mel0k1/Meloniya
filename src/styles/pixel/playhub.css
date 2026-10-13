@@ -113,7 +113,7 @@
   height: 24px;
   padding: 0 8px;
   font: 700 11.5px/1 var(--m-font);
-  color: #06200e;
+  color: var(--m-accent-fg);
   background: var(--m-accent);
   --px-n: 4px; clip-path: var(--px-4);
 }
@@ -127,7 +127,7 @@
   place-items: center;
   width: 26px;
   height: 26px;
-  color: #06200e;
+  color: var(--m-accent-fg);
   background: var(--m-accent);
   --px-n: 4px; clip-path: var(--px-4);
 }
@@ -355,7 +355,7 @@
 .ph-own-body b { font: 800 28px/1.05 var(--m-font); letter-spacing: -0.02em; color: #fff; }
 .ph-own-line { font-size: 13.5px; color: rgba(255, 255, 255, 0.78); }
 .ph-own-online { display: inline-flex; align-items: center; gap: 6px; font: 700 15px/1 var(--m-font); color: #fff; }
-.ph-own .ph-card-tag { position: static; background: #fff; color: #06200e; }
+.ph-own .ph-card-tag { position: static; background: #fff; color: var(--m-accent-fg); }
 
 .ph-hero-x {
   position: absolute;
@@ -844,7 +844,7 @@
   transition: background-color var(--m-t-fast), color var(--m-t-fast);
 }
 .ph-act-ic svg { width: 28px; height: 28px; }
-.ph-card.act:hover .ph-act-ic { color: var(--px-on-accent, #06200e); background-color: var(--m-accent); }
+.ph-card.act:hover .ph-act-ic { color: var(--px-on-accent); background-color: var(--m-accent); }
 
 /* Чипы всех режимов на экране «Режимы». */
 .ph-feed-retry { align-self: center; }
@@ -1591,7 +1591,7 @@ button.ph-hs:hover > .ph-hs-img { transform: scale(1.03); }
 }
 .ph-mine-edit svg { width: 13px; height: 13px; }
 .ph-card:hover .ph-mine-edit, .ph-mine-edit:focus-visible { opacity: 1; }
-.ph-mine-edit:hover { background: var(--m-accent); color: var(--px-on-accent, #06200e); }
+.ph-mine-edit:hover { background: var(--m-accent); color: var(--px-on-accent); }
 
 /* ---------- здоровье сборки (25.09.2026) ---------- */
 /* «Работает · запускали 2 ч назад», ниже «97% запусков без ошибок». */
@@ -1651,7 +1651,7 @@ button.ph-hs:hover > .ph-hs-img { transform: scale(1.03); }
   margin-left: auto;
   pointer-events: none;
 }
-.ph-card.ph-mt.is-own .ph-card-tag.excl { background: var(--m-rarity-legendary); color: var(--px-on-accent, #06200e); }
+.ph-card.ph-mt.is-own .ph-card-tag.excl { background: var(--m-rarity-legendary); color: var(--px-on-accent); }
 @media (hover: hover) and (pointer: fine) {
   .ph-card.ph-mt.is-own:hover .ph-mt-play { background: var(--m-accent-hover); }
 }
@@ -1942,7 +1942,7 @@ button.ph-hs:hover > .ph-hs-img { transform: scale(1.03); }
 /* «Рекомендуем» (владелец 30.09.2026, 21:04): три ряда, OneBlock — наш сервер
    первой клеткой с зелёной меткой, «Ещё» — последней. Метки типа тёмные,
    цвет раздела — только у значка: ряд карточек не рябит. */
-.fy-card .ph-card-tag.own { background: var(--m-accent); color: var(--px-on-accent, #06200e); }
+.fy-card .ph-card-tag.own { background: var(--m-accent); color: var(--px-on-accent); }
 .fy-card.is-own { position: relative; }
 .fy-card.is-own::after {
   content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
@@ -1956,7 +1956,7 @@ button.ph-hs:hover > .ph-hs-img { transform: scale(1.03); }
   border-radius: var(--m-r-ctl);
 }
 .fy-more-ic svg { width: 24px; height: 24px; }
-@media (hover: hover) and (pointer: fine) { .fy-more:hover .fy-more-ic { color: #06200e; background: var(--m-accent); } }
+@media (hover: hover) and (pointer: fine) { .fy-more:hover .fy-more-ic { color: var(--m-accent-fg); background: var(--m-accent); } }
 .hub-ctile-all { background: var(--m-surface); }
 .hub-ctile-allic { position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center; width: 56px; height: 56px; color: var(--m-fg-subtle, rgba(255,255,255,.55)); background: var(--m-inset, rgba(0,0,0,.3));
   border-radius: var(--m-r-ctl); }

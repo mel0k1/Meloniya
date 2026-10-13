@@ -711,7 +711,7 @@ button.mlx-t { cursor: pointer; }
 button.mlx-t::after { content: '▾'; margin-left: 5px; font-size: 10px; color: var(--m-fg-faint); }
 button.mlx-t[aria-expanded='true']::after { content: '▴'; }
 button.mlx-t:hover { color: var(--m-accent); }
-.mlx-n { flex: none; display: inline-flex; gap: 5px; font: 700 11px/1 'Monocraft', var(--m-mono); font-variant-numeric: tabular-nums; }
+.mlx-n { flex: none; display: inline-flex; gap: 5px; font: 700 11px/1 var(--m-mono); font-variant-numeric: tabular-nums; }
 .mlx-n:empty { display: none; }
 .mlx-add { color: var(--m-success); }
 .mlx-rm { color: var(--m-danger); }

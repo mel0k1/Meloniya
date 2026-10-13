@@ -457,7 +457,7 @@
   width: 30px;
   height: 30px;
   clip-path: var(--px-4);
-  color: var(--px-on-accent, #06200e);
+  color: var(--px-on-accent);
   background: var(--m-accent);
 }
 .ch-action-plus svg { width: 16px; height: 16px }
@@ -527,8 +527,8 @@
 /* Надето — сплошная обводка акцентом по всему силуэту, примерка — синим. */
 :root:root .ch-tile.on { --px-ol: var(--m-accent); --px-ol-w: 2px; }
 :root:root .ch-tile.trying { --px-ol: var(--m-rarity-rare); --px-ol-w: 2px; }
-:root:root .ch-slot.on { --px-ol: var(--px-btn-ol); --px-ol-w: 2px; --px-ft: var(--px-btn-t); --px-ft-w: 3px; --px-fb: var(--px-btn-b); --px-fb-w: 5px; --px-fl: var(--px-btn-l); --px-fl-w: 3px; --px-fr: var(--px-btn-r); --px-fr-w: 3px; color: var(--px-on-accent, #06200e) }
-:root:root .ch-tile-mark { color: var(--px-on-accent, #06200e) }
+:root:root .ch-slot.on { --px-ol: var(--px-btn-ol); --px-ol-w: 2px; --px-ft: var(--px-btn-t); --px-ft-w: 3px; --px-fb: var(--px-btn-b); --px-fb-w: 5px; --px-fl: var(--px-btn-l); --px-fl-w: 3px; --px-fr: var(--px-btn-r); --px-fr-w: 3px; color: var(--px-on-accent) }
+:root:root .ch-tile-mark { color: var(--px-on-accent) }
 
 /* «Снять» / «Снять всё» в строке раздела (правка 23.09.2026, 22:00). */
 .ch-off { display: inline-flex; gap: 6px; margin-left: auto; }

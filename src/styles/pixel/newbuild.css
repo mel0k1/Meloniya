@@ -81,7 +81,7 @@
 .nb2-ver span { font-size: 10px; line-height: 1; font-weight: 700; color: var(--m-warning); }
 @media (hover: hover) and (pointer: fine) { .nb2-ver:hover { background-color: var(--m-raised); } }
 .nb2-ver.on {
-  color: var(--px-on-accent, #06200e);
+  color: var(--px-on-accent);
   background-color: var(--m-accent);
   --px-ol: var(--px-btn-ol); --px-ol-w: 2px; --px-ft: var(--px-btn-t); --px-fb: var(--px-btn-b);
 }

@@ -742,7 +742,7 @@ body:has(.dp-bg) .rw-small {
 
 /* ── Первый вход: лучи и конфетти за логотипом (Welcome.tsx) ───────── */
 .welcome {
-  --rw-tone: #9dff7a;
+  --rw-tone: var(--m-accent);
 }
 .welcome .rw-rays {
   z-index: 0;

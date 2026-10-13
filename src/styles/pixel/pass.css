@@ -76,7 +76,7 @@
 .bp-hero-cta { display: flex; gap: 10px; align-items: stretch; margin-left: auto; }
 .bp-claim { min-width: 190px; height: 58px; font-size: 22px; gap: 10px; }
 .bp-claim .px-icon { animation: bp-hop 1.4s steps(1, end) infinite; }
-.bp-count { display: grid; place-items: center; min-width: 26px; height: 26px; padding: 0 6px; background: #06200e; color: var(--m-accent); font-size: 15px; clip-path: var(--px-4); }
+.bp-count { display: grid; place-items: center; min-width: 26px; height: 26px; padding: 0 6px; background: var(--m-inset); color: var(--m-accent); font-size: 15px; clip-path: var(--px-4); }
 .bp-timer {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 58px; padding: 0 18px;
   background: rgba(0, 0, 0, 0.62); color: #fff; font-size: 22px; font-weight: 900; font-variant-numeric: tabular-nums; clip-path: var(--px-5);

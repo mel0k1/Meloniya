@@ -120,7 +120,7 @@
   place-items: center;
   width: 26px;
   height: 26px;
-  color: #06200e;
+  color: var(--m-accent-fg);
   background: var(--m-accent);
   --px-n: 4px;
   clip-path: var(--px-4);

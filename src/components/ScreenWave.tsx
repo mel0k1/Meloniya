@@ -21,11 +21,11 @@ const FLASH_MS = 60
 
 /** Цвет экрана: плотный тон и вспышка фронта. */
 const TONE: Record<ScreenId, [string, string]> = {
-  play: ['#155f2a', '#3fbf5c'],
-  playhub: ['#155f2a', '#3fbf5c'],
-  builds: ['#155f2a', '#3fbf5c'],
-  mods: ['#155f2a', '#3fbf5c'],
-  servers: ['#155f2a', '#3fbf5c'],
+  play: ['#23272b', '#8a9199'],
+  playhub: ['#23272b', '#8a9199'],
+  builds: ['#23272b', '#8a9199'],
+  mods: ['#23272b', '#8a9199'],
+  servers: ['#23272b', '#8a9199'],
   premium: ['#7a4a06', '#f2b23a'],
   plus: ['#7a4a06', '#f2b23a'],
   rubies: ['#8a1030', '#ff4d6d'],

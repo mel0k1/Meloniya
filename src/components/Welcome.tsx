@@ -122,7 +122,7 @@ export function Welcome() {
           const at = (order[y * cols + x] / max) * DISSOLVE_MS
           if (t >= at + FLASH_MS) continue
           left++
-          ctx.fillStyle = t >= at ? '#3fbf5c' : '#155f2a'
+          ctx.fillStyle = t >= at ? '#edefee' : '#26272a'
           ctx.fillRect(x * CELL, y * CELL, CELL, CELL)
         }
       if (left) raf = requestAnimationFrame(tick)
@@ -150,7 +150,7 @@ export function Welcome() {
         {first && phase === 'in' ? <Burst n={30} spread={320} seed={9} /> : null}
         <img className="welcome-logo" src="/meloniya-logo.png" alt="" />
         <span className="welcome-hi">{first ? 'Добро пожаловать' : 'С возвращением,'}</span>
-        <b className="welcome-nick">{first ? 'в Мелонии' : nick || 'игрок'}</b>
+        <b className="welcome-nick">{first ? 'в Мелонию' : nick || 'игрок'}</b>
         {gift ? (
           <div className="welcome-gift sh-card is-show" {...rarityProps(gift.item.rarity)}>
             <RarityFx />

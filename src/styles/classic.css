@@ -10,7 +10,7 @@
 :root.lay-classic .sidebar { position: relative; padding-top: 14px; }
 :root.lay-classic .cl-fold {
   position: absolute; top: 10px; right: 10px; z-index: 2;
-  width: 26px; height: 26px; border-radius: 0; clip-path: var(--px-4); display: grid; place-items: center;
+  width: 26px; height: 26px; border-radius: var(--m-r-ctl); display: grid; place-items: center;
   color: var(--m-fg-subtle); background: transparent; opacity: 0;
   transition: opacity .15s ease, background-color .15s ease, color .15s ease;
 }
@@ -23,7 +23,7 @@
 :root.lay-classic .content:has(#s-home.on) { padding: 14px 0 0 0; overflow: hidden; }
 :root.lay-classic #s-home .ch-stage {
   position: relative; height: calc(100vh - 72px); min-height: 440px;
-  border-radius: 0; clip-path: var(--px-10); overflow: hidden; background: var(--m-inset);
+  border-radius: var(--m-r-md); overflow: hidden; background: var(--m-inset);
   isolation: isolate;
 }
 :root.lay-classic #s-home .ch-stage > .screen.lobby { position: absolute; inset: 0; height: 100%; }

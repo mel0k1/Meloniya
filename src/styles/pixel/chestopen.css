@@ -233,7 +233,7 @@
 .co-card.sm .co-foot .rar-fbar .rar-frag { display: none; }
 .co-card .rar-plate { align-self: center; }
 /* Собрано — плашка акцентом: вещь теперь твоя. */
-.co-card.done .co-sub { background: var(--m-accent); color: #06200e; }
+.co-card.done .co-sub { background: var(--m-accent); color: var(--m-accent-fg); }
 /* Мифическая: рамка карточки переливается ступенями. */
 .co-card[data-rar='MYTHIC'] { animation: rar-prism 2.4s steps(1, end) infinite; }
 @media (prefers-reduced-motion: reduce) { .co-card[data-rar='MYTHIC'] { animation: none; } }

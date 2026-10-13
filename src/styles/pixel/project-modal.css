@@ -751,7 +751,7 @@
 #pjModal .pjx-tr .r { text-align: right; }
 #pjModal .pjx-tr.miss .pjx-vname b { color: var(--m-fg-subtle); }
 #pjModal .pjx-cm { display: grid; place-items: center; width: 18px; height: 18px; clip-path: var(--px-4); }
-#pjModal .pjx-cm.ok { color: #06200e; background: var(--m-accent); }
+#pjModal .pjx-cm.ok { color: var(--m-accent-fg); background: var(--m-accent); }
 #pjModal .pjx-cm.no { color: var(--m-warning); background: var(--m-warning-soft); }
 #pjModal .pjx-vname { display: flex; flex-direction: column; gap: 3px; }
 #pjModal .pjx-vname b { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 13.5px; font-weight: 750; color: var(--m-fg); }

@@ -20,7 +20,7 @@
 /* ── FPS-индикатор ─────────────────────────────────────────── */
 .lk-fps {
   display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 7px 0 6px;
-  font: 800 10.5px/1 'Monocraft', var(--m-mono); letter-spacing: 0.02em; color: #fff;
+  font: 800 10.5px/1 var(--m-mono); letter-spacing: 0.02em; color: #fff;
   background: rgba(10, 11, 12, 0.72); --px-n: 3px; clip-path: var(--px-4);
 }
 .lk-fps-bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 11px; }
@@ -151,7 +151,7 @@
 .lk-list.is-drag .lk-grip.can { cursor: grabbing; }
 .lk-n {
   flex: none; min-width: 18px; height: 18px; display: grid; place-items: center;
-  font: 800 11px/1 'Monocraft', var(--m-mono); color: var(--m-fg-muted); background: var(--m-inset);
+  font: 800 11px/1 var(--m-mono); color: var(--m-fg-muted); background: var(--m-inset);
 }
 .lk-row.is-top .lk-n { color: var(--m-accent-fg); background: var(--m-accent); }
 .lk-row-pic { width: 72px; height: 44px; --px-n: 3px; clip-path: var(--px-4); }
@@ -161,7 +161,7 @@
 .lk-row-b:empty { display: none; }
 .lk-res {
   display: inline-flex; align-items: center; gap: 3px; height: 16px; padding: 0 5px;
-  font: 800 10px/1 'Monocraft', var(--m-mono); color: var(--m-fg-muted); background: var(--m-inset); cursor: help;
+  font: 800 10px/1 var(--m-mono); color: var(--m-fg-muted); background: var(--m-inset); cursor: help;
   --px-n: 2px; clip-path: var(--px-4);
 }
 .lk-res.fit-mid { color: var(--m-warning); background: var(--m-warning-soft); }

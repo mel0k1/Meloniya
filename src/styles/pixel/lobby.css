@@ -579,7 +579,7 @@
   background: var(--m-surface-2);
   --px-n: 5px; clip-path: var(--px-5);
 }
-.lobby-mate-act:hover:not(:disabled) { color: #06200e; background: var(--m-accent); }
+.lobby-mate-act:hover:not(:disabled) { color: var(--m-accent-fg); background: var(--m-accent); }
 .lobby-mate-act:disabled { color: var(--m-accent); }
 .lobby-mate-act svg { width: 14px; height: 14px; }
 
@@ -869,7 +869,7 @@
 .lrec-body i svg { width: 12px; height: 12px; }
 .lrec-go {
   justify-self: start; display: inline-flex; align-items: center; gap: 4px; padding: 7px 10px 9px;
-  font: 800 13px/1 var(--m-font); color: var(--px-on-accent, #06200e); background: var(--m-accent);
+  font: 800 13px/1 var(--m-font); color: var(--px-on-accent); background: var(--m-accent);
   clip-path: var(--px-5); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.25);
 }
 .lrec-go svg { width: 12px; height: 12px; }
