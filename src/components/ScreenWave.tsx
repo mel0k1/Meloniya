@@ -25,7 +25,6 @@ const TONE: Record<ScreenId, [string, string]> = {
   playhub: ['#23272b', '#8a9199'],
   builds: ['#23272b', '#8a9199'],
   mods: ['#23272b', '#8a9199'],
-  servers: ['#23272b', '#8a9199'],
   premium: ['#7a4a06', '#f2b23a'],
   plus: ['#7a4a06', '#f2b23a'],
   rubies: ['#8a1030', '#ff4d6d'],

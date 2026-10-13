@@ -24,7 +24,6 @@ const NAV: { id: ScreenId; icon: string; label: string; pill?: string; hub?: boo
   { id: 'play', icon: 'i-play', label: 'Играть' },
   { id: 'playhub', icon: 'i-box2', label: 'Мои сборки', hub: false },
   { id: 'playhub', icon: 'i-blocks', label: 'Каталог', hub: true },
-  { id: 'servers', icon: 'i-server', label: 'Серверы' },
   { id: 'skins', icon: 'i-shirt', label: 'Скины' },
   { id: 'rubies', icon: 'i-gem', label: 'Магазин' },
   { id: 'top', icon: 'i-trophy', label: 'Топ' },

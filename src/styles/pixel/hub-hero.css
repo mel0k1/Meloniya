@@ -69,7 +69,6 @@
 .hub-rail .ph-mine .ph-card-art svg, .hub-rail .ph-mine .ph-card-art img { max-height: 84px; }
 
 /* Серверы в библиотеке — первые шесть и «Все серверы». */
-.hub-srv-more { margin-top: 10px; width: 100%; justify-content: center; }
 /* Анархия на баннере: игрок справа целиком, не по пояс. */
 .hh-main .hh-an .an-art-hero { left: 70%; top: 6%; height: 104%; }
 .hh-main .hh-an .an-art-lava { height: 14%; }

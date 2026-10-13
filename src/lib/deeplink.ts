@@ -2,9 +2,8 @@ import { getCurrent, onOpenUrl } from '@tauri-apps/plugin-deep-link'
 import { hasTauri } from '../ipc/tauri'
 import { setScreen, showToast } from '../state/ui'
 import { uiConfirm } from '../state/confirm'
-import { useServerDetail } from '../state/serverDetail'
-import { useServers } from '../state/servers'
 import { useMods } from '../state/mods'
+import { openHubTab } from '../components/playhub/hubTab'
 import { openProject } from '../state/project'
 import { setNewBuildPreset } from '../state/newBuild'
 import { openModal } from '../state/ui'
@@ -60,10 +59,7 @@ function handle(raw: string) {
     return
   }
   if (action === 'server') {
-    setScreen('servers')
-    const slug = rest || q.get('slug') || ''
-    const found = useServers.getState().list.find((s) => s.slug === slug)
-    if (found) useServerDetail.getState().open(found)
+    openHubTab('servers')
     return
   }
   if (action === 'hosting') {

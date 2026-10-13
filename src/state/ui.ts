@@ -9,7 +9,6 @@ export type ScreenId =
   | 'premium'
   | 'plus'
   | 'builds'
-  | 'servers'
   | 'mods'
   | 'skins'
   | 'rubies'

@@ -7,7 +7,6 @@ const loaders = {
   premium: () => import('./Premium'),
   plus: () => import('./Plus'),
   builds: () => import('./Builds'),
-  servers: () => import('./Servers'),
   mods: () => import('./Mods'),
   skins: () => import('./Skins'),
   rubies: () => import('./Rubies'),
@@ -24,7 +23,6 @@ export const Play = lazy(() => loaders.play().then((m) => ({ default: m.Play }))
 export const Premium = lazy(() => loaders.premium().then((m) => ({ default: m.Premium })))
 export const Plus = lazy(() => loaders.plus().then((m) => ({ default: m.Plus })))
 export const Builds = lazy(() => loaders.builds().then((m) => ({ default: m.Builds })))
-export const Servers = lazy(() => loaders.servers().then((m) => ({ default: m.Servers })))
 export const Mods = lazy(() => loaders.mods().then((m) => ({ default: m.Mods })))
 export const Skins = lazy(() => loaders.skins().then((m) => ({ default: m.Skins })))
 export const Rubies = lazy(() => loaders.rubies().then((m) => ({ default: m.Rubies })))

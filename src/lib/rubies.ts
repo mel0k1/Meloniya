@@ -580,7 +580,7 @@ export interface Achievement {
    */
   reward?: { kind: 'SHARDS'; amount: number } | { kind: 'ITEM'; item: ItemRef; exclusive?: boolean }
   /** Точка интереса: какой экран лаунчера открывает «Перейти». */
-  go?: 'play' | 'servers' | 'friends' | 'builds' | 'mods' | 'skins' | 'hosting'
+  go?: 'play' | 'playhub' | 'friends' | 'builds' | 'mods' | 'skins' | 'hosting'
 }
 
 export interface EconomyProgress {

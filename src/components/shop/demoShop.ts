@@ -147,7 +147,7 @@ interface State {
 type AchRow = [string, string, number, number, number | 'item' | 'excl', Achievement['go']?]
 const ACHIEVEMENTS: AchRow[] = [
   ['launch-1', 'Запусти игру', 1, 1, 50, 'play'],
-  ['server-rating', 'Зайди на сервер из рейтинга', 1, 1, 50, 'servers'],
+  ['server-rating', 'Зайди на сервер из рейтинга', 1, 1, 50, 'playhub'],
   ['skin-upload', 'Загрузи свой скин', 1, 1, 100, 'skins'],
   ['outfit-save', 'Сохрани образ', 0, 1, 50, 'skins'],
   ['friend-add', 'Добавь друга', 1, 1, 100, 'friends'],
@@ -163,8 +163,8 @@ const ACHIEVEMENTS: AchRow[] = [
   ['days-365', 'Год в лаунчере', 12, 365, 'excl'],
   ['hours-10', '10 часов в игре', 10, 10, 100],
   ['hours-50', '50 часов в игре', 29, 50, 200],
-  ['servers-10', '10 разных серверов', 7, 10, 150, 'servers'],
-  ['servers-50', '50 разных серверов', 7, 50, 'item', 'servers'],
+  ['servers-10', '10 разных серверов', 7, 10, 150, 'playhub'],
+  ['servers-50', '50 разных серверов', 7, 50, 'item', 'playhub'],
   ['friends-5', '5 друзей', 3, 5, 200, 'friends'],
   ['friend-play-10', '10 игр с друзьями', 2, 10, 'item', 'friends'],
   ['launches-100', '100 запусков', 41, 100, 200, 'play'],

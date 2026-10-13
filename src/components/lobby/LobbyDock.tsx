@@ -10,7 +10,6 @@ const TABS: { id: ScreenId; label: string; icon: string }[] = [
   { id: 'play', label: 'Лобби', icon: 'blocks' },
   { id: 'playhub', label: 'Библиотека', icon: 'book' },
   { id: 'mods', label: 'Каталог', icon: 'grid' },
-  { id: 'servers', label: 'Серверы', icon: 'server' },
   { id: 'skins', label: 'Скины', icon: 'shirt' },
   { id: 'rubies', label: 'Магазин', icon: 'gem' },
   { id: 'hosting', label: 'Хостинг', icon: 'server-cog' },

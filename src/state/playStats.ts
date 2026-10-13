@@ -3,7 +3,6 @@ import { getPlayStats, labelServer } from '../ipc/commands'
 import type { PlayStats } from '../ipc/commands'
 import { hasTauri } from '../ipc/tauri'
 import { api, hasMillidaAccount } from '../lib/api'
-import { useServers } from './servers'
 import { canonAddr } from '../lib/serverAddr'
 import { privacySettings, usePrivacy } from '../lib/privacy'
 import { statsSyncDue } from '../lib/presence'
@@ -111,14 +110,12 @@ export const buildStat = (build: string) =>
 
 export { canonAddr }
 
-/** Имя сервера для адреса: сначала то, что уже знает ядро, затем рейтинг. */
+/** Имя сервера для адреса: сначала то, что уже знает ядро. */
 export function serverNameFor(addr: string): string {
   const key = canonAddr(addr)
   if (!key) return ''
   const known = usePlayStats.getState().stats.servers.find((s) => canonAddr(s.key) === key)
-  if (known && known.label) return known.label
-  const rated = useServers.getState().list.find((s) => canonAddr(s.ip) === key)
-  return (rated && rated.name) || ''
+  return (known && known.label) || ''
 }
 
 export function rememberServerName(addr: string, name: string) {

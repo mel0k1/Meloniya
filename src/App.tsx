@@ -28,7 +28,6 @@ import {
   Premium,
   Plus,
   Rubies,
-  Servers,
   Settings,
   Skins,
   preloadScreens,
@@ -57,7 +56,6 @@ import { PackDrop } from './components/PackDrop'
 import { initInstalls } from './state/installs'
 import { initCalls } from './state/call'
 import { loadProfileSettings, overlayNotify } from './ipc/commands'
-import { ServerDetail } from './components/ServerDetail'
 import { pushChatNotify } from './state/chatNotify'
 import { notifyAudible, notifyShown } from './state/notifyPrefs'
 import { createPresenceMemo, presenceEvents, presenceText, presenceTitle } from './state/presenceNotify'
@@ -76,7 +74,6 @@ import { Guard } from './components/Guard'
 import { useUi, closeModal, setScreen as gotoScreen, showToast } from './state/ui'
 import { modalToClose, openLayers } from './lib/escClose'
 import { useWallpaper } from './state/wallpaper'
-import { loadLiveRating } from './state/servers'
 import { appendChatMessage, applyChatMessage, applyTypingPush, loadFriends, openRoomChat, useFriends } from './state/friends'
 import { bumpRoom, loadRooms, nickInRooms, roomById, useRooms, type VoiceMember } from './state/rooms'
 import type {
@@ -368,7 +365,6 @@ export function App() {
       } else if (acc) enterApp()
       else logoutToLogin()
       void refreshProfiles()
-      loadLiveRating()
       warmHeads(useAccounts.getState().list.filter((x) => !x.avatar).map((x) => x.nick))
       // Каталог — своим куском сборки, не в стартовом: тянем его после загрузки.
       void import('./components/catalog/siteStore').then((m) => m.warmCatalog()).catch(() => {})
@@ -798,7 +794,6 @@ export function App() {
           {(() => {
             const onNav = (s: ScreenId) => {
               if (s === 'hosting') track('hosting_open', {})
-              if (s === 'servers') track('rating_open', {})
               if (s === 'mods') useMods.getState().scopeTo(null)
               setScreen(s)
               const c = document.querySelector('.content')
@@ -837,11 +832,6 @@ export function App() {
               {screen === 'builds' && (
                 <Guard what="Сборки">
                   <Builds on />
-                </Guard>
-              )}
-              {screen === 'servers' && (
-                <Guard what="Серверы">
-                  <Servers on />
                 </Guard>
               )}
               {screen === 'mods' && (
@@ -918,7 +908,6 @@ export function App() {
         <PackCodeHost />
         <PartyHost />
         <CrashModal />
-        <ServerDetail />
         <ChatNotify />
         <CallPanel />
         <RoomModals />

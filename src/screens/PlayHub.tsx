@@ -979,16 +979,11 @@ export function PlayHub({ on }: { on?: boolean }) {
           }}
         />,
       )}
-      {/* Под режимами — вся лента серверов Millida (владелец 24.09.2026, 18:29). */}
+      {/* Под режимами — лента серверов Millida (владелец 24.09.2026, 18:29). */}
       {head(
         'servers',
         'Серверы',
-        <>
-          <ServerFeed limit={6} render={(s, i) => <ServerRow s={s} pos={i} current={current} onPlay={(x) => launch(serverMode(x))} />} />
-          <button className="btn md secondary hub-srv-more" data-sound="nav" data-track="hub_all_servers" onClick={() => setScreen('servers')}>
-            Все серверы <Icon id="i-chev-r" />
-          </button>
-        </>,
+        <ServerFeed limit={6} render={(s, i) => <ServerRow s={s} pos={i} current={current} onPlay={(x) => launch(serverMode(x))} />} />,
       )}
       {/* Игры Minecraft — такими же карточками, как сборки; клик открывает экран игры (владелец 29.09.2026). */}
       {head(
