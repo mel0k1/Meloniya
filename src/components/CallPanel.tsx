@@ -9,6 +9,7 @@ import {
   fmtCallTime,
   hangUp,
   ringRoom,
+  setCallNoise,
   setCallVolume,
   sharedScreens,
   toggleCamera,
@@ -18,6 +19,7 @@ import {
   useCall,
   type CallParticipant,
 } from '../state/call'
+import type { NoiseMode } from '../lib/call/mic-worklet'
 import { CAM_MAX_VIEWERS, SCREEN_MAX_VIEWERS, canShareScreenTo, canShowCamTo } from '../lib/call/mesh-rules'
 import { setStoredCallVolume } from '../lib/call/audio'
 import { openChat, openRoomChat } from '../state/friends'
@@ -102,6 +104,9 @@ function VoiceGraph() {
     let mine: number[] = []
     let theirs: number[] = []
     let width = 0
+    /// Отпечаток последнего нарисованного кадра: в тишине волна стоит, и
+    /// перерисовывать её каждый кадр незачем.
+    let sig = ''
     let colorMe = '#EDEFEE'
     let colorPeer = '#6AA9E9'
     let colorGrid = 'rgba(255,255,255,.14)'
@@ -119,6 +124,7 @@ function VoiceGraph() {
       const pad = (list: number[]) => (list.length >= n ? list.slice(-n) : new Array(n - list.length).fill(0).concat(list))
       mine = pad(mine)
       theirs = pad(theirs)
+      sig = ''
     }
 
     const readColors = () => {
@@ -147,7 +153,13 @@ function VoiceGraph() {
       theirs.push(ease(theirs, graphAmp(peerLevel)))
       if (mine.length > n) mine = mine.slice(-n)
       if (theirs.length > n) theirs = theirs.slice(-n)
-      if (++ticks % 20 === 0) readColors()
+      if (++ticks % 20 === 0) {
+        const me0 = colorMe
+        const peer0 = colorPeer
+        const grid0 = colorGrid
+        readColors()
+        if (me0 !== colorMe || peer0 !== colorPeer || grid0 !== colorGrid) sig = ''
+      }
     }, GRAPH_STEP_MS)
 
     const wave = (list: number[], color: string, up: boolean) => {
@@ -178,6 +190,13 @@ function VoiceGraph() {
     let raf = 0
     const draw = () => {
       raf = requestAnimationFrame(draw)
+      // Волна сошла и кадр уже нарисован — пропускаем пустую перерисовку:
+      // в тишине канвас не должен работать вхолостую каждый кадр.
+      const a = mine.length ? mine[mine.length - 1] : 0
+      const b = theirs.length ? theirs[theirs.length - 1] : 0
+      const next = Math.round(a * 400) + ':' + Math.round(b * 400)
+      if (next === sig) return
+      sig = next
       ctx.clearRect(0, 0, width, GRAPH_HEIGHT)
       ctx.strokeStyle = colorGrid
       ctx.lineWidth = 1
@@ -480,6 +499,9 @@ function ScreenFull({ stream, onClose }: { stream: MediaStream; onClose: () => v
   )
 }
 
+const NOISE_NEXT: Record<NoiseMode, NoiseMode> = { off: 'standard', standard: 'strong', strong: 'off' }
+const NOISE_LABEL: Record<NoiseMode, string> = { off: 'выключен', standard: 'обычный', strong: 'сильный' }
+
 export function CallPanel() {
   const status = useCall((s) => s.status)
   const mode = useCall((s) => s.mode)
@@ -500,6 +522,7 @@ export function CallPanel() {
   const camOf = useCall((s) => s.camOf)
   const camFull = useCall((s) => s.camFull)
   const volume = useCall((s) => s.volume)
+  const noise = useCall((s) => s.noise)
   const set = useCall((s) => s.set)
   const peer = parts[0]
   const peerMuted = mode === 'dm' && !!peer?.muted
@@ -671,6 +694,13 @@ export function CallPanel() {
             onClick={() => setVolOpen((v) => !v)}
           >
             <Icon id="i-volume" />
+          </button>
+          <button
+            className={'tb-btn' + (noise === 'off' ? ' off' : '')}
+            title={'Шумоподавление: ' + NOISE_LABEL[noise] + ' — переключить'}
+            onClick={() => setCallNoise(NOISE_NEXT[noise])}
+          >
+            <Icon id="i-ear" />
           </button>
           {mode === 'room' ? (
             <button className="tb-btn" title="Позвать остальных" onClick={() => void ringRoom(roomId)}>
