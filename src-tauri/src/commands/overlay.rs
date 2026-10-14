@@ -25,6 +25,7 @@ pub async fn overlay_state() -> Result<OverlayState, String> {
 pub fn overlay_set_enabled(app: tauri::AppHandle, on: bool) -> Result<(), String> {
     crate::engine::set_ui_pref("overlay-enabled".into(), if on { "1".into() } else { "0".into() })?;
     if on {
+        overlay::voice_rearm();
         overlay::show(&app, false)?;
         overlay::hide(&app);
     } else {
@@ -122,6 +123,13 @@ pub fn overlay_cleared(seq: u64) {
 #[tauri::command]
 pub fn realtime_relay(app: tauri::AppHandle, payload: serde_json::Value) {
     overlay::relay_realtime(&app, payload);
+}
+
+/// Снимок разговора для голосового HUD: состав, флаги речи. Частота событий —
+/// только реальные перемены, снимок крошечный, поэтому без потока и буферизации.
+#[tauri::command]
+pub fn overlay_voice(app: tauri::AppHandle, payload: serde_json::Value) {
+    overlay::voice(&app, payload);
 }
 
 #[derive(serde::Serialize)]

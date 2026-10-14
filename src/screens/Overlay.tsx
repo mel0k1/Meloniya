@@ -50,6 +50,49 @@ const HISTORY = 24
 /// full-screen, always on top and has no close button of its own.
 const EMPTY_TTL_MS = 4_000
 
+interface VoiceFace {
+  id: string
+  nick: string
+  speaking: boolean
+  muted: boolean
+}
+interface VoiceHud {
+  live: boolean
+  title: string
+  self: { nick: string; speaking: boolean; muted: boolean; deafened: boolean }
+  peers: VoiceFace[]
+}
+
+const VOICE_FACES = 6
+
+/// Полоска разговора: кто внутри и кто сейчас говорит. Не интерактивна — в
+/// пассивном режиме оверлей остаётся сквозным, клик по полоске уходит в игру.
+function VoiceStrip({ v }: { v: VoiceHud }) {
+  return (
+    <div className="ov-voice">
+      <span className={'ov-face' + (v.self.speaking ? ' talk' : '')}>
+        <Head nick={v.self.nick || 'MHF_Steve'} size={30} />
+        {v.self.muted ? (
+          <i className="ov-face-badge">
+            <Icon id={v.self.deafened ? 'i-headset-off' : 'i-mic-off'} />
+          </i>
+        ) : null}
+      </span>
+      {v.peers.slice(0, VOICE_FACES).map((p) => (
+        <span key={p.id} className={'ov-face' + (p.speaking ? ' talk' : '')}>
+          <Head nick={p.nick} size={30} />
+          {p.muted ? (
+            <i className="ov-face-badge">
+              <Icon id="i-mic-off" />
+            </i>
+          ) : null}
+        </span>
+      ))}
+      <span className="ov-voice-t">{v.title}</span>
+    </div>
+  )
+}
+
 /// The overlay owns no polling of its own: two pollers would share one `since`
 /// cursor and eat each other's messages. The main window relays what it got.
 export function Overlay() {
@@ -58,6 +101,7 @@ export function Overlay() {
   const [hover, setHover] = useState(false)
   const [tick, setTick] = useState(0)
   const [to, setTo] = useState<OverlayMessage | null>(null)
+  const [voice, setVoice] = useState<VoiceHud | null>(null)
   /// Set while the core waits to hide the window: a hidden window keeps its last
   /// frame and shows it again on the next show, so that frame has to be empty.
   const [clearSeq, setClearSeq] = useState<number | null>(null)
@@ -107,6 +151,12 @@ export function Overlay() {
       .listen<boolean>('overlay-hover', (e) => setHover(e.payload))
       .then((un) => offs.push(un))
       .catch(() => {})
+    // Снимок разговора от главного окна: live:false гасит полоску, остальное
+    // обновляет состав и подсветку говорящих.
+    void T.event
+      .listen<VoiceHud>('overlay-voice', (e) => setVoice(e.payload && e.payload.live ? e.payload : null))
+      .then((un) => offs.push(un))
+      .catch(() => {})
     // The card that was clicked decides who the reply goes to: the chat opens on
     // that conversation instead of whatever arrived last.
     void T.event
@@ -153,7 +203,10 @@ export function Overlay() {
     // compositor layer over the game, so it goes away with its last card.
     // A freshly created window may have no card yet, but waiting forever is how
     // an empty overlay ends up covering the whole screen with no way out.
+    // Полоска разговора держит окно сама: прятать его можно, когда ушли
+    // и карточки, и голос.
     if (!fresh.length) {
+      if (voice) return
       const t = setTimeout(() => void overlayHide().catch(() => {}), msgs.length ? 0 : EMPTY_TTL_MS)
       return () => clearTimeout(t)
     }
@@ -161,7 +214,7 @@ export function Overlay() {
     // to its ceiling, and someone has to notice when that ceiling is reached.
     const t = setTimeout(() => setTick((n) => n + 1), 500)
     return () => clearTimeout(t)
-  }, [msgs, interactive, hover, fresh.length, tick])
+  }, [msgs, interactive, hover, fresh.length, tick, voice])
 
   // The window is click-through as a whole and the core lifts that flag only
   // over the rectangles reported here, so a stale rectangle is a hole the game
@@ -238,6 +291,7 @@ export function Overlay() {
     return (
       <div className="ov ov-passive">
         <SvgSprite />
+        {voice ? <VoiceStrip v={voice} /> : null}
         <div className={'ov-cards' + (hover ? ' held' : '')} ref={cardsRef}>
           {fresh.map((m) => (
             <div
@@ -297,6 +351,7 @@ export function Overlay() {
   return (
     <div className="ov ov-active" onMouseDown={(e) => e.target === e.currentTarget && void overlayHide()}>
       <SvgSprite />
+      {voice ? <VoiceStrip v={voice} /> : null}
       <div className="ov-panel" onMouseDown={(e) => e.stopPropagation()}>
         <OverlayChat
           target={chatTarget}

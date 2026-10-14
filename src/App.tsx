@@ -190,6 +190,7 @@ import { initMusic, startMusicAfterLogin, stopMusicNow } from './state/music'
 import { initSounds, playSound } from './lib/sound'
 import { initUiTracking } from './lib/uiTrack'
 import { initDeepLinks } from './lib/deeplink'
+import { initOverlayVoice } from './lib/overlayVoice'
 import { initGameInvites } from './lib/gameInvite'
 import { initOverlayLink } from './lib/overlayLink'
 import { initStreakReminder } from './lib/streakReminder'
@@ -324,6 +325,7 @@ export function App() {
     // Сборки обновляются только при «Играть» (владелец 08.10.2026: фоновая докачка мешала) — initPackAutoUpdate не запускаем.
     const releaseRealtime = retainRealtime()
     const stopRelay = initRealtimeRelay()
+    initOverlayVoice()
     initCalls()
     const stopPromo = watchPromo()
     const stopStreakReminder = initStreakReminder()

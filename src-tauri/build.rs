@@ -11,6 +11,7 @@ const OVERLAY_COMMANDS: &[&str] = &[
     "overlay_cleared",
     "overlay_hit_areas",
     "overlay_open",
+    "overlay_voice",
     "session_status",
     "millida_api",
     "head_avatar",

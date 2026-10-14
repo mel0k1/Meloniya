@@ -471,6 +471,7 @@ pub fn run() {
             commands::rewind::rewind_reveal_clip,
             commands::overlay::overlay_hit_areas,
             commands::overlay::overlay_open,
+            commands::overlay::overlay_voice,
             commands::overlay::realtime_relay,
             commands::overlay::realtime_relay_state,
             commands::system::dedupe_scan,

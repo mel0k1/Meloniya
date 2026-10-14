@@ -1208,6 +1208,21 @@ export const overlayCleared = (seq: number) => invoke<void>('overlay_cleared', {
 export const overlayHitAreas = (rects: number[][]) => invoke<void>('overlay_hit_areas', { rects })
 export const overlayOpen = (payload: OverlayCard, toLauncher = false) =>
   invoke<void>('overlay_open', { payload, toLauncher })
+
+/** Снимок разговора для голосового HUD оверлея: кто в разговоре и кто говорит. */
+export interface OverlayVoiceFace {
+  id: string
+  nick: string
+  speaking: boolean
+  muted: boolean
+}
+export interface OverlayVoiceHud {
+  live: boolean
+  title: string
+  self: { nick: string; speaking: boolean; muted: boolean; deafened: boolean }
+  peers: OverlayVoiceFace[]
+}
+export const overlayVoice = (payload: OverlayVoiceHud) => invoke<void>('overlay_voice', { payload })
 export interface RealtimeRelayState {
   relay: boolean
   live: boolean

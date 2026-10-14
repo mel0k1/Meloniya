@@ -35,6 +35,16 @@ static HIT: Mutex<Vec<[f64; 4]>> = Mutex::new(Vec::new());
 static HOVER: AtomicBool = AtomicBool::new(false);
 static HIT_SEQ: AtomicU64 = AtomicU64::new(0);
 
+/// Голосовой HUD: полоска с головами тех, кто сейчас в разговоре. Главное окно
+/// присылает снимок состава и флагов речи, ядро решает, когда окно вообще
+/// показывать, и хранит последний снимок для заново поднявшегося вебвью.
+pub const VOICE_EVENT: &str = "overlay-voice";
+static VOICE_LIVE: AtomicBool = AtomicBool::new(false);
+/// HUD убрали руками (Esc, хоткей, настройки) при живом разговоре: иначе
+/// следующая же волна речи вернёт окно, которое человек только что закрыл.
+static VOICE_DISMISS: AtomicBool = AtomicBool::new(false);
+static VOICE_LAST: Mutex<Option<serde_json::Value>> = Mutex::new(None);
+
 const HIT_POLL_MS: u64 = 25;
 
 /// Extra time the watchdog gives the webview past the card's own deadline: the
@@ -300,6 +310,9 @@ pub fn hide(app: &AppHandle) {
     if crate::exiting() {
         return;
     }
+    if VOICE_LIVE.load(Ordering::SeqCst) {
+        VOICE_DISMISS.store(true, Ordering::SeqCst);
+    }
     stop_hit_watch(app);
     PENDING.lock().unwrap_or_else(|e| e.into_inner()).clear();
     REVEAL.lock().unwrap_or_else(|e| e.into_inner()).take();
@@ -346,6 +359,11 @@ pub fn drain_pending(app: &AppHandle) {
     for payload in queued {
         let _ = app.emit_to(LABEL, "overlay-message", payload);
     }
+    // Вебвью, поднятый посреди разговора, получает текущий снимок голоса —
+    // иначе полоска молчала бы до первого события речи.
+    if let Some(p) = VOICE_LAST.lock().unwrap_or_else(|e| e.into_inner()).clone() {
+        let _ = app.emit_to(LABEL, VOICE_EVENT, p);
+    }
     let Some(interactive) = REVEAL.lock().unwrap_or_else(|e| e.into_inner()).take() else { return };
     if let Some(win) = app.get_webview_window(LABEL) {
         let _ = reveal(app, &win, interactive);
@@ -370,6 +388,14 @@ fn arm_watchdog(app: &AppHandle) {
         if NOTIFY_SEQ.load(Ordering::SeqCst) != seq || INTERACTIVE.load(Ordering::SeqCst) {
             return;
         }
+        // Живой разговор сам держит окно: HUD прячется, когда звонок кончился,
+        // а не когда истёк срок последней карточки.
+        while VOICE_LIVE.load(Ordering::SeqCst) && NOTIFY_SEQ.load(Ordering::SeqCst) == seq {
+            tokio::time::sleep(std::time::Duration::from_millis(5_000)).await;
+            if NOTIFY_SEQ.load(Ordering::SeqCst) != seq {
+                return;
+            }
+        }
         hide(&handle);
     });
 }
@@ -382,6 +408,43 @@ pub async fn notify(app: &AppHandle, payload: serde_json::Value) -> Result<(), S
         return Ok(());
     }
     app.emit_to(LABEL, "overlay-message", payload).map_err(|e| e.to_string())
+}
+
+/// Снимок разговора от главного окна. Окно открывается один раз — на входе в
+/// «живой» разговор при запущенной игре, — дальше снимки летят в открытое окно.
+/// Ручное закрытие (Esc, хоткей) действует до конца звонка: HUD не выпрыгивает
+/// обратно на первой же фразе.
+pub fn voice(app: &AppHandle, payload: serde_json::Value) {
+    let live = payload.get("live").and_then(|v| v.as_bool()).unwrap_or(false);
+    VOICE_LIVE.store(live, Ordering::SeqCst);
+    if !live {
+        VOICE_DISMISS.store(false, Ordering::SeqCst);
+        *VOICE_LAST.lock().unwrap_or_else(|e| e.into_inner()) = None;
+        if app.get_webview_window(LABEL).is_some() {
+            let _ = app.emit_to(LABEL, VOICE_EVENT, payload);
+        }
+        return;
+    }
+    *VOICE_LAST.lock().unwrap_or_else(|e| e.into_inner()) = Some(payload.clone());
+    if VOICE_DISMISS.load(Ordering::SeqCst) {
+        if app.get_webview_window(LABEL).is_some() {
+            let _ = app.emit_to(LABEL, VOICE_EVENT, payload);
+        }
+        return;
+    }
+    let win = app.get_webview_window(LABEL);
+    let need_show = win.as_ref().map(|w| !w.is_visible().unwrap_or(false)).unwrap_or(true);
+    if need_show && enabled() && !crate::engine::running_games().is_empty() {
+        let _ = show(app, false);
+    }
+    if app.get_webview_window(LABEL).is_some() {
+        let _ = app.emit_to(LABEL, VOICE_EVENT, payload);
+    }
+}
+
+/// Оверлей включили заново посреди разговора: разрешаем HUD вернуться.
+pub fn voice_rearm() {
+    VOICE_DISMISS.store(false, Ordering::SeqCst);
 }
 
 /// Rebinding drops the previous accelerator first: a changed hotkey that left
