@@ -78,3 +78,12 @@
 .call-part.lost{opacity:.55;border-style:dashed}
 .call-part-live{width:6px;height:6px;border-radius:50%;background:var(--m-accent)}
 .call-room-empty{font-size:11.5px;color:var(--m-fg-subtle);text-align:center;padding:2px 0}
+
+/* Говорящий дышит: мягкий пульс свечения на чипе, точка развёрнутого
+   экрана подсказывает, чья картинка на доске. */
+.call-part { transition: border-color 150ms var(--m-ease-smooth), box-shadow 150ms var(--m-ease-smooth); }
+.call-part.talking { animation: callPartTalk 1.3s ease-in-out infinite; }
+@keyframes callPartTalk { 0%, 100% { box-shadow: 0 0 0 1px var(--m-accent-glow); } 50% { box-shadow: 0 0 0 1px var(--m-accent-glow), 0 0 12px var(--m-accent-glow); } }
+.call-part-live { animation: callPartLive 1.6s ease-in-out infinite; }
+@keyframes callPartLive { 50% { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { .call-part.talking, .call-part-live { animation: none; } }

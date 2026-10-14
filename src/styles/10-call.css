@@ -106,3 +106,9 @@
   .call-ring-card::before{animation:none}
   .call-dock,.call-ring-card{animation:none}
 }
+
+/* Кнопки панели звонка приподнимаются под курсором: ряд и так плотный,
+   поэтому отклик читается именно через сдвиг на пиксель. */
+.call-dock-acts .tb-btn { transition: background-color var(--m-t-fast), color var(--m-t-fast), transform var(--m-t-fast); }
+.call-dock-acts .tb-btn:hover { transform: translateY(-1px); }
+.call-dock-acts .tb-btn:active { transform: translateY(0) scale(.96); }

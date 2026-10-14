@@ -1087,3 +1087,13 @@
 .lobby-chat.is-reward .lch-reward small { max-width: 170px; font: 800 12px/1.1 var(--m-font); color: #fff; text-shadow: 0 2px 0 rgba(0, 0, 0, 0.4); white-space: nowrap; }
 .lobby-chat.is-reward .lan-go { background: #ff5a74; color: #1a0508; }
 @media (hover: hover) and (pointer: fine) { .lobby-chat.is-reward:hover .lan-go { background: #ff7a90; } }
+
+/* Мелкая жизнь интерфейса: кнопки приподнимаются под курсором — отклик
+   без суеты, только transform, чтобы не трогать слой раскладки. */
+.lobby-tool { transition: background-color var(--m-t-fast) var(--m-ease-smooth), color var(--m-t-fast) var(--m-ease-smooth), transform var(--m-t-fast) var(--m-ease-smooth); }
+.lobby-tool:hover:not(:disabled) { transform: translateY(-1px); }
+.lobby-tool:active:not(:disabled) { transform: translateY(0) scale(.97); }
+.mln-dock-item { transition: background-color var(--m-t-fast) var(--m-ease-smooth), color var(--m-t-fast) var(--m-ease-smooth), transform var(--m-t-fast) var(--m-ease-smooth); }
+.mln-dock-item:hover { transform: translateY(-1px); }
+.mln-dock-item:active { transform: translateY(0) scale(.97); }
+@media (prefers-reduced-motion: reduce) { .lobby-tool:hover:not(:disabled), .mln-dock-item:hover { transform: none; } .lobby-tool:active:not(:disabled), .mln-dock-item:active { transform: none; } }
